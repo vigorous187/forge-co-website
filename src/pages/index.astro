@@ -1,0 +1,679 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+const industries = [
+  { name: "Contractors", slug: "contractors", icon: "🔨" },
+  { name: "Restaurants", slug: "restaurants", icon: "🍽️" },
+  { name: "Realtors", slug: "realtors", icon: "🏠" },
+  { name: "Auto Shops", slug: "auto-shops", icon: "🔧" },
+  { name: "Dental", slug: "dental", icon: "🦷" },
+  { name: "Legal", slug: "legal", icon: "⚖️" },
+  { name: "Landscaping", slug: "landscaping", icon: "🌿" },
+  { name: "Cleaning", slug: "cleaning", icon: "✨" },
+];
+
+const cities = [
+  "Toronto",
+  "Mississauga",
+  "Brampton",
+  "Vaughan",
+  "Richmond Hill",
+  "Markham",
+  "Oakville",
+  "Burlington",
+  "Hamilton",
+  "Pickering",
+  "Ajax",
+  "Whitby",
+  "Oshawa",
+];
+
+const metrics = [
+  { value: "500M+", label: "Impressions Generated" },
+  { value: "$2K→$4K", label: "Retainer Growth in 60 Days" },
+  { value: "697K", label: "TikTok Followers" },
+  { value: "4.2→4.8", label: "Star Rating Improvement" },
+];
+
+const packageItems = [
+  "A website that actually converts visitors into calls",
+  "Show up when customers search Google for your service",
+  "Your Google Business Profile optimized and managed for you",
+  "Social media content posted consistently every week",
+  "Listed across 50+ directories so you're everywhere customers look",
+  "More 5-star reviews — and someone handling the bad ones",
+  "Monthly numbers showing exactly what's working",
+];
+
+const differentiators = [
+  {
+    title: "ONE PACKAGE",
+    body:
+      "Website. SEO. Reviews. Social. Everything local businesses need — bundled, managed, and delivered as one system. No juggling 5 vendors.",
+  },
+  {
+    title: "REAL RESULTS",
+    body:
+      "We've helped clients double their monthly retainer revenue, push to the top of Google Maps, and rebuild their online reputation — with data to back every claim.",
+  },
+  {
+    title: "NO CONTRACTS",
+    body:
+      "We don't lock you in. We earn your business every month. If you're not seeing results, you walk. That's the deal.",
+  },
+];
+---
+
+<BaseLayout
+  title="Forge | Websites, Google Rankings & Reviews for Local Business"
+  description="Your website looks outdated, you don't show up on Google, and nobody's managing your reviews. Forge fixes all three — one monthly fee, no contracts."
+>
+  <Navbar />
+
+  <!-- ===================== -->
+  <!-- Section 1: Hero       -->
+  <!-- ===================== -->
+  <section
+    id="hero"
+    class="min-h-screen flex items-center pt-[72px]"
+    style="background: #0d0d0d;"
+  >
+    <div class="max-w-7xl mx-auto w-full px-6 py-16 md:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+        <!-- Left: 60% -->
+        <div class="lg:col-span-3">
+          <!-- Eyebrow -->
+          <p
+            class="text-[#c41230] text-xs tracking-[0.3em] font-semibold uppercase mb-6"
+          >
+            Toronto's Local Business Growth Agency
+          </p>
+
+          <!-- H1 -->
+          <h1
+            class="text-[48px] md:text-[72px] lg:text-[84px] leading-none tracking-tight text-[#f3f4f6] mb-6"
+            style="font-family: 'Bebas Neue', sans-serif;"
+          >
+            Your Front Door<br />Is Broken.<br />
+            <span class="text-[#c41230]">We Fix It.</span>
+          </h1>
+
+          <!-- Subhead -->
+          <p class="text-[#6b7280] text-base md:text-lg leading-relaxed max-w-xl mb-10">
+            Your website looks outdated. You don't show up when customers search
+            Google. Nobody's responding to your reviews. We fix all three —
+            one monthly fee, no contracts.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap gap-4 mb-12">
+            <a
+              href="/contact"
+              class="inline-flex items-center px-7 py-4 bg-[#c41230] text-white font-semibold tracking-widest text-sm hover:bg-[#a00e26] transition-colors"
+              style="font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.15em;"
+            >
+              BOOK A FREE CALL
+            </a>
+            <a
+              href="#solution"
+              class="inline-flex items-center px-7 py-4 border border-[#2d2d2d] text-[#6b7280] font-medium text-sm hover:border-[#6b7280] hover:text-[#f3f4f6] transition-all"
+            >
+              See What We Do &darr;
+            </a>
+          </div>
+
+          <!-- Trust Bar -->
+          <div class="flex flex-wrap gap-6 pt-6 border-t border-[#2d2d2d]">
+            <div class="flex items-center gap-2">
+              <span class="text-[#c41230] font-bold text-sm">500M+</span>
+              <span class="text-[#6b7280] text-xs">Impressions</span>
+            </div>
+            <div class="w-px h-4 bg-[#2d2d2d] self-center hidden sm:block"></div>
+            <div class="flex items-center gap-2">
+              <span class="text-[#c41230] font-bold text-sm">697K</span>
+              <span class="text-[#6b7280] text-xs">TikTok Followers</span>
+            </div>
+            <div class="w-px h-4 bg-[#2d2d2d] self-center hidden sm:block"></div>
+            <div class="flex items-center gap-2">
+              <span class="text-[#c41230] font-bold text-sm">89K</span>
+              <span class="text-[#6b7280] text-xs">Instagram Followers</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 40% — Proof Card -->
+        <div class="lg:col-span-2">
+          <div class="border border-[#2d2d2d] bg-[#1a1a1a] p-6 md:p-8">
+            <p
+              class="text-[#c41230] text-xs tracking-[0.2em] uppercase font-semibold mb-6"
+            >
+              Client Results
+            </p>
+
+            <!-- Crab Boil -->
+            <div class="mb-6 pb-6 border-b border-[#2d2d2d]">
+              <div class="flex items-center justify-between mb-3">
+                <span
+                  class="text-[#f3f4f6] text-sm font-semibold"
+                >Crab Boil Restaurant</span>
+                <span class="text-xs text-[#6b7280]">60 days</span>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <p
+                    class="text-2xl md:text-3xl text-[#c41230]"
+                    style="font-family: 'Bebas Neue', sans-serif;"
+                  >
+                    $2K
+                  </p>
+                  <p class="text-xs text-[#6b7280] mt-1">Starting retainer</p>
+                </div>
+                <div>
+                  <p
+                    class="text-2xl md:text-3xl text-[#f3f4f6]"
+                    style="font-family: 'Bebas Neue', sans-serif;"
+                  >
+                    $4K
+                  </p>
+                  <p class="text-xs text-[#6b7280] mt-1">After 60 days</p>
+                </div>
+              </div>
+              <div class="mt-3 flex items-center gap-2">
+                <div class="flex-1 h-1.5 bg-[#0d0d0d] rounded-full overflow-hidden">
+                  <div class="h-full bg-[#c41230] rounded-full" style="width: 100%;"></div>
+                </div>
+                <span class="text-xs text-[#c41230] font-semibold">+100%</span>
+              </div>
+            </div>
+
+            <!-- Jayden -->
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-[#f3f4f6] text-sm font-semibold">Jayden (Creator)</span>
+                <span class="text-xs text-[#6b7280]">Ongoing</span>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <p
+                    class="text-2xl md:text-3xl text-[#c41230]"
+                    style="font-family: 'Bebas Neue', sans-serif;"
+                  >
+                    697K
+                  </p>
+                  <p class="text-xs text-[#6b7280] mt-1">TikTok followers</p>
+                </div>
+                <div>
+                  <p
+                    class="text-2xl md:text-3xl text-[#f3f4f6]"
+                    style="font-family: 'Bebas Neue', sans-serif;"
+                  >
+                    500M+
+                  </p>
+                  <p class="text-xs text-[#6b7280] mt-1">Total impressions</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- Section 2: Marquee    -->
+  <!-- ===================== -->
+  <section
+    id="marquee"
+    class="marquee-wrapper overflow-hidden border-y border-[#2d2d2d] bg-[#1a1a1a] py-4"
+  >
+    <div class="marquee-track flex gap-0 whitespace-nowrap" style="width: max-content;">
+      <!-- Duplicate for seamless loop -->
+      {
+        [1, 2].map(() => (
+          <div class="flex items-center gap-12 px-6">
+            <span class="flex items-center gap-2 text-sm text-[#6b7280]">
+              <span class="text-yellow-400">★★★★★</span> Google Reviews
+            </span>
+            <span class="text-[#2d2d2d]">·</span>
+            <span class="text-sm text-[#6b7280]">
+              <span class="text-[#f3f4f6] font-semibold">500M+</span> Impressions Generated
+            </span>
+            <span class="text-[#2d2d2d]">·</span>
+            <span class="text-sm text-[#6b7280]">
+              Active Clients in <span class="text-[#f3f4f6] font-semibold">Ottawa · Toronto · Hamilton</span>
+            </span>
+            <span class="text-[#2d2d2d]">·</span>
+            <span class="text-sm text-[#6b7280]">
+              Crab Boil: <span class="text-[#c41230] font-semibold">$2K → $4K/mo in 60 days</span>
+            </span>
+            <span class="text-[#2d2d2d]">·</span>
+            <span class="flex items-center gap-2 text-sm text-[#6b7280]">
+              <span class="text-yellow-400">★★★★★</span> Google Reviews
+            </span>
+            <span class="text-[#2d2d2d]">·</span>
+            <span class="text-sm text-[#6b7280]">
+              <span class="text-[#f3f4f6] font-semibold">697K</span> TikTok Followers
+            </span>
+            <span class="text-[#2d2d2d]">·</span>
+            <span class="text-sm text-[#6b7280]">
+              Reputation scores up <span class="text-[#c41230] font-semibold">4.2 → 4.8 stars</span>
+            </span>
+            <span class="text-[#2d2d2d]">·</span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- Section 3: Problem        -->
+  <!-- ========================= -->
+  <section id="problem" class="py-20 md:py-28 bg-[#0d0d0d]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-3xl mb-14">
+        <p class="text-[#c41230] text-xs tracking-[0.3em] uppercase font-semibold mb-4">
+          The Problem
+        </p>
+        <h2
+          class="text-[40px] md:text-[56px] lg:text-[64px] leading-none text-[#f3f4f6] mb-6"
+          style="font-family: 'Bebas Neue', sans-serif;"
+        >
+          Most Local Businesses<br />Are Invisible Online.
+        </h2>
+        <p class="text-[#6b7280] text-base md:text-lg leading-relaxed">
+          Your customers are searching right now. They're typing "best contractor near me,"
+          "restaurant open late," "dentist accepting new patients." If you're not showing up
+          on the first page — and looking credible when they get there — they're calling
+          someone else. Every single day.
+        </p>
+      </div>
+
+      <!-- 3-card grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#2d2d2d]">
+        {
+          [
+            {
+              num: "01",
+              title: "Your website looks outdated.",
+              body: "First impressions happen in 0.05 seconds. An outdated site doesn't just look bad — it signals to customers that you're not serious. They leave before they read a word.",
+            },
+            {
+              num: "02",
+              title: "Google can't find you.",
+              body: "If your Google Business Profile is incomplete, your website isn't optimized, and you're not in the right directories — you simply don't exist to 90% of local searchers.",
+            },
+            {
+              num: "03",
+              title: "Bad reviews are costing you jobs.",
+              body: "A 3.8-star rating costs you 40% of potential customers compared to a 4.5-star business. Reputation isn't something you manage once — it's something you manage every week.",
+            },
+          ].map((card) => (
+            <div class="bg-[#1a1a1a] p-8 md:p-10">
+              <p
+                class="text-[#c41230] text-4xl mb-6"
+                style="font-family: 'Bebas Neue', sans-serif;"
+              >
+                {card.num}
+              </p>
+              <h3
+                class="text-[#f3f4f6] text-xl md:text-2xl mb-4"
+                style="font-family: 'Bebas Neue', sans-serif;"
+              >
+                {card.title}
+              </h3>
+              <p class="text-[#6b7280] text-sm leading-relaxed">{card.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- Section 4: Solution       -->
+  <!-- ========================= -->
+  <section id="solution" class="py-20 md:py-28 bg-[#1a1a1a] border-y border-[#2d2d2d]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Left: Copy -->
+        <div>
+          <p class="text-[#c41230] text-xs tracking-[0.3em] uppercase font-semibold mb-4">
+            The Solution
+          </p>
+          <h2
+            class="text-[40px] md:text-[56px] leading-none text-[#f3f4f6] mb-6"
+            style="font-family: 'Bebas Neue', sans-serif;"
+          >
+            One Package.<br />Everything Covered.
+          </h2>
+          <p class="text-[#6b7280] text-base md:text-lg leading-relaxed mb-8">
+            The Front Door Package is Forge's flagship offer. It covers
+            everything customers see before they call you — your website, Google
+            ranking, reviews, and social — built, managed, and optimized by one
+            team with one point of contact. No fragmented vendors. No handoffs.
+            No excuses.
+          </p>
+          <a
+            href="/contact"
+            class="inline-flex items-center px-7 py-4 bg-[#c41230] text-white font-semibold hover:bg-[#a00e26] transition-colors"
+            style="font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.15em;"
+          >
+            BOOK A CALL &rarr;
+          </a>
+        </div>
+
+        <!-- Right: Package Card -->
+        <div class="border border-[#2d2d2d] bg-[#0d0d0d] p-8 md:p-10">
+          <p
+            class="text-[#f3f4f6] text-2xl mb-2"
+            style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;"
+          >
+            The Front Door Package
+          </p>
+          <p class="text-[#6b7280] text-xs mb-8 tracking-wide uppercase">Everything you need. Nothing you don't.</p>
+
+          <ul class="space-y-4">
+            {packageItems.map((item) => (
+              <li class="flex items-start gap-3">
+                <span
+                  class="mt-0.5 flex-shrink-0 w-5 h-5 border border-[#c41230] flex items-center justify-center"
+                >
+                  <svg class="w-3 h-3 text-[#c41230]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </span>
+                <span class="text-[#f3f4f6] text-sm leading-relaxed">{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-10 pt-8 border-t border-[#2d2d2d]">
+            <p class="text-xs text-[#6b7280] uppercase tracking-widest mb-2">Starting at</p>
+            <p
+              class="text-[#c41230] text-4xl"
+              style="font-family: 'Bebas Neue', sans-serif;"
+            >
+              $1,500/mo
+            </p>
+            <p class="text-xs text-[#6b7280] mt-1">No contracts. Cancel anytime.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- Section 5: Metrics Wall   -->
+  <!-- ========================= -->
+  <section id="metrics" class="py-20 md:py-28 bg-[#0d0d0d]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <p class="text-[#c41230] text-xs tracking-[0.3em] uppercase font-semibold mb-4">
+          The Numbers
+        </p>
+        <h2
+          class="text-[40px] md:text-[56px] leading-none text-[#f3f4f6]"
+          style="font-family: 'Bebas Neue', sans-serif;"
+        >
+          Results That Actually Move The Needle.
+        </h2>
+      </div>
+
+      <!-- Metrics grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#2d2d2d] mb-px">
+        {metrics.map((m) => (
+          <div class="bg-[#1a1a1a] p-8 md:p-10 text-center">
+            <p
+              class="text-[#c41230] text-[40px] md:text-[52px] leading-none mb-3"
+              style="font-family: 'Bebas Neue', sans-serif;"
+            >
+              {m.value}
+            </p>
+            <p class="text-[#6b7280] text-xs md:text-sm leading-relaxed">{m.label}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Case study preview cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#2d2d2d]">
+        <!-- Crab Boil -->
+        <div class="bg-[#1a1a1a] p-8 md:p-10">
+          <div class="flex items-start justify-between mb-6">
+            <div>
+              <p class="text-[#c41230] text-xs tracking-widest uppercase font-semibold mb-1">
+                Case Study
+              </p>
+              <h3
+                class="text-[#f3f4f6] text-2xl md:text-3xl"
+                style="font-family: 'Bebas Neue', sans-serif;"
+              >
+                Crab Boil Restaurant
+              </h3>
+            </div>
+            <span class="text-xs text-[#6b7280] border border-[#2d2d2d] px-2 py-1">
+              Restaurants
+            </span>
+          </div>
+          <p class="text-[#6b7280] text-sm leading-relaxed mb-8">
+            A Toronto seafood restaurant was struggling with low online visibility and a
+            stagnant retainer. Within 60 days of launching the Front Door Package,
+            their retainer doubled from $2K to $4K/month.
+          </p>
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-[#2d2d2d]">
+            <div>
+              <p class="text-[#c41230] text-xl font-bold">100%</p>
+              <p class="text-[#6b7280] text-xs mt-1">Revenue growth</p>
+            </div>
+            <div>
+              <p class="text-[#c41230] text-xl font-bold">60</p>
+              <p class="text-[#6b7280] text-xs mt-1">Days to results</p>
+            </div>
+            <div>
+              <p class="text-[#c41230] text-xl font-bold">4.8★</p>
+              <p class="text-[#6b7280] text-xs mt-1">Google rating</p>
+            </div>
+          </div>
+          <div class="mt-6">
+            <a
+              href="/case-studies/crab-boil"
+              class="text-sm text-[#c41230] hover:text-[#f3f4f6] font-semibold transition-colors"
+            >
+              Read full case study &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Jayden -->
+        <div class="bg-[#1a1a1a] p-8 md:p-10">
+          <div class="flex items-start justify-between mb-6">
+            <div>
+              <p class="text-[#c41230] text-xs tracking-widest uppercase font-semibold mb-1">
+                Case Study
+              </p>
+              <h3
+                class="text-[#f3f4f6] text-2xl md:text-3xl"
+                style="font-family: 'Bebas Neue', sans-serif;"
+              >
+                Jayden — Creator
+              </h3>
+            </div>
+            <span class="text-xs text-[#6b7280] border border-[#2d2d2d] px-2 py-1">
+              Creators
+            </span>
+          </div>
+          <p class="text-[#6b7280] text-sm leading-relaxed mb-8">
+            A content creator needed a digital infrastructure that could support rapid
+            audience growth. Forge built the strategy and content system that drove
+            697K TikTok followers and over 500 million impressions.
+          </p>
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-[#2d2d2d]">
+            <div>
+              <p class="text-[#c41230] text-xl font-bold">697K</p>
+              <p class="text-[#6b7280] text-xs mt-1">TikTok followers</p>
+            </div>
+            <div>
+              <p class="text-[#c41230] text-xl font-bold">500M+</p>
+              <p class="text-[#6b7280] text-xs mt-1">Impressions</p>
+            </div>
+            <div>
+              <p class="text-[#c41230] text-xl font-bold">89K</p>
+              <p class="text-[#6b7280] text-xs mt-1">Instagram</p>
+            </div>
+          </div>
+          <div class="mt-6">
+            <a
+              href="/case-studies/jayden"
+              class="text-sm text-[#c41230] hover:text-[#f3f4f6] font-semibold transition-colors"
+            >
+              Read full case study &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- Section 6: Industries     -->
+  <!-- ========================= -->
+  <section id="industries" class="py-20 md:py-28 bg-[#1a1a1a] border-y border-[#2d2d2d]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <p class="text-[#c41230] text-xs tracking-[0.3em] uppercase font-semibold mb-4">
+          Industries
+        </p>
+        <h2
+          class="text-[40px] md:text-[56px] leading-none text-[#f3f4f6]"
+          style="font-family: 'Bebas Neue', sans-serif;"
+        >
+          Built for Your Industry.
+        </h2>
+        <p class="text-[#6b7280] text-base mt-4 max-w-xl mx-auto">
+          Every industry has different customer search behavior, different review platforms, different trust signals. We know yours.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px bg-[#2d2d2d]">
+        {industries.map((ind) => (
+          <a
+            href={`/industries/${ind.slug}/`}
+            class="group bg-[#0d0d0d] p-6 md:p-8 flex flex-col items-center justify-center text-center hover:bg-[#1a1a1a] transition-colors border-0"
+          >
+            <span class="text-3xl mb-4 block" role="img" aria-label={ind.name}>
+              {ind.icon}
+            </span>
+            <span
+              class="text-[#6b7280] group-hover:text-[#f3f4f6] transition-colors text-sm font-medium"
+            >
+              {ind.name}
+            </span>
+            <span
+              class="mt-2 text-xs text-[#c41230] opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              Learn more &rarr;
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- Section 7: Locations      -->
+  <!-- ========================= -->
+  <section id="locations" class="py-14 bg-[#0d0d0d] border-b border-[#2d2d2d]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-6">
+        <p
+          class="text-[#f3f4f6] text-lg flex-shrink-0"
+          style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.08em;"
+        >
+          Serving the GTA:
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {cities.map((city) => (
+            <a
+              href={`/locations/${city.toLowerCase().replace(/ /g, "-")}/`}
+              class="text-xs text-[#6b7280] border border-[#2d2d2d] px-3 py-1.5 hover:text-[#f3f4f6] hover:border-[#6b7280] transition-all"
+            >
+              {city}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- Section 8: Why Forge      -->
+  <!-- ========================= -->
+  <section id="why-forge" class="py-20 md:py-28 bg-[#0d0d0d]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <p class="text-[#c41230] text-xs tracking-[0.3em] uppercase font-semibold mb-4">
+          Why Forge
+        </p>
+        <h2
+          class="text-[40px] md:text-[56px] leading-none text-[#f3f4f6]"
+          style="font-family: 'Bebas Neue', sans-serif;"
+        >
+          Different by Design.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#2d2d2d]">
+        {differentiators.map((d, i) => (
+          <div class="bg-[#1a1a1a] p-8 md:p-10">
+            <p
+              class="text-[#c41230] text-5xl md:text-6xl mb-6"
+              style="font-family: 'Bebas Neue', sans-serif;"
+            >
+              0{i + 1}
+            </p>
+            <h3
+              class="text-[#f3f4f6] text-2xl md:text-3xl mb-4"
+              style="font-family: 'Bebas Neue', sans-serif;"
+            >
+              {d.title}
+            </h3>
+            <p class="text-[#6b7280] text-sm leading-relaxed">{d.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- Section 9: Full-width CTA -->
+  <!-- ========================= -->
+  <section id="cta" class="bg-[#c41230] py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2
+        class="text-[40px] md:text-[64px] lg:text-[72px] leading-none text-white mb-6"
+        style="font-family: 'Bebas Neue', sans-serif;"
+      >
+        Ready to Fix<br />Your Front Door?
+      </h2>
+      <p class="text-white/70 text-base md:text-lg mb-10 max-w-xl mx-auto">
+        Book a free 30-minute call. We'll look at your website, your Google
+        ranking, and your reviews — and show you exactly what's costing you
+        customers. No pitch, no pressure.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center px-10 py-5 bg-white text-[#c41230] font-bold hover:bg-[#f3f4f6] transition-colors text-sm tracking-widest"
+        style="font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.15em;"
+      >
+        BOOK A FREE CALL
+      </a>
+      <p class="text-white/50 text-xs mt-6 tracking-wide">No contracts. No commitments. Just a conversation.</p>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- Section 10: Footer        -->
+  <!-- ========================= -->
+  <Footer />
+</BaseLayout>

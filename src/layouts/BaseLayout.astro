@@ -1,0 +1,160 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  schema?: object | object[];
+}
+
+const {
+  title = "Forge | Toronto Digital Presence Agency",
+  description = "Local businesses lose customers every day because their website looks like 2012, they don't show up on Google, and nobody's managing their reputation. Forge fixes all three — as one package.",
+  ogImage = "/og-default.png",
+  schema,
+} = Astro.props;
+
+const siteUrl = 'https://forge-co.ca';
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [{
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Forge',
+  url: siteUrl,
+  description,
+  areaServed: { '@type': 'City', name: 'Toronto' },
+}];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="en-CA" href={canonicalURL} />
+    <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- JSON-LD Schema -->
+    {schemas.map(s => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[#0d0d0d] text-[#f3f4f6] font-[Inter,sans-serif]">
+    <slot />
+    <!-- Forge Prospect Tracking -->
+    <script>
+      (function () {
+        var T = "https://forge-tracker.2313745ontarioinc.workers.dev/t",
+          S = "forge-co-ca-homepage",
+          p = new URLSearchParams(window.location.search),
+          r = p.get("ref") || "direct",
+          sid = Math.random().toString(36).slice(2) + Date.now().toString(36),
+          d = /Mobile|Android|iPhone/i.test(navigator.userAgent)
+            ? "mobile"
+            : "desktop",
+          sc = window.innerWidth + "x" + window.innerHeight;
+        function send(t, data) {
+          try {
+            navigator.sendBeacon(
+              T,
+              JSON.stringify({
+                site: S,
+                ref: r,
+                type: t,
+                data: data,
+                sessionId: sid,
+                device: d,
+                screen: sc,
+                url: window.location.pathname,
+              }),
+            );
+          } catch {}
+        }
+        send("pageview", {});
+        var mx = 0,
+          ml = [25, 50, 75, 100],
+          rp = new Set();
+        window.addEventListener(
+          "scroll",
+          function () {
+            var pct = Math.round(
+              (window.scrollY /
+                (document.documentElement.scrollHeight - window.innerHeight)) *
+                100,
+            );
+            if (pct > mx) {
+              mx = pct;
+              for (var m of ml) {
+                if (pct >= m && !rp.has(m)) {
+                  rp.add(m);
+                  send("scroll", { depth: m });
+                }
+              }
+            }
+          },
+          { passive: true },
+        );
+        var obs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                send("section", { section: e.target.id || e.target.tagName });
+                obs.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.3 },
+        );
+        document
+          .querySelectorAll("section[id],[data-section]")
+          .forEach(function (el) {
+            obs.observe(el);
+          });
+        document.addEventListener("click", function (e) {
+          var l = e.target.closest("a,button");
+          if (l) {
+            send("click", {
+              target: l.href || l.dataset.action || "",
+              text: (l.textContent || "").trim().slice(0, 50),
+            });
+          }
+        });
+        var el = 0;
+        setInterval(function () {
+          el += 15;
+          send("heartbeat", { elapsed: el });
+        }, 15000);
+        document.addEventListener("visibilitychange", function () {
+          if (document.visibilityState === "hidden") {
+            send("heartbeat", { elapsed: el, final: true });
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
