@@ -1,0 +1,134 @@
+---
+interface NavItem {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+}
+
+const navItems: NavItem[] = [
+  {
+    label: 'Services',
+    href: '/services/',
+    children: [
+      { label: 'SearchForge', href: '/services/search-forge/' },
+      { label: 'ContentForge', href: '/services/content-forge/' },
+      { label: 'Web Design', href: '/services/web-design/' },
+    ],
+  },
+  { label: 'Case Studies', href: '/case-studies/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'About', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
+];
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 bg-brand-primary/95 backdrop-blur-sm border-b border-white/10"
+>
+  <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center">
+        <img src="/assets/images/forge-logo-dark.png" alt="Forge-Co." class="h-12 w-auto" />
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden lg:flex lg:items-center lg:gap-8">
+        {navItems.map((item) => (
+          <div class="relative group">
+            <a
+              href={item.href}
+              class="text-sm font-medium text-brand-white/80 hover:text-brand-white transition-colors"
+            >
+              {item.label}
+              {item.children && (
+                <svg class="ml-1 inline-block h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              )}
+            </a>
+            {item.children && (
+              <div class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div class="rounded-lg bg-brand-primary-light border border-white/10 py-2 shadow-xl min-w-[200px]">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="block px-4 py-2 text-sm text-brand-white/80 hover:text-brand-white hover:bg-white/5 transition-colors"
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+        <a href="/growth-audit/" class="btn-primary text-sm">
+          Get Your Growth Audit
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden text-brand-white p-2"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg id="hamburger-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="close-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden pb-4">
+      {navItems.map((item) => (
+        <div>
+          <a
+            href={item.href}
+            class="block py-2 text-sm font-medium text-brand-white/80 hover:text-brand-white"
+          >
+            {item.label}
+          </a>
+          {item.children && (
+            <div class="pl-4">
+              {item.children.map((child) => (
+                <a
+                  href={child.href}
+                  class="block py-1.5 text-sm text-brand-white/60 hover:text-brand-white"
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+      <a href="/growth-audit/" class="btn-primary text-sm mt-4 w-full text-center">
+        Get Your Growth Audit
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="h-16"></div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const hamburger = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('hidden') === false;
+    hamburger?.classList.toggle('hidden', isOpen);
+    closeIcon?.classList.toggle('hidden', !isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
+  });
+</script>

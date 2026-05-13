@@ -1,0 +1,32 @@
+---
+/** TODO: Add star rating display and photo rendering in Phase 1 */
+interface Props {
+  quote: string;
+  author: string;
+  role: string;
+  photo?: string;
+  rating?: number;
+}
+
+const { quote, author, role, photo, rating } = Astro.props;
+---
+
+<div class="bg-brand-card rounded-xl p-6 border border-brand-border">
+  {rating && (
+    <div class="flex gap-1 mb-3">
+      {Array.from({ length: rating }).map(() => (
+        <span class="text-brand-secondary">&#9733;</span>
+      ))}
+    </div>
+  )}
+  <blockquote class="text-brand-text italic leading-relaxed">"{quote}"</blockquote>
+  <div class="mt-4 flex items-center gap-3">
+    {photo && (
+      <img src={photo} alt={author} class="h-10 w-10 rounded-full object-cover" />
+    )}
+    <div>
+      <p class="text-sm font-semibold text-brand-heading">{author}</p>
+      <p class="text-xs text-brand-muted">{role}</p>
+    </div>
+  </div>
+</div>

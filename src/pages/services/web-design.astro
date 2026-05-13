@@ -1,0 +1,260 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BreadcrumbNav from '../../components/BreadcrumbNav.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABanner from '../../components/CTABanner.astro';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Web Design for Restaurants — Fast, SEO-Optimized Websites',
+    description: 'Custom restaurant websites built for speed, SEO, and conversions. Mobile-first, lightning fast, and designed to turn visitors into customers.',
+    url: 'https://forge-co.ca/services/web-design/',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'Forge',
+      url: 'https://forge-co.ca',
+    },
+    areaServed: {
+      '@type': 'Place',
+      name: 'Greater Toronto Area, Ontario, Canada',
+    },
+    serviceType: 'Web Design',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://forge-co.ca/' },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://forge-co.ca/services/' },
+      { '@type': 'ListItem', position: 3, name: 'Web Design' },
+    ],
+  },
+];
+
+const painPoints = [
+  'My website looks outdated',
+  "Customers can't find my hours, menu, or location easily",
+  'My site takes forever to load on mobile',
+  "Google can't even read my website",
+];
+
+const features = [
+  {
+    title: 'Mobile-First Design',
+    description: 'Most of your customers visit from their phone. Every site we build looks and works perfectly on mobile first.',
+  },
+  {
+    title: 'SEO-Ready Architecture',
+    description: 'Built with clean code that Google can read, crawl, and index. No blank-page React apps.',
+  },
+  {
+    title: 'Conversion-Optimized',
+    description: 'Clear calls to action, easy-to-find information, and a layout designed to turn visitors into customers.',
+  },
+  {
+    title: 'Lightning Fast',
+    description: 'Sub-2-second load times. Built on modern technology that doesn\'t slow down.',
+  },
+  {
+    title: 'Easy to Update',
+    description: 'We build it so you can update menus, hours, and specials without calling a developer.',
+  },
+];
+
+const included = [
+  'Custom design (not a template)',
+  'Mobile-responsive development',
+  'SEO setup (meta tags, schema, sitemap, robots.txt)',
+  'Google Analytics integration',
+  'Contact form setup',
+  'Menu/hours/location pages',
+  '30 days of post-launch support',
+  'Hosting on Cloudflare (fast, secure, global)',
+];
+
+const lighthouseScores = [
+  { label: 'Performance', score: '95+' },
+  { label: 'Accessibility', score: '95+' },
+  { label: 'Best Practices', score: '95+' },
+  { label: 'SEO', score: '95+' },
+];
+
+const faqs = [
+  {
+    question: 'How long does it take to build a website?',
+    answer: 'Most restaurant websites are designed, built, and launched within 2-4 weeks. Complex projects with custom features may take longer.',
+  },
+  {
+    question: 'Do I own the website?',
+    answer: 'Yes. You own the design, the code, and the content. We host it on Cloudflare for speed and security, but the site is yours.',
+  },
+  {
+    question: 'What if I already have a website?',
+    answer: 'We can rebuild it from scratch or optimize what you have. During your Growth Audit, we will evaluate your current site and recommend the best path forward.',
+  },
+  {
+    question: 'Can I update the site myself?',
+    answer: 'Yes. We build sites so that common updates like menus, hours, and specials can be handled without a developer. We also include 30 days of post-launch support.',
+  },
+];
+---
+
+<Layout
+  title="Web Design for Restaurants — Fast, SEO-Optimized Websites | Forge"
+  description="Custom restaurant websites built for speed, SEO, and conversions. Mobile-first, lightning fast, and designed to turn visitors into customers."
+  schema={schema}
+>
+
+  <!-- ============================================ -->
+  <!-- HERO                                         -->
+  <!-- ============================================ -->
+  <section id="hero" class="bg-brand-primary section-hero relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-primary to-brand-dark/30 pointer-events-none"></div>
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="mb-6">
+        <BreadcrumbNav items={[
+          { label: 'Home', href: '/' },
+          { label: 'Services', href: '/services/' },
+          { label: 'Web Design' },
+        ]} />
+      </div>
+      <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">WebForge</p>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-800 text-brand-white leading-tight text-shadow-forge">
+        Websites That Work as Hard as You Do
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-brand-white/70 max-w-2xl mx-auto leading-relaxed">
+        Fast, beautiful, conversion-optimized websites for restaurant operators.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- THE PROBLEM                                  -->
+  <!-- ============================================ -->
+  <section id="problem" class="section-hero bg-brand-bg">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <p class="text-lg text-brand-text font-medium leading-relaxed">
+          Your website should be your hardest-working employee. But most restaurant websites are slow, outdated, and impossible to find on Google.
+        </p>
+      </div>
+      <div class="space-y-4">
+        {painPoints.map((point) => (
+          <div class="flex items-start gap-4 bg-brand-card rounded-xl border border-brand-border p-5">
+            <div class="flex-shrink-0 mt-0.5">
+              <svg class="h-5 w-5 text-brand-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+              </svg>
+            </div>
+            <p class="text-brand-text font-medium">{point}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- WHAT WE BUILD                                -->
+  <!-- ============================================ -->
+  <section id="what-we-build" class="section-hero bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">What We Build</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading leading-tight">
+          Built for Speed, SEO, and Conversions
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {features.map((feature) => (
+          <div class="bg-brand-card rounded-xl border border-brand-border p-8 card-hover">
+            <h3 class="font-display text-lg font-bold text-brand-heading">{feature.title}</h3>
+            <p class="mt-3 text-brand-muted leading-relaxed">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- OUR STACK                                    -->
+  <!-- ============================================ -->
+  <section id="stack" class="section-hero bg-brand-primary">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">Our Stack</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-white leading-tight">
+          Built on Modern Technology
+        </h2>
+        <p class="mt-6 text-lg text-brand-white/60 max-w-2xl mx-auto leading-relaxed">
+          We build with Astro — the same technology powering some of the fastest websites on the internet. Your site loads instantly, ranks better, and converts more visitors into customers.
+        </p>
+      </div>
+
+      <!-- Lighthouse Scores -->
+      <div class="text-center mb-6">
+        <p class="text-sm text-brand-white/50 uppercase tracking-wider font-semibold">Our launch targets — typical Lighthouse scores at handoff</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {lighthouseScores.map((item) => (
+          <div class="text-center bg-white/5 rounded-xl border border-white/10 p-6">
+            <p class="font-display text-3xl sm:text-4xl font-bold text-brand-secondary">{item.score}</p>
+            <p class="mt-2 text-sm text-brand-white/60">{item.label}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-4 text-center text-xs text-brand-white/40 max-w-2xl mx-auto">
+        Measured on launch with Google PageSpeed Insights on a representative production page. Real-world scores vary with content (image volume, embeds, third-party scripts).
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- WHAT'S INCLUDED                              -->
+  <!-- ============================================ -->
+  <section id="included" class="section-hero bg-brand-bg">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading">
+          What's Included
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {included.map((item) => (
+          <div class="flex items-center gap-3 bg-brand-card rounded-lg border border-brand-border p-4">
+            <svg class="h-5 w-5 text-brand-secondary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+            <span class="text-brand-text font-medium">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FAQ                                          -->
+  <!-- ============================================ -->
+  <section id="faq" class="section-hero bg-white">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading">
+          Frequently Asked Questions
+        </h2>
+      </div>
+      <FAQ items={faqs} />
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CTA BANNER                                   -->
+  <!-- ============================================ -->
+  <CTABanner
+    headline="Your website should fill seats, not collect dust."
+    description="Get a complete website audit and see exactly what's holding you back."
+    primaryCTA={{ text: 'Get Your Growth Audit', href: '/growth-audit/' }}
+  />
+
+</Layout>

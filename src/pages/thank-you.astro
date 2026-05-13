@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const source = Astro.url.searchParams.get('source') ?? 'contact';
+
+const copy = {
+  contact: {
+    headline: "Got it. We'll be in touch.",
+    body: 'Thanks for reaching out. We read every message ourselves and reply within one business day. If your inquiry is time-sensitive, email hello@forge-co.ca directly.',
+  },
+  'growth-audit': {
+    headline: 'Growth Audit request received.',
+    body: "Thanks. We'll review your submission and email you within one business day to confirm scope, billing, and timing. If you don't see a reply, check spam or email hello@forge-co.ca.",
+  },
+}[source] ?? {
+  headline: "Got it. We'll be in touch.",
+  body: 'Thanks for reaching out. We read every message ourselves and reply within one business day.',
+};
+---
+
+<Layout
+  title="Thank You — Forge"
+  description="We received your submission. We'll be in touch within one business day."
+  noindex={true}
+>
+  <section class="bg-brand-primary py-24 sm:py-32">
+    <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-800 text-brand-white leading-tight text-shadow-forge">
+        {copy.headline}
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-brand-white/70">
+        {copy.body}
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="btn-secondary">Back to home</a>
+        <a href="/blog/" class="btn-outline">Read the blog</a>
+      </div>
+    </div>
+  </section>
+  <h2 class="sr-only">Explore more from Forge</h2>
+</Layout>

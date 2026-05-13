@@ -1,0 +1,30 @@
+---
+/** TODO: Add JSON-LD BreadcrumbList schema injection in Phase 1 */
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="text-sm text-brand-muted">
+  <ol class="flex items-center gap-2">
+    {items.map((item, index) => (
+      <li class="flex items-center gap-2">
+        {index > 0 && <span class="text-brand-border">/</span>}
+        {item.href ? (
+          <a href={item.href} class="hover:text-brand-primary transition-colors">
+            {item.label}
+          </a>
+        ) : (
+          <span class="text-brand-heading font-medium">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

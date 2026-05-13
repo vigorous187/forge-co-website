@@ -1,0 +1,240 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'Growth Audit',
+    description: 'A complete audit of your Google presence, social media, website, and reviews. Plus a custom 90-day action plan.',
+    url: 'https://forge-co.ca/growth-audit/',
+    brand: { '@type': 'Organization', name: 'Forge' },
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      url: 'https://forge-co.ca/growth-audit/',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://forge-co.ca/' },
+      { '@type': 'ListItem', position: 2, name: 'Growth Audit' },
+    ],
+  },
+];
+
+const included = [
+  {
+    title: 'Google Business Profile Health Check',
+    description: 'We audit your GBP listing, photos, categories, posts, and Q&A. Most restaurants are leaving visibility on the table.',
+  },
+  {
+    title: 'Local SEO Ranking Assessment',
+    description: "Where do you rank for your most important search terms? We'll show you — and show you where your competitors rank too.",
+  },
+  {
+    title: 'Social Media Presence Review',
+    description: 'Followers, engagement, content quality, posting frequency, and platform strategy. We grade it all.',
+  },
+  {
+    title: 'Website Conversion Audit',
+    description: "Your website should be your hardest-working employee. We'll tell you if it is — or why it isn't.",
+  },
+  {
+    title: 'Review & Reputation Analysis',
+    description: 'Your star rating, review velocity, response rate, and sentiment analysis across Google, Yelp, and delivery platforms.',
+  },
+  {
+    title: '90-Day Action Plan',
+    description: 'Not a generic playbook. A specific, prioritized plan for your business with estimated impact for each recommendation.',
+  },
+];
+
+const steps = [
+  {
+    number: '1',
+    title: 'Book Your Audit',
+    description: "Pick a time that works. We'll send you a short questionnaire before we start.",
+  },
+  {
+    number: '2',
+    title: 'We Do the Work',
+    description: 'Our team spends 5-8 hours analyzing your digital presence across every channel.',
+  },
+  {
+    number: '3',
+    title: 'Get Your Plan',
+    description: 'A 60-minute presentation of findings plus your custom 90-day action plan. Then decide if you want us to execute it.',
+  },
+];
+
+const objections = [
+  {
+    question: 'Why start with an audit?',
+    answer: 'Because strategy before execution prevents wasted spend. This is 5-8 hours of focused analysis by specialists in restaurant growth.',
+  },
+  {
+    question: "What if I'm not ready for a retainer?",
+    answer: "The audit stands on its own. You'll walk away with a specific, actionable plan whether or not you engage us further.",
+  },
+  {
+    question: 'How is this different from a free consultation?',
+    answer: "A consultation is a conversation. This is a deliverable — a comprehensive report with data, benchmarks, competitor analysis, and a prioritized roadmap.",
+  },
+];
+
+const tallyAuditUrl = 'https://tally.so/r/Ek8Q0B?source=forge-growth-audit-page';
+---
+
+<Layout
+  title="Growth Audit — Digital Presence Diagnostic | Forge"
+  description="Get a complete audit of your Google presence, social media, website, and reviews. Plus a custom 90-day action plan."
+  schema={schema}
+>
+  <!-- Hero -->
+  <section id="hero" class="bg-brand-primary section-hero relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-primary to-brand-dark opacity-50"></div>
+    <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <p class="inline-block rounded-full bg-brand-secondary/20 px-4 py-1.5 text-sm font-semibold text-brand-secondary mb-6">
+        Most Popular Entry Point
+      </p>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-800 text-brand-white leading-tight text-shadow-forge">
+        Your Growth Audit
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-brand-white/70 max-w-2xl mx-auto">
+        A complete diagnostic of your digital presence — and a 90-day plan to fix it. Credit applied to your first month.
+      </p>
+      <div class="mt-10">
+        <a href="#book" class="btn-secondary text-base px-8 py-4">
+          Book Your Audit Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+    <BreadcrumbNav items={[{ label: 'Home', href: '/' }, { label: 'Growth Audit' }]} />
+  </div>
+
+  <!-- What's Included -->
+  <section id="whats-included" class="section-standard">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading text-center">
+        What's Included
+      </h2>
+      <p class="mt-4 text-brand-muted text-center max-w-2xl mx-auto">
+        5-8 hours of expert analysis across every digital channel that matters for your business.
+      </p>
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {included.map((item, i) => (
+          <div class="bg-brand-card rounded-xl border border-brand-border p-6 card-hover">
+            <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-brand-secondary/10 text-brand-secondary font-display font-bold text-lg mb-4">
+              {i + 1}
+            </div>
+            <h3 class="font-display text-lg font-bold text-brand-heading">{item.title}</h3>
+            <p class="mt-2 text-sm text-brand-muted leading-relaxed">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Mid-page CTA -->
+  <section class="bg-brand-bg-alt section-compact">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-lg font-semibold text-brand-heading">Ready to see where you stand?</p>
+      <a href="#book" class="btn-secondary text-base px-8 py-3 mt-4 inline-block">
+        Book Your Audit Now
+      </a>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="section-standard">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading text-center mb-12">
+        How It Works
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {steps.map((step) => (
+          <div class="text-center">
+            <div class="flex items-center justify-center w-14 h-14 rounded-full bg-brand-primary text-brand-white font-display font-bold text-xl mx-auto mb-4">
+              {step.number}
+            </div>
+            <h3 class="font-display text-xl font-bold text-brand-heading">{step.title}</h3>
+            <p class="mt-3 text-brand-muted text-sm leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Questions -->
+  <section id="objections" class="section-standard bg-brand-bg-alt">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading text-center mb-12">
+        Common Questions
+      </h2>
+      <div class="space-y-8">
+        {objections.map((obj) => (
+          <div>
+            <h3 class="font-display text-lg font-bold text-brand-heading">{obj.question}</h3>
+            <p class="mt-2 text-brand-muted leading-relaxed">{obj.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Form -->
+  <section id="book" class="section-standard">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading text-center">
+        Book Your Growth Audit
+      </h2>
+      <p class="mt-4 text-brand-muted text-center max-w-xl mx-auto">
+        Submit the intake below and we will follow up within one business day with next steps.
+      </p>
+      <p class="mt-2 text-xs text-brand-muted text-center max-w-xl mx-auto">
+        This Tally form is routed through our Forge intake workflow and synced into Notion.
+      </p>
+      <div class="mt-10 rounded-xl border border-brand-border overflow-hidden bg-brand-card">
+        <iframe
+          src={tallyAuditUrl}
+          title="Forge Growth Audit Form"
+          loading="lazy"
+          class="w-full min-h-[980px]"
+        ></iframe>
+      </div>
+      <div class="mt-6 text-center">
+        <a href={tallyAuditUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary text-base px-8 py-4 inline-block font-bold">
+          Open Audit Form in New Tab
+        </a>
+      </div>
+      <p class="text-center text-sm text-brand-muted mt-4">
+        Prefer to talk first? Email <a href="mailto:hello@forge-co.ca" class="text-brand-secondary hover:underline">hello@forge-co.ca</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Trust Section -->
+  <section id="trust" class="section-standard bg-brand-primary">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-lg text-brand-white/70">
+        Most restaurant clients use this audit to prioritize the highest-leverage growth opportunities first.
+      </p>
+      <p class="mt-4 text-brand-white/50 text-sm">
+        You leave with a clear action plan your team can execute immediately.
+      </p>
+      <div class="mt-8">
+        <a href="#book" class="btn-secondary text-base px-8 py-3">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,180 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface SchemaObject {
+  '@context'?: string;
+  '@type'?: string;
+  [key: string]: unknown;
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+  schema?: SchemaObject[];
+}
+
+const {
+  title,
+  description = 'Forge builds connected growth systems that turn visibility into revenue for local operators, with dedicated restaurant programs through Toronto Restaurant Growth.',
+  ogImage = '/og-default.jpg',
+  ogType = 'website',
+  canonicalUrl,
+  noindex = false,
+  schema = [],
+} = Astro.props;
+
+const siteUrl = 'https://forge-co.ca';
+const resolvedCanonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
+const resolvedOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
+
+const defaultOrgSchema: SchemaObject = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Forge',
+  url: 'https://forge-co.ca',
+  description: 'Growth systems agency for GTA operators and restaurant brands',
+  areaServed: {
+    '@type': 'Place',
+    name: 'Greater Toronto Area, Ontario, Canada',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Toronto',
+    addressRegion: 'ON',
+    addressCountry: 'CA',
+  },
+};
+
+const allSchemas = [defaultOrgSchema, ...schema];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={resolvedCanonical} />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:url" content={resolvedCanonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Forge" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org JSON-LD -->
+    {allSchemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+
+    <link rel="icon" type="image/png" href="https://forge-co.ca/assets/images/forge-logo-dark.png" />
+    <link rel="shortcut icon" href="https://forge-co.ca/assets/images/forge-logo-dark.png" />
+    <link rel="apple-touch-icon" href="https://forge-co.ca/assets/images/forge-logo-dark.png" />
+  </head>
+  <body class="bg-brand-bg text-brand-text font-sans antialiased">
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Forge Tracker -->
+    <script>
+      (function () {
+        var T = 'https://forge-tracker.2313745ontarioinc.workers.dev/t',
+          S = 'forge-site',
+          p = new URLSearchParams(window.location.search),
+          r = p.get('ref') || 'direct',
+          sid = Math.random().toString(36).slice(2) + Date.now().toString(36),
+          d = /Mobile|Android|iPhone/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+          sc = window.innerWidth + 'x' + window.innerHeight;
+        function send(t: string, data: Record<string, unknown>) {
+          try {
+            navigator.sendBeacon(
+              T,
+              JSON.stringify({ site: S, ref: r, type: t, data: data, sessionId: sid, device: d, screen: sc, url: window.location.pathname })
+            );
+          } catch {}
+        }
+        send('pageview', {});
+        var mx = 0,
+          ml = [25, 50, 75, 100],
+          rp = new Set<number>();
+        window.addEventListener(
+          'scroll',
+          function () {
+            var pct = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+            if (pct > mx) {
+              mx = pct;
+              for (var m of ml) {
+                if (pct >= m && !rp.has(m)) {
+                  rp.add(m);
+                  send('scroll', { depth: m });
+                }
+              }
+            }
+          },
+          { passive: true }
+        );
+        var obs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                send('section', { section: (e.target as HTMLElement).id || e.target.tagName });
+                obs.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+        document.querySelectorAll('section[id],[data-section]').forEach(function (el) {
+          obs.observe(el);
+        });
+        document.addEventListener('click', function (e) {
+          var l = (e.target as HTMLElement).closest('a,button') as HTMLAnchorElement | HTMLButtonElement | null;
+          if (l) {
+            send('click', { target: (l as HTMLAnchorElement).href || l.dataset.action || '', text: (l.textContent || '').trim().slice(0, 50) });
+          }
+        });
+        var el = 0;
+        setInterval(function () {
+          el += 15;
+          send('heartbeat', { elapsed: el });
+        }, 15000);
+        document.addEventListener('visibilitychange', function () {
+          if (document.visibilityState === 'hidden') {
+            send('heartbeat', { elapsed: el, final: true });
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

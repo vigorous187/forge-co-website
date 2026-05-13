@@ -1,0 +1,243 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BreadcrumbNav from '../../components/BreadcrumbNav.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABanner from '../../components/CTABanner.astro';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'ContentForge — Restaurant Video, Social Media & Photography',
+    description: 'On-site video production, social media management, and brand photography for GTA restaurants. We come to you, create content, and fill seats.',
+    url: 'https://forge-co.ca/services/content-forge/',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'Forge',
+      url: 'https://forge-co.ca',
+    },
+    areaServed: {
+      '@type': 'Place',
+      name: 'Greater Toronto Area, Ontario, Canada',
+    },
+    serviceType: 'Social Media Marketing',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://forge-co.ca/' },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://forge-co.ca/services/' },
+      { '@type': 'ListItem', position: 3, name: 'ContentForge' },
+    ],
+  },
+];
+
+const painPoints = [
+  'You know you need to post more, but who has time?',
+  "Your photos don't do your food justice",
+  "You're on TikTok but nothing's going viral",
+  'You post but engagement is flat',
+];
+
+const services = [
+  {
+    title: 'On-Site Video Production',
+    description: 'Our team comes to your restaurant and creates TikTok, Reels, and Shorts content. Behind-the-kitchen, food prep, atmosphere, staff — the content that fills seats.',
+  },
+  {
+    title: 'Social Media Management',
+    description: 'Strategy, content calendar, posting, community management, and analytics across Instagram, TikTok, Facebook, and Google.',
+  },
+  {
+    title: 'Brand Photography',
+    description: 'Professional food photography, interior/exterior shots, team portraits, and menu photography optimized for social and web.',
+  },
+  {
+    title: 'Content Strategy',
+    description: "Not just posting — planning. We align your content with seasons, events, promotions, and your overall growth goals.",
+  },
+];
+
+const faqs = [
+  {
+    question: 'How often do you come to film?',
+    answer: 'Depends on your package. Typically 1-2 visits per month for video content, with additional visits for special events or seasonal shoots.',
+  },
+  {
+    question: 'Do you handle posting or just create content?',
+    answer: 'Both. We can create content for you to post, or manage your entire social presence including posting, engagement, and community management.',
+  },
+  {
+    question: 'What platforms do you cover?',
+    answer: 'Instagram, TikTok, Facebook, Google Business Profile, and YouTube Shorts. We recommend focusing on 2-3 platforms rather than spreading thin across all of them.',
+  },
+];
+---
+
+<Layout
+  title="ContentForge — Restaurant Video, Social Media & Photography | Forge"
+  description="On-site video production, social media management, and brand photography for GTA restaurants. We come to you, create content, and fill seats."
+  schema={schema}
+>
+
+  <!-- ============================================ -->
+  <!-- HERO                                         -->
+  <!-- ============================================ -->
+  <section id="hero" class="bg-brand-primary section-hero relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-primary to-brand-dark/30 pointer-events-none"></div>
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="mb-6">
+        <BreadcrumbNav items={[
+          { label: 'Home', href: '/' },
+          { label: 'Services', href: '/services/' },
+          { label: 'ContentForge' },
+        ]} />
+      </div>
+      <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">ContentForge</p>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-800 text-brand-white leading-tight text-shadow-forge">
+        Video, Social Media & Photography
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-brand-white/70 max-w-2xl mx-auto leading-relaxed">
+        We come to your restaurant. We film. We post. You fill seats.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- THE PROBLEM                                  -->
+  <!-- ============================================ -->
+  <section id="problem" class="section-hero bg-brand-bg">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <p class="text-lg text-brand-text font-medium leading-relaxed">
+          A growing share of younger diners discover new restaurants on social media before they ever check Google. But posting randomly isn't a strategy.
+        </p>
+      </div>
+      <div class="space-y-4">
+        {painPoints.map((point) => (
+          <div class="flex items-start gap-4 bg-brand-card rounded-xl border border-brand-border p-5">
+            <div class="flex-shrink-0 mt-0.5">
+              <svg class="h-5 w-5 text-brand-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+              </svg>
+            </div>
+            <p class="text-brand-text font-medium">{point}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- WHAT WE DO                                   -->
+  <!-- ============================================ -->
+  <section id="what-we-do" class="section-hero bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">What We Do</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading leading-tight">
+          Content That Fills Seats
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-8">
+        <img
+          src="/assets/images/hero-food-plating.jpg"
+          alt="Chef plating food with precision in a restaurant kitchen"
+          class="w-full rounded-xl shadow-lg"
+          loading="lazy"
+          width="560"
+          height="374"
+        />
+        <div class="grid grid-cols-1 gap-6">
+          {services.slice(0, 2).map((service) => (
+            <div class="bg-brand-card rounded-xl border border-brand-border p-8 card-hover">
+              <h3 class="font-display text-xl font-bold text-brand-heading">{service.title}</h3>
+              <p class="mt-3 text-brand-muted leading-relaxed">{service.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {services.slice(2).map((service) => (
+          <div class="bg-brand-card rounded-xl border border-brand-border p-8 card-hover">
+            <h3 class="font-display text-xl font-bold text-brand-heading">{service.title}</h3>
+            <p class="mt-3 text-brand-muted leading-relaxed">{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- THE DIFFERENCE                               -->
+  <!-- ============================================ -->
+  <section id="difference" class="section-hero bg-brand-bg">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading mb-8">
+          The Difference
+        </h2>
+        <p class="text-lg text-brand-text leading-relaxed">
+          Most agencies schedule stock-looking posts from their laptop. We show up at your restaurant with cameras.
+        </p>
+        <p class="mt-6 text-lg text-brand-muted leading-relaxed">
+          Content created on-site, with your real food, your real team, your real atmosphere — that's what drives engagement.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- RESULTS                                      -->
+  <!-- ============================================ -->
+  <section id="results" class="section-hero bg-brand-primary">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">Results</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-white leading-tight">
+          Numbers That Matter
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        <div class="text-center">
+          <p class="font-display text-4xl sm:text-5xl font-bold text-brand-white">202K</p>
+          <p class="mt-2 text-sm text-brand-white/60">Combined followers across 3 Crab Boil locations</p>
+        </div>
+        <div class="text-center">
+          <p class="font-display text-4xl sm:text-5xl font-bold text-brand-white">89K</p>
+          <p class="mt-2 text-sm text-brand-white/60">Jayden's Instagram following — proof we know what makes content actually perform</p>
+        </div>
+        <div class="text-center">
+          <p class="font-display text-4xl sm:text-5xl font-bold text-brand-white">4<span class="text-brand-secondary">x</span></p>
+          <p class="mt-2 text-sm text-brand-white/60">Average engagement increase in first 90 days</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FAQ                                          -->
+  <!-- ============================================ -->
+  <section id="faq" class="section-hero bg-brand-bg">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading">
+          Frequently Asked Questions
+        </h2>
+      </div>
+      <FAQ items={faqs} />
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CTA BANNER                                   -->
+  <!-- ============================================ -->
+  <CTABanner
+    headline="Ready to fill seats with content that works?"
+    description="Get a complete audit of your social presence and a content strategy built for your restaurant."
+    primaryCTA={{ text: 'Get Your Growth Audit', href: '/growth-audit/' }}
+  />
+
+</Layout>

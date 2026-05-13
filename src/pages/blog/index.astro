@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BreadcrumbNav from '../../components/BreadcrumbNav.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const sortedPosts = allPosts.sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+
+const categories = [
+  { label: 'All', value: 'all' },
+  { label: 'SEO', value: 'seo' },
+  { label: 'Social Media', value: 'social-media' },
+  { label: 'Restaurant Marketing', value: 'restaurant-marketing' },
+  { label: 'Industry Trends', value: 'industry-trends' },
+  { label: 'Strategy', value: 'strategy' },
+];
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Blog' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      item: item.href ? `https://forge-co.ca${item.href}` : undefined,
+    })),
+  },
+];
+---
+
+<Layout
+  title="Blog — Restaurant Marketing Insights | Forge"
+  description="Insights on restaurant marketing, local SEO, social media, and growing your business in the GTA. Practical advice from the Forge team."
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="bg-brand-primary section-hero">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-6">
+        <BreadcrumbNav items={breadcrumbs} />
+      </div>
+      <h1 class="font-display text-4xl sm:text-5xl font-bold text-brand-white text-shadow-forge">
+        The Forge Blog
+      </h1>
+      <p class="mt-4 text-lg text-brand-white/70 max-w-2xl">
+        Insights on restaurant marketing, local SEO, social media, and growing your business in the GTA.
+      </p>
+    </div>
+  </section>
+
+  <!-- Category Filters -->
+  <section class="border-b border-brand-border bg-brand-card">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex gap-1 overflow-x-auto py-4 -mb-px">
+        {categories.map((cat) => (
+          <a
+            href={cat.value === 'all' ? '/blog/' : `#${cat.value}`}
+            class="px-4 py-2 text-sm font-medium text-brand-muted hover:text-brand-primary whitespace-nowrap rounded-lg hover:bg-brand-bg transition-colors"
+          >
+            {cat.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Posts Grid -->
+  <section class="section-standard">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {sortedPosts.length > 0 ? (
+        <>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-heading mb-8">
+            Latest articles
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {sortedPosts.map((post) => (
+              <BlogCard
+                title={post.data.title}
+                description={post.data.description}
+                date={post.data.publishDate}
+                category={post.data.category}
+                image={post.data.featuredImage}
+                href={`/blog/${post.id}/`}
+                readTime={post.data.readTime}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div class="text-center py-16">
+          <p class="text-brand-muted text-lg">Blog posts coming soon. We're putting the finishing touches on our first articles.</p>
+          <a href="/growth-audit/" class="btn-primary mt-6 inline-block">Get Your Growth Audit</a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTABanner
+    headline="Stop guessing. Start growing."
+    description="Get a complete marketing audit for your restaurant. We'll show you exactly what's working, what's not, and what to do next."
+    primaryCTA={{ text: 'Get Your Growth Audit', href: '/growth-audit/' }}
+    secondaryCTA={{ text: 'Learn About Our Services', href: '/services/' }}
+  />
+</Layout>

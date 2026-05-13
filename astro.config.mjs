@@ -1,15 +1,19 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
-
-// https://astro.build/config
 import sitemap from "@astrojs/sitemap";
+import mdx from "@astrojs/mdx";
 
 export default defineConfig({
   site: "https://forge-co.ca",
-  output: "static",
   trailingSlash: "always",
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) =>
+        !page.includes("/thank-you/") && !page.includes("/pricing/"),
+    }),
+    mdx(),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

@@ -1,0 +1,67 @@
+---
+interface Metric {
+  label: string;
+  value: string;
+  prefix?: string;
+  suffix?: string;
+}
+
+interface Props {
+  title: string;
+  client: string;
+  industry: string;
+  metrics: Metric[];
+  image?: string;
+  logo?: string;
+  services?: string[];
+  timeframe?: string;
+  href: string;
+}
+
+const { title, client, industry, metrics, image, logo, services, timeframe, href } = Astro.props;
+---
+
+<a href={href} class="block bg-brand-card rounded-xl overflow-hidden border border-brand-border card-hover">
+  {image && (
+    <div class="relative h-48 overflow-hidden">
+      <img src={image} alt={title} class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+    </div>
+  )}
+  <div class="p-6">
+    <div class="flex items-center gap-3 mb-3">
+      {logo && (
+        <img src={logo} alt={client} class="h-8 w-auto max-w-[120px] object-contain flex-shrink-0" loading="lazy" />
+      )}
+      <div>
+        <p class="text-xs uppercase font-semibold text-brand-secondary">{industry}</p>
+        <p class="text-sm text-brand-muted">{client}</p>
+      </div>
+    </div>
+    <h3 class="font-display text-lg font-bold text-brand-heading">{title}</h3>
+    {timeframe && (
+      <p class="text-xs text-brand-muted mt-1">{timeframe}</p>
+    )}
+    {services && services.length > 0 && (
+      <div class="mt-3 flex flex-wrap gap-1.5">
+        {services.map((service) => (
+          <span class="inline-block px-2 py-0.5 bg-brand-primary/5 text-brand-primary text-xs font-medium rounded-full">
+            {service}
+          </span>
+        ))}
+      </div>
+    )}
+    {metrics.length > 0 && (
+      <div class="mt-4 flex gap-4">
+        {metrics.slice(0, 2).map((metric, i) => (
+          <div class:list={["text-center flex-1", i === 0 && "border-r border-brand-border pr-4"]}>
+            <p class="font-display text-xl font-bold text-brand-primary">
+              {metric.prefix}{metric.value}{metric.suffix}
+            </p>
+            <p class="text-xs text-brand-muted">{metric.label}</p>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</a>

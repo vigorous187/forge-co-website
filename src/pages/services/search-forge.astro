@@ -1,0 +1,256 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BreadcrumbNav from '../../components/BreadcrumbNav.astro';
+import MetricCallout from '../../components/MetricCallout.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABanner from '../../components/CTABanner.astro';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'SearchForge — Restaurant SEO, Google Maps & AI Discoverability',
+    description: 'Show up on Google, Maps, and in AI-generated answers. SearchForge combines local SEO, organic search, GBP optimization, and AI discoverability for GTA restaurants.',
+    url: 'https://forge-co.ca/services/search-forge/',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'Forge',
+      url: 'https://forge-co.ca',
+    },
+    areaServed: {
+      '@type': 'Place',
+      name: 'Greater Toronto Area, Ontario, Canada',
+    },
+    serviceType: 'Search Engine Optimization',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://forge-co.ca/' },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://forge-co.ca/services/' },
+      { '@type': 'ListItem', position: 3, name: 'SearchForge' },
+    ],
+  },
+];
+
+const painPoints = [
+  'I struggle to stand out against so many local competitors',
+  "My restaurant doesn't show up on Google Maps",
+  'Third-party delivery platforms are taking traffic from my website',
+  "I don't know what AI search engines say about my business",
+  'My Google Business Profile is out of date or incomplete',
+];
+
+const features = [
+  {
+    title: 'Local SEO',
+    description: 'Rank in Google Maps and local search results for your most important keywords.',
+    icon: 'map',
+  },
+  {
+    title: 'Organic SEO',
+    description: 'On-page optimization, technical SEO, content strategy, and link building.',
+    icon: 'search',
+  },
+  {
+    title: 'AI Search Optimization',
+    description: 'Improve the structure, schema, and content patterns AI engines look for when generating answers — to increase your odds of being cited by ChatGPT, Gemini, Perplexity, and AI Overviews.',
+    icon: 'ai',
+  },
+  {
+    title: 'Google Business Profile',
+    description: 'Complete optimization: photos, categories, posts, Q&A, attributes.',
+    icon: 'profile',
+  },
+  {
+    title: 'Citation Management',
+    description: 'Consistent NAP (name, address, phone) data across all the major directories and platforms search engines pull from.',
+    icon: 'citation',
+  },
+  {
+    title: 'Competitor Analysis',
+    description: 'Know exactly where you stand and what it takes to outrank them.',
+    icon: 'competitor',
+  },
+  {
+    title: 'Monthly Reporting',
+    description: 'Clear, jargon-free reports showing rankings, traffic, and revenue impact.',
+    icon: 'report',
+  },
+  {
+    title: 'AI Crawler Access',
+    description: 'Configure robots.txt, sitemaps, and structured markup so AI crawlers (GPTBot, ClaudeBot, PerplexityBot) aren\'t blocked and your content is machine-readable.',
+    icon: 'crawler',
+  },
+];
+
+const faqs = [
+  {
+    question: 'How long until I see results?',
+    answer: 'Most clients see measurable improvement in Google Maps within 30-60 days. Organic SEO typically takes 3-6 months for competitive keywords.',
+  },
+  {
+    question: 'Do you guarantee rankings?',
+    answer: "No honest agency guarantees specific rankings. We guarantee the work, the process, and transparent reporting. Our track record speaks for itself.",
+  },
+  {
+    question: 'What about AI search?',
+    answer: "AI search engines like ChatGPT and Perplexity are increasingly used to find restaurants. We optimize your content to be cited in AI-generated answers — a service most agencies don't even offer yet.",
+  },
+  {
+    question: "What's included in the monthly reporting?",
+    answer: 'Rankings for all target keywords, Google Maps positions, website traffic, Google Business Profile insights, citation health, and actionable recommendations for the next month.',
+  },
+];
+---
+
+<Layout
+  title="SearchForge — Restaurant SEO, Google Maps & AI Discoverability | Forge"
+  description="Show up on Google, Maps, and in AI-generated answers. SearchForge combines local SEO, organic search, GBP optimization, and AI discoverability for GTA restaurants."
+  schema={schema}
+>
+
+  <!-- ============================================ -->
+  <!-- HERO                                         -->
+  <!-- ============================================ -->
+  <section id="hero" class="bg-brand-primary section-hero relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-primary to-brand-dark/30 pointer-events-none"></div>
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="mb-6">
+        <BreadcrumbNav items={[
+          { label: 'Home', href: '/' },
+          { label: 'Services', href: '/services/' },
+          { label: 'SearchForge' },
+        ]} />
+      </div>
+      <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">SearchForge</p>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-800 text-brand-white leading-tight text-shadow-forge">
+        SEO, Google Maps & AI Discoverability
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-brand-white/70 max-w-2xl mx-auto leading-relaxed">
+        When someone asks Google — or ChatGPT — for the best [your cuisine] in [your city], do they find you?
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- THE PROBLEM                                  -->
+  <!-- ============================================ -->
+  <section id="problem" class="section-hero bg-brand-bg">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading text-center mb-12">
+        Sound Familiar?
+      </h2>
+      <div class="space-y-4">
+        {painPoints.map((point) => (
+          <div class="flex items-start gap-4 bg-brand-card rounded-xl border border-brand-border p-5">
+            <div class="flex-shrink-0 mt-0.5">
+              <svg class="h-5 w-5 text-brand-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+              </svg>
+            </div>
+            <p class="text-brand-text font-medium">{point}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-8 text-center text-lg text-brand-muted">
+        If any of these sound familiar, SearchForge was built for you.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- WHAT'S INCLUDED                              -->
+  <!-- ============================================ -->
+  <section id="features" class="section-hero bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">What's Included</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading leading-tight">
+          Everything You Need to Get Found
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+        <!-- Dashboard Image -->
+        <div class="lg:col-span-2">
+          <img
+            src="/assets/images/gbp-dashboard.jpg"
+            alt="Google Business Profile dashboard showing search views, reviews, and location health metrics"
+            class="w-full rounded-xl shadow-lg"
+            loading="lazy"
+            width="480"
+            height="360"
+          />
+        </div>
+        <!-- Feature Grid -->
+        <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {features.map((feature) => (
+            <div class="bg-brand-card rounded-xl border border-brand-border p-6 card-hover">
+              <div class="w-10 h-10 rounded-lg bg-brand-secondary/10 flex items-center justify-center mb-4">
+                <svg class="h-5 w-5 text-brand-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+              </div>
+              <h3 class="font-display text-lg font-bold text-brand-heading">{feature.title}</h3>
+              <p class="mt-2 text-sm text-brand-muted leading-relaxed">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- RESULTS                                      -->
+  <!-- ============================================ -->
+  <section id="results" class="section-hero bg-brand-primary">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">Results</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-white leading-tight">
+          Numbers That Matter
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        <div class="text-center">
+          <p class="font-display text-4xl sm:text-5xl font-bold text-brand-white">523K</p>
+          <p class="mt-2 text-sm text-brand-white/60">Monthly search opportunity identified for Crab Boil</p>
+        </div>
+        <div class="text-center">
+          <p class="font-display text-4xl sm:text-5xl font-bold text-brand-white">+340<span class="text-brand-secondary">%</span></p>
+          <p class="mt-2 text-sm text-brand-white/60">Google Maps visibility for Crab Boil in 6 months</p>
+        </div>
+        <div class="text-center">
+          <p class="font-display text-4xl sm:text-5xl font-bold text-brand-white">#1</p>
+          <p class="mt-2 text-sm text-brand-white/60">Rankings achieved for target keywords</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FAQ                                          -->
+  <!-- ============================================ -->
+  <section id="faq" class="section-hero bg-brand-bg">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading">
+          Frequently Asked Questions
+        </h2>
+      </div>
+      <FAQ items={faqs} />
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CTA BANNER                                   -->
+  <!-- ============================================ -->
+  <CTABanner
+    headline="Find out where you rank."
+    description="A complete SEO diagnostic showing exactly where you stand and what it takes to win."
+    primaryCTA={{ text: 'Get Your Growth Audit', href: '/growth-audit/' }}
+  />
+
+</Layout>

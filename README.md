@@ -1,43 +1,28 @@
-# Astro Starter Kit: Minimal
+# Forge site (`forge-co.ca`)
 
-```sh
-npm create astro@latest -- --template minimal
+Astro static site for Forge Growth Co. Deploy target: **Cloudflare Pages** (`forge-co`).
+
+## Commands
+
+| Command                  | Action                                                                |
+| ------------------------ | --------------------------------------------------------------------- |
+| `npm run dev`            | Dev server (default [http://localhost:4321](http://localhost:4321))   |
+| `npm run build`          | Production build + SEO / blog / GEO / brand / **heading audit** gates |
+| `npm run preview`        | Serve `dist/` locally before deploy                                   |
+| `npm run audit-headings` | Re-run heading audit only (needs `dist/` from a build)                |
+
+## Deploy
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name forge-co --commit-dirty=true
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Post-deploy smoke tests and favicon checks: see **`~/Developer/shared/knowledge-hub/seo/website-production-standard.md`**.
 
-## 🚀 Project Structure
+## Standards (do not ship without)
 
-Inside of your Astro project, you'll see the following folders and files:
+Multi-brand playbook (blog Typography, author assets, final-site checklist, Cloudflare mapping):  
+**`~/Developer/shared/knowledge-hub/seo/website-production-standard.md`** (or the same path relative to your workspace root under `shared/knowledge-hub/seo/`).
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Forge repo layout: **`../REPO-MAP.md`** (parent forge workspace).

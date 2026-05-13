@@ -1,219 +1,73 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
+import Layout from '../layouts/Layout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import MetricCallout from '../components/MetricCallout.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import BlogCard from '../components/BlogCard.astro';
 
-const industries = [
-  { name: "Contractors", slug: "contractors", icon: "🔨" },
-  { name: "Restaurants", slug: "restaurants", icon: "🍽️" },
-  { name: "Realtors", slug: "realtors", icon: "🏠" },
-  { name: "Auto Shops", slug: "auto-shops", icon: "🔧" },
-  { name: "Dental", slug: "dental", icon: "🦷" },
-  { name: "Legal", slug: "legal", icon: "⚖️" },
-  { name: "Landscaping", slug: "landscaping", icon: "🌿" },
-  { name: "Cleaning", slug: "cleaning", icon: "✨" },
-];
-
-const cities = [
-  "Toronto",
-  "Mississauga",
-  "Brampton",
-  "Vaughan",
-  "Richmond Hill",
-  "Markham",
-  "Oakville",
-  "Burlington",
-  "Hamilton",
-  "Pickering",
-  "Ajax",
-  "Whitby",
-  "Oshawa",
-];
-
-const metrics = [
-  { value: "500M+", label: "Impressions Generated" },
-  { value: "$2K→$4K", label: "Retainer Growth in 60 Days" },
-  { value: "697K", label: "TikTok Followers" },
-  { value: "4.2→4.8", label: "Star Rating Improvement" },
-];
-
-const packageItems = [
-  "A website that actually converts visitors into calls",
-  "Show up when customers search Google for your service",
-  "Your Google Business Profile optimized and managed for you",
-  "Social media content posted consistently every week",
-  "Listed across 50+ directories so you're everywhere customers look",
-  "More 5-star reviews — and someone handling the bad ones",
-  "Monthly numbers showing exactly what's working",
-];
-
-const differentiators = [
-  {
-    title: "ONE PACKAGE",
-    body:
-      "Website. SEO. Reviews. Social. Everything local businesses need — bundled, managed, and delivered as one system. No juggling 5 vendors.",
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Forge',
+  url: 'https://forge-co.ca',
+  description: 'Growth systems agency for GTA operators, with a dedicated restaurant growth branch',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://forge-co.ca/search/?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
   },
-  {
-    title: "REAL RESULTS",
-    body:
-      "We've helped clients double their monthly retainer revenue, push to the top of Google Maps, and rebuild their online reputation — with data to back every claim.",
-  },
-  {
-    title: "NO CONTRACTS",
-    body:
-      "We don't lock you in. We earn your business every month. If you're not seeing results, you walk. That's the deal.",
-  },
-];
+};
 ---
 
-<BaseLayout
-  title="Forge | Websites, Google Rankings & Reviews for Local Business"
-  description="Your website looks outdated, you don't show up on Google, and nobody's managing your reviews. Forge fixes all three — one monthly fee, no contracts."
+<Layout
+  title="Forge — Growth Systems for GTA Operators"
+  description="Forge builds connected growth systems for local operators. Website development, SEO, and content execution, plus a dedicated restaurant branch through Toronto Restaurant Growth."
+  schema={[websiteSchema]}
 >
-  <Navbar />
 
-  <!-- ===================== -->
-  <!-- Section 1: Hero       -->
-  <!-- ===================== -->
-  <section
-    id="hero"
-    class="min-h-screen flex items-center pt-[72px]"
-    style="background: #0d0d0d;"
-  >
-    <div class="max-w-7xl mx-auto w-full px-6 py-16 md:py-24">
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center">
-        <!-- Left: 60% -->
-        <div class="lg:col-span-3">
-          <!-- Eyebrow -->
-          <p
-            class="text-[#c41230] text-xs tracking-[0.3em] font-semibold uppercase mb-6"
-          >
-            Toronto's Local Business Growth Agency
-          </p>
-
-          <!-- H1 -->
-          <h1
-            class="text-[48px] md:text-[72px] lg:text-[84px] leading-none tracking-tight text-[#f3f4f6] mb-6"
-            style="font-family: 'Bebas Neue', sans-serif;"
-          >
-            Your Front Door<br />Is Broken.<br />
-            <span class="text-[#c41230]">We Fix It.</span>
+  <!-- ============================================ -->
+  <!-- HERO                                         -->
+  <!-- ============================================ -->
+  <section id="hero" class="hero-section">
+    <div class="hero-bg-gradient"></div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Text Column -->
+        <div class="text-center lg:text-left">
+          <p class="hero-qualifier">Growth systems for local operators across the GTA</p>
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-800 text-brand-white leading-[1.08] tracking-tight text-shadow-forge">
+            Build Once. Grow Everywhere.
           </h1>
-
-          <!-- Subhead -->
-          <p class="text-[#6b7280] text-base md:text-lg leading-relaxed max-w-xl mb-10">
-            Your website looks outdated. You don't show up when customers search
-            Google. Nobody's responding to your reviews. We fix all three —
-            one monthly fee, no contracts.
+          <p class="mt-6 text-lg sm:text-xl text-brand-white/70 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            Forge is the master growth brand for websites, visibility, and content systems. Toronto Restaurant Growth runs as our dedicated restaurant branch.
           </p>
-
-          <!-- CTAs -->
-          <div class="flex flex-wrap gap-4 mb-12">
-            <a
-              href="/contact"
-              class="inline-flex items-center px-7 py-4 bg-[#c41230] text-white font-semibold tracking-widest text-sm hover:bg-[#a00e26] transition-colors"
-              style="font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.15em;"
-            >
-              BOOK A FREE CALL
+          <div class="mt-10 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
+            <a href="/growth-audit/" class="btn-secondary text-base px-8 py-4 shadow-lg shadow-brand-secondary/20">
+              Get Your Growth Audit
             </a>
-            <a
-              href="#solution"
-              class="inline-flex items-center px-7 py-4 border border-[#2d2d2d] text-[#6b7280] font-medium text-sm hover:border-[#6b7280] hover:text-[#f3f4f6] transition-all"
-            >
-              See What We Do &darr;
+            <a href="#system" class="hero-secondary-cta">
+              See How It Works
+              <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
             </a>
-          </div>
-
-          <!-- Trust Bar -->
-          <div class="flex flex-wrap gap-6 pt-6 border-t border-[#2d2d2d]">
-            <div class="flex items-center gap-2">
-              <span class="text-[#c41230] font-bold text-sm">500M+</span>
-              <span class="text-[#6b7280] text-xs">Impressions</span>
-            </div>
-            <div class="w-px h-4 bg-[#2d2d2d] self-center hidden sm:block"></div>
-            <div class="flex items-center gap-2">
-              <span class="text-[#c41230] font-bold text-sm">697K</span>
-              <span class="text-[#6b7280] text-xs">TikTok Followers</span>
-            </div>
-            <div class="w-px h-4 bg-[#2d2d2d] self-center hidden sm:block"></div>
-            <div class="flex items-center gap-2">
-              <span class="text-[#c41230] font-bold text-sm">89K</span>
-              <span class="text-[#6b7280] text-xs">Instagram Followers</span>
-            </div>
           </div>
         </div>
-
-        <!-- Right: 40% — Proof Card -->
-        <div class="lg:col-span-2">
-          <div class="border border-[#2d2d2d] bg-[#1a1a1a] p-6 md:p-8">
-            <p
-              class="text-[#c41230] text-xs tracking-[0.2em] uppercase font-semibold mb-6"
-            >
-              Client Results
-            </p>
-
-            <!-- Crab Boil -->
-            <div class="mb-6 pb-6 border-b border-[#2d2d2d]">
-              <div class="flex items-center justify-between mb-3">
-                <span
-                  class="text-[#f3f4f6] text-sm font-semibold"
-                >Crab Boil Restaurant</span>
-                <span class="text-xs text-[#6b7280]">60 days</span>
-              </div>
-              <div class="grid grid-cols-2 gap-4">
-                <div>
-                  <p
-                    class="text-2xl md:text-3xl text-[#c41230]"
-                    style="font-family: 'Bebas Neue', sans-serif;"
-                  >
-                    $2K
-                  </p>
-                  <p class="text-xs text-[#6b7280] mt-1">Starting retainer</p>
-                </div>
-                <div>
-                  <p
-                    class="text-2xl md:text-3xl text-[#f3f4f6]"
-                    style="font-family: 'Bebas Neue', sans-serif;"
-                  >
-                    $4K
-                  </p>
-                  <p class="text-xs text-[#6b7280] mt-1">After 60 days</p>
-                </div>
-              </div>
-              <div class="mt-3 flex items-center gap-2">
-                <div class="flex-1 h-1.5 bg-[#0d0d0d] rounded-full overflow-hidden">
-                  <div class="h-full bg-[#c41230] rounded-full" style="width: 100%;"></div>
-                </div>
-                <span class="text-xs text-[#c41230] font-semibold">+100%</span>
-              </div>
-            </div>
-
-            <!-- Jayden -->
-            <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-[#f3f4f6] text-sm font-semibold">Jayden (Creator)</span>
-                <span class="text-xs text-[#6b7280]">Ongoing</span>
-              </div>
-              <div class="grid grid-cols-2 gap-4">
-                <div>
-                  <p
-                    class="text-2xl md:text-3xl text-[#c41230]"
-                    style="font-family: 'Bebas Neue', sans-serif;"
-                  >
-                    697K
-                  </p>
-                  <p class="text-xs text-[#6b7280] mt-1">TikTok followers</p>
-                </div>
-                <div>
-                  <p
-                    class="text-2xl md:text-3xl text-[#f3f4f6]"
-                    style="font-family: 'Bebas Neue', sans-serif;"
-                  >
-                    500M+
-                  </p>
-                  <p class="text-xs text-[#6b7280] mt-1">Total impressions</p>
-                </div>
-              </div>
+        <!-- Image Column -->
+        <div class="hero-image-wrapper">
+          <div class="relative">
+            <img
+              src="/assets/images/hero-food-plating.jpg"
+              alt="Chef plating food with precision in a restaurant kitchen"
+              class="hero-image"
+              width="640"
+              height="480"
+            />
+            <div class="hero-result-chip">
+              <svg class="h-3.5 w-3.5 text-brand-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
+              </svg>
+              <span>+340% Maps Visibility (Crab Boil)</span>
             </div>
           </div>
         </div>
@@ -221,459 +75,981 @@ const differentiators = [
     </div>
   </section>
 
-  <!-- ===================== -->
-  <!-- Section 2: Marquee    -->
-  <!-- ===================== -->
-  <section
-    id="marquee"
-    class="marquee-wrapper overflow-hidden border-y border-[#2d2d2d] bg-[#1a1a1a] py-4"
-  >
-    <div class="marquee-track flex gap-0 whitespace-nowrap" style="width: max-content;">
-      <!-- Duplicate for seamless loop -->
-      {
-        [1, 2].map(() => (
-          <div class="flex items-center gap-12 px-6">
-            <span class="flex items-center gap-2 text-sm text-[#6b7280]">
-              <span class="text-yellow-400">★★★★★</span> Google Reviews
-            </span>
-            <span class="text-[#2d2d2d]">·</span>
-            <span class="text-sm text-[#6b7280]">
-              <span class="text-[#f3f4f6] font-semibold">500M+</span> Impressions Generated
-            </span>
-            <span class="text-[#2d2d2d]">·</span>
-            <span class="text-sm text-[#6b7280]">
-              Active Clients in <span class="text-[#f3f4f6] font-semibold">Ottawa · Toronto · Hamilton</span>
-            </span>
-            <span class="text-[#2d2d2d]">·</span>
-            <span class="text-sm text-[#6b7280]">
-              Crab Boil: <span class="text-[#c41230] font-semibold">$2K → $4K/mo in 60 days</span>
-            </span>
-            <span class="text-[#2d2d2d]">·</span>
-            <span class="flex items-center gap-2 text-sm text-[#6b7280]">
-              <span class="text-yellow-400">★★★★★</span> Google Reviews
-            </span>
-            <span class="text-[#2d2d2d]">·</span>
-            <span class="text-sm text-[#6b7280]">
-              <span class="text-[#f3f4f6] font-semibold">697K</span> TikTok Followers
-            </span>
-            <span class="text-[#2d2d2d]">·</span>
-            <span class="text-sm text-[#6b7280]">
-              Reputation scores up <span class="text-[#c41230] font-semibold">4.2 → 4.8 stars</span>
-            </span>
-            <span class="text-[#2d2d2d]">·</span>
-          </div>
-        ))
-      }
+  <!-- ============================================ -->
+  <!-- SELECTED CLIENT WORK STRIP                   -->
+  <!-- ============================================ -->
+  <section id="clients" class="client-strip">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-xs font-semibold uppercase tracking-widest text-brand-muted mb-6">Selected Client Work</p>
+      <div class="flex items-center justify-center gap-6 sm:gap-8 flex-wrap">
+        <div class="client-logo-slot">
+          <img src="/assets/images/crabboil-logo.jpg" alt="Crab Boil" class="client-logo" loading="lazy" width="160" height="80" />
+        </div>
+        <div class="client-logo-slot">
+          <img src="https://www.mtcrenovations.ca/assets/img/logo/logo.png" alt="MTC Renovations" class="client-logo" loading="lazy" width="160" height="80" />
+        </div>
+        <div class="client-logo-slot">
+          <img src="https://michaelthehomebuyer.ca/assets/img/logo/logo-full.webp" alt="Michael The Home Buyer" class="client-logo" loading="lazy" width="408" height="140" />
+        </div>
+        <div class="client-logo-slot">
+          <img src="https://ibuyuglyhouses.ca/assets/img/logo/logo-optimized.svg" alt="I Buy Ugly Houses" class="client-logo" loading="lazy" width="204" height="70" />
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ========================= -->
-  <!-- Section 3: Problem        -->
-  <!-- ========================= -->
-  <section id="problem" class="py-20 md:py-28 bg-[#0d0d0d]">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="max-w-3xl mb-14">
-        <p class="text-[#c41230] text-xs tracking-[0.3em] uppercase font-semibold mb-4">
-          The Problem
-        </p>
-        <h2
-          class="text-[40px] md:text-[56px] lg:text-[64px] leading-none text-[#f3f4f6] mb-6"
-          style="font-family: 'Bebas Neue', sans-serif;"
-        >
-          Most Local Businesses<br />Are Invisible Online.
+  <!-- ============================================ -->
+  <!-- WHY FORGE                                    -->
+  <!-- ============================================ -->
+  <section id="trust" class="trust-strip">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-sm font-medium text-brand-muted uppercase tracking-wider mb-4">
+        Built for local operators, with dedicated restaurant growth through TRG
+      </p>
+      <h2 class="text-center font-display text-xl font-bold text-brand-heading mb-10">Why Forge</h2>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div class="why-forge-card">
+          <div class="trust-icon">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.379a48.474 48.474 0 00-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M12.265 3.11a.375.375 0 11-.53 0L12 2.845l.265.265zm-3 0a.375.375 0 11-.53 0L9 2.845l.265.265zm6 0a.375.375 0 11-.53 0L15 2.845l.265.265z" />
+            </svg>
+          </div>
+          <span class="trust-label">Multi-Vertical Core</span>
+          <p class="text-xs text-brand-muted mt-1 leading-snug">One growth system adapted per vertical</p>
+        </div>
+        <div class="why-forge-card">
+          <div class="trust-icon">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+            </svg>
+          </div>
+          <span class="trust-label">Full Growth System</span>
+          <p class="text-xs text-brand-muted mt-1 leading-snug">SEO, content, web, reputation -- connected</p>
+        </div>
+        <div class="why-forge-card">
+          <div class="trust-icon">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+            </svg>
+          </div>
+          <span class="trust-label">Clear Execution Scope</span>
+          <p class="text-xs text-brand-muted mt-1 leading-snug">Defined deliverables and measurable milestones</p>
+        </div>
+        <div class="why-forge-card">
+          <div class="trust-icon">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+            </svg>
+          </div>
+          <span class="trust-label">Real Results</span>
+          <p class="text-xs text-brand-muted mt-1 leading-snug">Documented outcomes, not vague promises</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- THE PROBLEM                                  -->
+  <!-- ============================================ -->
+  <section id="problem" class="py-20 sm:py-28 bg-brand-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-16">
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading leading-tight">
+          The Market Won't Wait for You to Figure It Out
         </h2>
-        <p class="text-[#6b7280] text-base md:text-lg leading-relaxed">
-          Your customers are searching right now. They're typing "best contractor near me,"
-          "restaurant open late," "dentist accepting new patients." If you're not showing up
-          on the first page — and looking credible when they get there — they're calling
-          someone else. Every single day.
+        <p class="mt-6 text-lg text-brand-muted leading-relaxed">
+          Most operators are overwhelmed by disconnected web, SEO, and content tasks. The ones scaling are running integrated growth systems.
         </p>
       </div>
 
-      <!-- 3-card grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#2d2d2d]">
-        {
-          [
-            {
-              num: "01",
-              title: "Your website looks outdated.",
-              body: "First impressions happen in 0.05 seconds. An outdated site doesn't just look bad — it signals to customers that you're not serious. They leave before they read a word.",
-            },
-            {
-              num: "02",
-              title: "Google can't find you.",
-              body: "If your Google Business Profile is incomplete, your website isn't optimized, and you're not in the right directories — you simply don't exist to 90% of local searchers.",
-            },
-            {
-              num: "03",
-              title: "Bad reviews are costing you jobs.",
-              body: "A 3.8-star rating costs you 40% of potential customers compared to a 4.5-star business. Reputation isn't something you manage once — it's something you manage every week.",
-            },
-          ].map((card) => (
-            <div class="bg-[#1a1a1a] p-8 md:p-10">
-              <p
-                class="text-[#c41230] text-4xl mb-6"
-                style="font-family: 'Bebas Neue', sans-serif;"
-              >
-                {card.num}
-              </p>
-              <h3
-                class="text-[#f3f4f6] text-xl md:text-2xl mb-4"
-                style="font-family: 'Bebas Neue', sans-serif;"
-              >
-                {card.title}
-              </h3>
-              <p class="text-[#6b7280] text-sm leading-relaxed">{card.body}</p>
-            </div>
-          ))
-        }
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Pain Point 1 -->
+        <div class="pain-card">
+          <div class="pain-number">01</div>
+          <h3 class="font-display text-xl font-bold text-brand-white mt-4">Invisible on Search</h3>
+          <p class="mt-3 text-brand-white/60 text-sm leading-relaxed">
+            Your competitors show up first. Every day you're not discoverable, you're losing demand to someone who is.
+          </p>
+        </div>
+
+        <!-- Pain Point 2 -->
+        <div class="pain-card">
+          <div class="pain-number">02</div>
+          <h3 class="font-display text-xl font-bold text-brand-white mt-4">Activity Without Systems</h3>
+          <p class="mt-3 text-brand-white/60 text-sm leading-relaxed">
+            You are shipping tactics but not compounding outcomes. Isolated actions do not create consistent pipeline growth.
+          </p>
+        </div>
+
+        <!-- Pain Point 3 -->
+        <div class="pain-card">
+          <div class="pain-number">03</div>
+          <h3 class="font-display text-xl font-bold text-brand-white mt-4">Spending Without Tracking</h3>
+          <p class="mt-3 text-brand-white/60 text-sm leading-relaxed">
+            You're paying for ads, a website, maybe even an agency. But can you tell what's actually working?
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ========================= -->
-  <!-- Section 4: Solution       -->
-  <!-- ========================= -->
-  <section id="solution" class="py-20 md:py-28 bg-[#1a1a1a] border-y border-[#2d2d2d]">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        <!-- Left: Copy -->
-        <div>
-          <p class="text-[#c41230] text-xs tracking-[0.3em] uppercase font-semibold mb-4">
-            The Solution
-          </p>
-          <h2
-            class="text-[40px] md:text-[56px] leading-none text-[#f3f4f6] mb-6"
-            style="font-family: 'Bebas Neue', sans-serif;"
-          >
-            One Package.<br />Everything Covered.
-          </h2>
-          <p class="text-[#6b7280] text-base md:text-lg leading-relaxed mb-8">
-            The Front Door Package is Forge's flagship offer. It covers
-            everything customers see before they call you — your website, Google
-            ranking, reviews, and social — built, managed, and optimized by one
-            team with one point of contact. No fragmented vendors. No handoffs.
-            No excuses.
-          </p>
-          <a
-            href="/contact"
-            class="inline-flex items-center px-7 py-4 bg-[#c41230] text-white font-semibold hover:bg-[#a00e26] transition-colors"
-            style="font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.15em;"
-          >
-            BOOK A CALL &rarr;
-          </a>
-        </div>
+  <!-- ============================================ -->
+  <!-- THE FORGE GROWTH SYSTEM                      -->
+  <!-- ============================================ -->
+  <section id="system" class="system-section">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-16 sm:mb-20">
+        <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">The Forge Growth System</p>
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-white leading-tight">
+          Stop Buying Tactics.<br/>Start Running a System.
+        </h2>
+        <p class="mt-6 text-lg text-brand-white/60 max-w-2xl mx-auto leading-relaxed">
+          The Forge Growth System connects every part of your marketing so nothing works in isolation.
+        </p>
+      </div>
 
-        <!-- Right: Package Card -->
-        <div class="border border-[#2d2d2d] bg-[#0d0d0d] p-8 md:p-10">
-          <p
-            class="text-[#f3f4f6] text-2xl mb-2"
-            style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;"
-          >
-            The Front Door Package
-          </p>
-          <p class="text-[#6b7280] text-xs mb-8 tracking-wide uppercase">Everything you need. Nothing you don't.</p>
-
-          <ul class="space-y-4">
-            {packageItems.map((item) => (
-              <li class="flex items-start gap-3">
-                <span
-                  class="mt-0.5 flex-shrink-0 w-5 h-5 border border-[#c41230] flex items-center justify-center"
-                >
-                  <svg class="w-3 h-3 text-[#c41230]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                </span>
-                <span class="text-[#f3f4f6] text-sm leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div class="mt-10 pt-8 border-t border-[#2d2d2d]">
-            <p class="text-xs text-[#6b7280] uppercase tracking-widest mb-2">Starting at</p>
-            <p
-              class="text-[#c41230] text-4xl"
-              style="font-family: 'Bebas Neue', sans-serif;"
-            >
-              $1,500/mo
-            </p>
-            <p class="text-xs text-[#6b7280] mt-1">No contracts. Cancel anytime.</p>
+      <!-- 3-Stage System -->
+      <div class="system-stages">
+        <!-- Stage 1 -->
+        <div class="system-stage">
+          <div class="stage-number-wrapper">
+            <span class="stage-number">01</span>
           </div>
+          <div class="stage-connector"></div>
+          <h3 class="font-display text-2xl font-bold text-brand-white mt-6">Be Found</h3>
+          <p class="mt-3 text-brand-white/60 leading-relaxed">
+            Get discovered on Google, Maps, AI search, and social. SearchForge handles SEO, GBP optimization, citations, and AI visibility.
+          </p>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="system-stage">
+          <div class="stage-number-wrapper">
+            <span class="stage-number">02</span>
+          </div>
+          <div class="stage-connector"></div>
+          <h3 class="font-display text-2xl font-bold text-brand-white mt-6">Be Chosen</h3>
+          <p class="mt-3 text-brand-white/60 leading-relaxed">
+            Turn visitors into customers with content that converts. ContentForge delivers video, social media, and photography that fills seats.
+          </p>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="system-stage">
+          <div class="stage-number-wrapper">
+            <span class="stage-number">03</span>
+          </div>
+          <h3 class="font-display text-2xl font-bold text-brand-white mt-6">Be Remembered</h3>
+          <p class="mt-3 text-brand-white/60 leading-relaxed">
+            Keep customers coming back with reputation management, reviews, and retention content.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========================= -->
-  <!-- Section 5: Metrics Wall   -->
-  <!-- ========================= -->
-  <section id="metrics" class="py-20 md:py-28 bg-[#0d0d0d]">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-14">
-        <p class="text-[#c41230] text-xs tracking-[0.3em] uppercase font-semibold mb-4">
-          The Numbers
-        </p>
-        <h2
-          class="text-[40px] md:text-[56px] leading-none text-[#f3f4f6]"
-          style="font-family: 'Bebas Neue', sans-serif;"
-        >
-          Results That Actually Move The Needle.
+  <!-- ============================================ -->
+  <!-- SERVICES PREVIEW                             -->
+  <!-- ============================================ -->
+  <section id="services" class="py-20 sm:py-28 bg-brand-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">What We Build</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading leading-tight">
+          Every Service Connects. That's the System.
         </h2>
       </div>
 
-      <!-- Metrics grid -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#2d2d2d] mb-px">
-        {metrics.map((m) => (
-          <div class="bg-[#1a1a1a] p-8 md:p-10 text-center">
-            <p
-              class="text-[#c41230] text-[40px] md:text-[52px] leading-none mb-3"
-              style="font-family: 'Bebas Neue', sans-serif;"
-            >
-              {m.value}
-            </p>
-            <p class="text-[#6b7280] text-xs md:text-sm leading-relaxed">{m.label}</p>
-          </div>
-        ))}
-      </div>
-
-      <!-- Case study preview cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#2d2d2d]">
-        <!-- Crab Boil -->
-        <div class="bg-[#1a1a1a] p-8 md:p-10">
-          <div class="flex items-start justify-between mb-6">
-            <div>
-              <p class="text-[#c41230] text-xs tracking-widest uppercase font-semibold mb-1">
-                Case Study
-              </p>
-              <h3
-                class="text-[#f3f4f6] text-2xl md:text-3xl"
-                style="font-family: 'Bebas Neue', sans-serif;"
-              >
-                Crab Boil Restaurant
-              </h3>
-            </div>
-            <span class="text-xs text-[#6b7280] border border-[#2d2d2d] px-2 py-1">
-              Restaurants
-            </span>
-          </div>
-          <p class="text-[#6b7280] text-sm leading-relaxed mb-8">
-            A Toronto seafood restaurant was struggling with low online visibility and a
-            stagnant retainer. Within 60 days of launching the Front Door Package,
-            their retainer doubled from $2K to $4K/month.
-          </p>
-          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-[#2d2d2d]">
-            <div>
-              <p class="text-[#c41230] text-xl font-bold">100%</p>
-              <p class="text-[#6b7280] text-xs mt-1">Revenue growth</p>
-            </div>
-            <div>
-              <p class="text-[#c41230] text-xl font-bold">60</p>
-              <p class="text-[#6b7280] text-xs mt-1">Days to results</p>
-            </div>
-            <div>
-              <p class="text-[#c41230] text-xl font-bold">4.8★</p>
-              <p class="text-[#6b7280] text-xs mt-1">Google rating</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <ServiceCard
+          name="SearchForge"
+          subtitle="SEO, Google Maps & AI Visibility"
+          description="Rank where your customers are searching — Google, Maps, ChatGPT, and beyond."
+          href="/services/search-forge/"
+          image="/assets/images/gbp-dashboard.jpg"
+        />
+        <ServiceCard
+          name="ContentForge"
+          subtitle="Video, Social Media & Photography"
+          description="We come to your restaurant. We film. We post. You fill seats."
+          href="/services/content-forge/"
+          image="/assets/images/hero-food-plating.jpg"
+        />
+        <a href="/services/web-design/" class="block bg-brand-card rounded-xl overflow-hidden border border-brand-border card-hover">
+          <div class="relative h-40 overflow-hidden bg-brand-primary">
+            <!-- CSS-only browser mockup -->
+            <div class="webforge-mockup">
+              <div class="mockup-toolbar">
+                <div class="mockup-dot mockup-dot--red"></div>
+                <div class="mockup-dot mockup-dot--yellow"></div>
+                <div class="mockup-dot mockup-dot--green"></div>
+                <div class="mockup-url-bar">yourrestaurant.ca</div>
+              </div>
+              <div class="mockup-content">
+                <div class="mockup-nav"></div>
+                <div class="mockup-hero-block"></div>
+                <div class="mockup-grid">
+                  <div class="mockup-card"></div>
+                  <div class="mockup-card"></div>
+                  <div class="mockup-card"></div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="mt-6">
-            <a
-              href="/case-studies/crab-boil"
-              class="text-sm text-[#c41230] hover:text-[#f3f4f6] font-semibold transition-colors"
-            >
-              Read full case study &rarr;
-            </a>
-          </div>
-        </div>
-
-        <!-- Jayden -->
-        <div class="bg-[#1a1a1a] p-8 md:p-10">
-          <div class="flex items-start justify-between mb-6">
-            <div>
-              <p class="text-[#c41230] text-xs tracking-widest uppercase font-semibold mb-1">
-                Case Study
-              </p>
-              <h3
-                class="text-[#f3f4f6] text-2xl md:text-3xl"
-                style="font-family: 'Bebas Neue', sans-serif;"
-              >
-                Jayden — Creator
-              </h3>
-            </div>
-            <span class="text-xs text-[#6b7280] border border-[#2d2d2d] px-2 py-1">
-              Creators
-            </span>
-          </div>
-          <p class="text-[#6b7280] text-sm leading-relaxed mb-8">
-            A content creator needed a digital infrastructure that could support rapid
-            audience growth. Forge built the strategy and content system that drove
-            697K TikTok followers and over 500 million impressions.
-          </p>
-          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-[#2d2d2d]">
-            <div>
-              <p class="text-[#c41230] text-xl font-bold">697K</p>
-              <p class="text-[#6b7280] text-xs mt-1">TikTok followers</p>
-            </div>
-            <div>
-              <p class="text-[#c41230] text-xl font-bold">500M+</p>
-              <p class="text-[#6b7280] text-xs mt-1">Impressions</p>
-            </div>
-            <div>
-              <p class="text-[#c41230] text-xl font-bold">89K</p>
-              <p class="text-[#6b7280] text-xs mt-1">Instagram</p>
-            </div>
-          </div>
-          <div class="mt-6">
-            <a
-              href="/case-studies/jayden"
-              class="text-sm text-[#c41230] hover:text-[#f3f4f6] font-semibold transition-colors"
-            >
-              Read full case study &rarr;
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================= -->
-  <!-- Section 6: Industries     -->
-  <!-- ========================= -->
-  <section id="industries" class="py-20 md:py-28 bg-[#1a1a1a] border-y border-[#2d2d2d]">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-14">
-        <p class="text-[#c41230] text-xs tracking-[0.3em] uppercase font-semibold mb-4">
-          Industries
-        </p>
-        <h2
-          class="text-[40px] md:text-[56px] leading-none text-[#f3f4f6]"
-          style="font-family: 'Bebas Neue', sans-serif;"
-        >
-          Built for Your Industry.
-        </h2>
-        <p class="text-[#6b7280] text-base mt-4 max-w-xl mx-auto">
-          Every industry has different customer search behavior, different review platforms, different trust signals. We know yours.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px bg-[#2d2d2d]">
-        {industries.map((ind) => (
-          <a
-            href={`/industries/${ind.slug}/`}
-            class="group bg-[#0d0d0d] p-6 md:p-8 flex flex-col items-center justify-center text-center hover:bg-[#1a1a1a] transition-colors border-0"
-          >
-            <span class="text-3xl mb-4 block" role="img" aria-label={ind.name}>
-              {ind.icon}
-            </span>
-            <span
-              class="text-[#6b7280] group-hover:text-[#f3f4f6] transition-colors text-sm font-medium"
-            >
-              {ind.name}
-            </span>
-            <span
-              class="mt-2 text-xs text-[#c41230] opacity-0 group-hover:opacity-100 transition-opacity"
-            >
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-brand-heading">WebForge</h3>
+            <p class="text-sm text-brand-secondary font-medium mt-1">Website Design & Development</p>
+            <p class="mt-3 text-sm text-brand-muted leading-relaxed">Fast, beautiful, conversion-optimized websites that work as hard as you do.</p>
+            <span class="mt-4 inline-block text-sm font-semibold text-brand-primary">
               Learn more &rarr;
             </span>
-          </a>
-        ))}
+          </div>
+        </a>
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="/services/" class="text-brand-primary font-semibold hover:text-brand-secondary transition-colors">
+          See all services &rarr;
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ========================= -->
-  <!-- Section 7: Locations      -->
-  <!-- ========================= -->
-  <section id="locations" class="py-14 bg-[#0d0d0d] border-b border-[#2d2d2d]">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="flex flex-col sm:flex-row sm:items-center gap-6">
-        <p
-          class="text-[#f3f4f6] text-lg flex-shrink-0"
-          style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.08em;"
-        >
-          Serving the GTA:
-        </p>
-        <div class="flex flex-wrap gap-2">
-          {cities.map((city) => (
-            <a
-              href={`/locations/${city.toLowerCase().replace(/ /g, "-")}/`}
-              class="text-xs text-[#6b7280] border border-[#2d2d2d] px-3 py-1.5 hover:text-[#f3f4f6] hover:border-[#6b7280] transition-all"
-            >
-              {city}
-            </a>
-          ))}
+  <!-- ============================================ -->
+  <!-- RESULTS / SOCIAL PROOF                       -->
+  <!-- ============================================ -->
+  <section id="results" class="results-section">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl mx-auto text-center mb-16">
+        <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">Proof, Not Promises</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading leading-tight">
+          Crab Boil Is Our Loudest Success Story
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Metrics -->
+        <div>
+          <div class="grid grid-cols-2 gap-8 mb-10">
+            <MetricCallout value="523K" label="Monthly search opportunity identified for Crab Boil alone" />
+            <MetricCallout value="202K" label="Combined followers across 3 Crab Boil locations" />
+            <MetricCallout value="+340" suffix="%" label="Google Maps visibility for Crab Boil in 6 months" />
+            <MetricCallout value="90-day" label="Action plan included in every Growth Audit" />
+          </div>
+
+          <!-- Proof Card (replaces anonymous testimonial) -->
+          <div class="proof-card">
+            <div class="proof-card-metric">+340% Google Maps visibility in 6 months</div>
+            <p class="text-sm text-brand-muted mt-2">From SEO score 28/100 to fully optimized across 3 locations.</p>
+            <p class="text-sm font-semibold text-brand-secondary mt-3">Crab Boil — Toronto & Ottawa</p>
+          </div>
+        </div>
+
+        <!-- Dashboard Image -->
+        <div class="results-image-wrapper">
+          <img
+            src="/assets/images/analytics-dashboard.jpg"
+            alt="Analytics dashboard showing growth metrics and engagement data"
+            class="results-image"
+            loading="lazy"
+            width="600"
+            height="400"
+          />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========================= -->
-  <!-- Section 8: Why Forge      -->
-  <!-- ========================= -->
-  <section id="why-forge" class="py-20 md:py-28 bg-[#0d0d0d]">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-14">
-        <p class="text-[#c41230] text-xs tracking-[0.3em] uppercase font-semibold mb-4">
-          Why Forge
-        </p>
-        <h2
-          class="text-[40px] md:text-[56px] leading-none text-[#f3f4f6]"
-          style="font-family: 'Bebas Neue', sans-serif;"
-        >
-          Different by Design.
+  <!-- ============================================ -->
+  <!-- CASE STUDY PREVIEW                           -->
+  <!-- ============================================ -->
+  <section id="case-studies" class="py-20 sm:py-28 bg-brand-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">Client Work</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading leading-tight">
+          Selected Client Work
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#2d2d2d]">
-        {differentiators.map((d, i) => (
-          <div class="bg-[#1a1a1a] p-8 md:p-10">
-            <p
-              class="text-[#c41230] text-5xl md:text-6xl mb-6"
-              style="font-family: 'Bebas Neue', sans-serif;"
-            >
-              0{i + 1}
-            </p>
-            <h3
-              class="text-[#f3f4f6] text-2xl md:text-3xl mb-4"
-              style="font-family: 'Bebas Neue', sans-serif;"
-            >
-              {d.title}
-            </h3>
-            <p class="text-[#6b7280] text-sm leading-relaxed">{d.body}</p>
+      <div class="max-w-3xl mx-auto">
+        <div class="case-study-featured">
+          <div class="case-study-image-col">
+            <img
+              src="/assets/images/restaurant-kitchen.jpg"
+              alt="Dark moody restaurant kitchen atmosphere"
+              class="case-study-image"
+              loading="lazy"
+              width="480"
+              height="320"
+            />
           </div>
-        ))}
+          <div class="case-study-content-col">
+            <CaseStudyCard
+              title="Building a Digital Growth Engine for a Multi-Location Seafood Brand"
+              client="Crab Boil — Toronto & Ottawa"
+              industry="Restaurant"
+              logo="/assets/images/crabboil-logo.jpg"
+              services={["SearchForge", "ContentForge"]}
+              timeframe="6 months"
+              href="/case-studies/crab-boil/"
+              metrics={[
+                { label: 'Maps visibility', value: '+340', suffix: '%' },
+                { label: 'Search opportunity', value: '523K' },
+              ]}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="/case-studies/" class="text-brand-primary font-semibold hover:text-brand-secondary transition-colors">
+          See our work &rarr;
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ========================= -->
-  <!-- Section 9: Full-width CTA -->
-  <!-- ========================= -->
-  <section id="cta" class="bg-[#c41230] py-20 md:py-28">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2
-        class="text-[40px] md:text-[64px] lg:text-[72px] leading-none text-white mb-6"
-        style="font-family: 'Bebas Neue', sans-serif;"
-      >
-        Ready to Fix<br />Your Front Door?
-      </h2>
-      <p class="text-white/70 text-base md:text-lg mb-10 max-w-xl mx-auto">
-        Book a free 30-minute call. We'll look at your website, your Google
-        ranking, and your reviews — and show you exactly what's costing you
-        customers. No pitch, no pressure.
-      </p>
-      <a
-        href="/contact"
-        class="inline-flex items-center px-10 py-5 bg-white text-[#c41230] font-bold hover:bg-[#f3f4f6] transition-colors text-sm tracking-widest"
-        style="font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.15em;"
-      >
-        BOOK A FREE CALL
-      </a>
-      <p class="text-white/50 text-xs mt-6 tracking-wide">No contracts. No commitments. Just a conversation.</p>
+  <!-- ============================================ -->
+  <!-- GROWTH AUDIT CTA                             -->
+  <!-- ============================================ -->
+  <!-- ============================================ -->
+  <!-- GROWTH AUDIT CTA                             -->
+  <!-- ============================================ -->
+  <section id="cta-banner" class="bg-brand-dark py-16 sm:py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Text -->
+        <div class="text-center lg:text-left">
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-white text-shadow-forge">
+            Start With a Growth Audit
+          </h2>
+          <p class="mt-4 text-lg text-brand-white/70 max-w-xl">
+            We audit your Google presence, social media, website, and reviews, then deliver a practical 90-day action plan.
+          </p>
+          <div class="mt-8 flex flex-col sm:flex-row items-center lg:items-start gap-4">
+            <a href="/growth-audit/" class="btn-secondary text-base px-8 py-3">
+              Book Your Growth Audit
+            </a>
+            <a href="/contact/" class="text-brand-white/80 hover:text-brand-white text-base font-medium transition-colors">
+              Have questions? Let's talk
+            </a>
+          </div>
+        </div>
+        <!-- Audit Preview Card -->
+        <div class="audit-preview">
+          <div class="audit-preview-header">
+            <div class="audit-preview-dot"></div>
+            <div class="audit-preview-dot audit-preview-dot--yellow"></div>
+            <div class="audit-preview-dot audit-preview-dot--green"></div>
+            <span class="audit-preview-title">Growth Audit Report</span>
+          </div>
+          <div class="audit-preview-body">
+            <div class="audit-preview-item">
+              <svg class="audit-check" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Google Business Profile</span>
+              <span class="audit-score audit-score--high">92/100</span>
+            </div>
+            <div class="audit-preview-item">
+              <svg class="audit-check" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Website SEO</span>
+              <span class="audit-score audit-score--mid">67/100</span>
+            </div>
+            <div class="audit-preview-item">
+              <svg class="audit-check" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Social Presence</span>
+              <span class="audit-score audit-score--low">41/100</span>
+            </div>
+            <div class="audit-preview-item">
+              <svg class="audit-check" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+              <span>Review Health</span>
+              <span class="audit-score audit-score--mid">58/100</span>
+            </div>
+            <div class="audit-preview-footer">
+              <span class="text-brand-secondary font-semibold text-sm">90-Day Action Plan Included</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ========================= -->
-  <!-- Section 10: Footer        -->
-  <!-- ========================= -->
-  <Footer />
-</BaseLayout>
+  <!-- ============================================ -->
+  <!-- BLOG PREVIEW                                 -->
+  <!-- ============================================ -->
+  <section id="blog" class="py-20 sm:py-28 bg-brand-bg">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">Insights</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading leading-tight">
+          Latest from the Blog
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <BlogCard
+          title="How Toronto Restaurants Can Rank on Google Maps in 2026"
+          description="The complete guide to Google Business Profile optimization for GTA restaurants. Local SEO tactics that actually move the needle."
+          date={new Date('2026-04-10')}
+          category="SEO"
+          href="/blog/toronto-restaurants-google-maps-2026/"
+          readTime={8}
+          image="/assets/images/gbp-dashboard.jpg"
+        />
+        <BlogCard
+          title="TikTok for Toronto Restaurants: The Complete Guide"
+          description="How to turn short-form video into real foot traffic. Content strategies built specifically for restaurant operators."
+          date={new Date('2026-04-07')}
+          category="Social Media"
+          href="/blog/tiktok-toronto-restaurants/"
+          readTime={10}
+          image="/assets/images/hero-food-plating.jpg"
+        />
+        <BlogCard
+          title="Why 7,000 Canadian Restaurants Closed Last Year"
+          description="The restaurants that survived aren't working harder. They're marketing smarter. Here's what separates the two."
+          date={new Date('2026-04-03')}
+          category="Industry"
+          href="/blog/canadian-restaurant-closures-survival/"
+          readTime={6}
+          image="/assets/images/restaurant-kitchen.jpg"
+        />
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="/blog/" class="text-brand-primary font-semibold hover:text-brand-secondary transition-colors">
+          Read more &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="trg-branch" class="py-16 sm:py-20 bg-brand-bg-alt">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">Subsidiary Structure</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading">Toronto Restaurant Growth Is a Forge Subsidiary</h2>
+      <p class="mt-4 text-brand-muted max-w-3xl mx-auto">
+        Forge remains the master brand. Toronto Restaurant Growth is the restaurant-specialized branch so you can run one system, one maintenance workflow, and one strategic center of gravity.
+      </p>
+      <div class="mt-8">
+        <a href="https://torontorestaurantgrowth.ca/" target="_blank" rel="noopener noreferrer" class="btn-primary text-base px-8 py-3">
+          View Toronto Restaurant Growth
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* ===== HERO ===== */
+  .hero-section {
+    position: relative;
+    padding: 6rem 0 5rem;
+    background: var(--color-brand-primary);
+    overflow: hidden;
+  }
+
+  @media (min-width: 640px) {
+    .hero-section {
+      padding: 8rem 0 7rem;
+    }
+  }
+
+  .hero-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(196, 154, 60, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 80% 100%, rgba(196, 154, 60, 0.05) 0%, transparent 60%),
+      linear-gradient(180deg, var(--color-brand-primary) 0%, color-mix(in srgb, var(--color-brand-primary) 92%, black) 100%);
+    pointer-events: none;
+  }
+
+  .hero-qualifier {
+    display: inline-block;
+    padding: 0.375rem 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(196, 154, 60, 0.3);
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-brand-secondary);
+    letter-spacing: 0.025em;
+  }
+
+  .hero-secondary-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    color: rgba(250, 250, 248, 0.8);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+    text-decoration: none;
+  }
+
+  .hero-secondary-cta:hover {
+    color: var(--color-brand-white);
+  }
+
+  /* ===== HERO IMAGE ===== */
+  .hero-image-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-image {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    border-radius: 1rem;
+    object-fit: cover;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  /* ===== WHY FORGE / TRUST STRIP ===== */
+  .trust-strip {
+    padding: 3rem 0;
+    background: white;
+    border-bottom: 1px solid rgba(26, 39, 68, 0.06);
+  }
+
+  .why-forge-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 1.25rem 1rem;
+    border-radius: 0.75rem;
+    background: var(--color-brand-bg);
+    border: 1px solid rgba(26, 39, 68, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .why-forge-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(26, 39, 68, 0.08);
+  }
+
+  .trust-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background: white;
+    color: var(--color-brand-secondary);
+  }
+
+  .trust-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-brand-heading);
+  }
+
+  /* ===== PAIN CARDS ===== */
+  .pain-card {
+    background: var(--color-brand-primary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .pain-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(196, 154, 60, 0.3);
+  }
+
+  .pain-number {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-brand-secondary);
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== SYSTEM SECTION ===== */
+  .system-section {
+    padding: 5rem 0;
+    background: var(--color-brand-primary);
+    position: relative;
+  }
+
+  @media (min-width: 640px) {
+    .system-section {
+      padding: 7rem 0;
+    }
+  }
+
+  .system-stages {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .system-stages {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .system-stage {
+    position: relative;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .stage-number-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    background: rgba(196, 154, 60, 0.15);
+    border: 2px solid var(--color-brand-secondary);
+  }
+
+  .stage-number {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: var(--color-brand-secondary);
+  }
+
+  .stage-connector {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .stage-connector {
+      display: block;
+      position: absolute;
+      top: 2rem;
+      left: calc(50% + 2.5rem);
+      width: calc(100% - 2rem);
+      height: 2px;
+      background: linear-gradient(90deg, var(--color-brand-secondary), rgba(196, 154, 60, 0.2));
+      transform: translateY(calc(2rem - 1px));
+    }
+
+    .system-stage:last-child .stage-connector {
+      display: none;
+    }
+  }
+
+  /* ===== RESULTS SECTION ===== */
+  .results-section {
+    position: relative;
+    padding: 5rem 0;
+    background: white;
+    overflow: hidden;
+  }
+
+  @media (min-width: 640px) {
+    .results-section {
+      padding: 7rem 0;
+    }
+  }
+
+  .proof-card {
+    background: var(--color-brand-bg);
+    border: 1px solid var(--color-brand-border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+
+  .proof-card-metric {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-brand-heading);
+  }
+
+  .results-image-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .results-image {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    border-radius: 1rem;
+    object-fit: cover;
+    box-shadow: 0 16px 48px rgba(26, 39, 68, 0.12), 0 0 0 1px rgba(26, 39, 68, 0.06);
+  }
+
+  /* ===== CASE STUDY FEATURED ===== */
+  .case-study-featured {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  @media (min-width: 768px) {
+    .case-study-featured {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .case-study-image-col {
+    overflow: hidden;
+    border-radius: 1rem;
+  }
+
+  .case-study-image {
+    width: 100%;
+    height: 100%;
+    min-height: 240px;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  .case-study-content-col {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .case-study-content-col > :first-child {
+    width: 100%;
+  }
+
+  /* ===== AUDIT PREVIEW ===== */
+  .audit-preview {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .audit-preview-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .audit-preview-dot {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 9999px;
+    background: #ff5f57;
+  }
+
+  .audit-preview-dot--yellow {
+    background: #febc2e;
+  }
+
+  .audit-preview-dot--green {
+    background: #28c840;
+  }
+
+  .audit-preview-title {
+    margin-left: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(250, 250, 248, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .audit-preview-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .audit-preview-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: rgba(250, 250, 248, 0.8);
+  }
+
+  .audit-check {
+    width: 1.125rem;
+    height: 1.125rem;
+    color: var(--color-brand-secondary);
+    flex-shrink: 0;
+  }
+
+  .audit-score {
+    margin-left: auto;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+
+  .audit-score--high {
+    color: #28c840;
+  }
+
+  .audit-score--mid {
+    color: #febc2e;
+  }
+
+  .audit-score--low {
+    color: #ff5f57;
+  }
+
+  .audit-preview-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0.75rem;
+    margin-top: 0.25rem;
+    text-align: center;
+  }
+
+  /* ===== CLIENT LOGO STRIP ===== */
+  .client-strip {
+    padding: 2.5rem 0;
+    background: var(--color-brand-bg-alt);
+    border-bottom: 1px solid rgba(26, 39, 68, 0.06);
+  }
+
+  .client-logo-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    width: 10rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+    filter: grayscale(100%);
+    opacity: 0.6;
+  }
+
+  .client-logo-slot:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  .client-logo {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .client-logo-placeholder {
+    width: 8rem;
+    height: 4rem;
+    border-radius: 0.75rem;
+    border: 2px dashed rgba(26, 39, 68, 0.1);
+    background: transparent;
+  }
+
+  /* ===== HERO RESULT CHIP ===== */
+  .hero-result-chip {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.875rem;
+    background: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(196, 154, 60, 0.3);
+    border-radius: 0.5rem;
+    color: var(--color-brand-white);
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+
+  /* ===== WEBFORGE MOCKUP ===== */
+  .webforge-mockup {
+    position: absolute;
+    inset: 0.75rem;
+    background: var(--color-brand-primary-light);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mockup-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.325rem;
+    padding: 0.375rem 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .mockup-dot {
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+  }
+
+  .mockup-dot--red { background: #ff5f57; }
+  .mockup-dot--yellow { background: #febc2e; }
+  .mockup-dot--green { background: #28c840; }
+
+  .mockup-url-bar {
+    margin-left: 0.5rem;
+    padding: 0.125rem 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.25rem;
+    font-size: 0.5625rem;
+    color: rgba(250, 250, 248, 0.4);
+    font-family: var(--font-sans);
+  }
+
+  .mockup-content {
+    flex: 1;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .mockup-nav {
+    height: 0.375rem;
+    width: 60%;
+    background: rgba(196, 154, 60, 0.3);
+    border-radius: 0.125rem;
+  }
+
+  .mockup-hero-block {
+    height: 2.5rem;
+    background: linear-gradient(135deg, rgba(196, 154, 60, 0.15) 0%, rgba(196, 154, 60, 0.05) 100%);
+    border-radius: 0.25rem;
+    border: 1px solid rgba(196, 154, 60, 0.1);
+  }
+
+  .mockup-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.25rem;
+    flex: 1;
+  }
+
+  .mockup-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 0.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  /* ===== SMOOTH SCROLL ===== */
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+</style>

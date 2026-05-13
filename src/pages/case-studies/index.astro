@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BreadcrumbNav from '../../components/BreadcrumbNav.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+
+const caseStudies = await getCollection('caseStudies');
+const sortedStudies = caseStudies.sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Case Studies' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      item: item.href ? `https://forge-co.ca${item.href}` : undefined,
+    })),
+  },
+];
+---
+
+<Layout
+  title="Selected Client Work | Forge"
+  description="Real results for real operators. See how Forge builds growth systems for home services, real estate, and restaurant brands."
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="bg-brand-primary section-hero">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-6">
+        <BreadcrumbNav items={breadcrumbs} />
+      </div>
+      <h1 class="font-display text-4xl sm:text-5xl font-bold text-brand-white text-shadow-forge">
+        Selected Client Work
+      </h1>
+      <p class="mt-4 text-lg text-brand-white/70 max-w-2xl">
+        Real results for real operators. Here's what happens when growth becomes a system.
+      </p>
+    </div>
+  </section>
+
+  <!-- Case Studies Grid -->
+  <section class="section-standard">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {sortedStudies.length > 0 ? (
+        <>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-heading mb-8">
+            Featured work
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {sortedStudies.map((study) => (
+              <CaseStudyCard
+                title={study.data.title}
+                client={study.data.client}
+                industry={study.data.industry}
+                metrics={study.data.metrics}
+                image={study.data.featuredImage}
+                logo={
+                  study.id === 'crab-boil'
+                    ? '/assets/images/crabboil-logo.jpg'
+                    : study.id === 'mtc-renovations'
+                      ? 'https://www.mtcrenovations.ca/assets/img/logo/logo.png'
+                      : study.id === 'michael-the-home-buyer'
+                        ? 'https://michaelthehomebuyer.ca/assets/img/logo/logo-full.webp'
+                        : undefined
+                }
+                href={`/case-studies/${study.id}/`}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div class="text-center py-16">
+          <p class="text-brand-muted text-lg">Case studies coming soon. We're documenting the results right now.</p>
+          <a href="/growth-audit/" class="btn-primary mt-6 inline-block">Get Your Growth Audit</a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTABanner
+    headline="Want results like these?"
+    description="Every engagement starts with a Growth Audit. We'll show you exactly where the opportunities are."
+    primaryCTA={{ text: 'Get Your Growth Audit', href: '/growth-audit/' }}
+  />
+</Layout>

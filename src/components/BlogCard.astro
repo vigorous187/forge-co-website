@@ -1,0 +1,38 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  category: string;
+  image?: string;
+  href: string;
+  readTime: number;
+}
+
+const { title, description, date, category, image, href, readTime } = Astro.props;
+const formattedDate = date.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+const categoryLabel = category
+  .split('-')
+  .map((part) => (part.toLowerCase() === 'seo' ? 'SEO' : part.charAt(0).toUpperCase() + part.slice(1)))
+  .join(' ');
+---
+
+<a href={href} class="block bg-brand-card rounded-xl overflow-hidden border border-brand-border card-hover">
+  {image && (
+    <div class="relative h-48 overflow-hidden">
+      <img src={image} alt={title} class="w-full h-full object-cover" loading="lazy" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+    </div>
+  )}
+  <div class="p-6">
+    <div class="flex items-center gap-3 text-xs text-brand-muted mb-3">
+      <span class="font-semibold text-brand-secondary">{categoryLabel}</span>
+      <span>&middot;</span>
+      <span>{formattedDate}</span>
+      <span>&middot;</span>
+      <span>{readTime} min read</span>
+    </div>
+    <h3 class="font-display text-lg font-bold text-brand-heading">{title}</h3>
+    <p class="mt-2 text-sm text-brand-muted leading-relaxed line-clamp-2">{description}</p>
+  </div>
+</a>

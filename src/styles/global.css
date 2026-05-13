@@ -1,62 +1,162 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
-  --color-bg-primary: #0d0d0d;
-  --color-bg-card: #1a1a1a;
-  --color-border: #2d2d2d;
-  --color-accent: #c41230;
-  --color-text-primary: #f3f4f6;
-  --color-text-muted: #6b7280;
+  --color-brand-primary: #1a2744;
+  --color-brand-primary-light: #2a3a5c;
+  --color-brand-secondary: #c49a3c;
+  --color-brand-secondary-dark: #a07d2e;
+  --color-brand-accent: #e8b84b;
+  --color-brand-dark: #0d1117;
+  --color-brand-card: #ffffff;
+  --color-brand-border: rgba(26, 39, 68, 0.1);
+  --color-brand-bg: #f7f5f0;
+  --color-brand-bg-alt: #edeae3;
+  --color-brand-muted: #6b7280;
+  --color-brand-text: #2d3142;
+  --color-brand-heading: #1a2744;
+  --color-brand-white: #fafaf8;
 
-  --font-heading: "Bebas Neue", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
-html {
-  background-color: #0d0d0d;
-  color: #f3f4f6;
-  font-family: "Inter", sans-serif;
-  scroll-behavior: smooth;
+@utility text-shadow-forge {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
+@utility card-hover {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26, 39, 68, 0.12);
+  }
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-white);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  &:hover {
+    background-color: var(--color-brand-secondary);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-secondary);
+    outline-offset: 2px;
+  }
+}
+
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-brand-secondary);
+  color: var(--color-brand-primary);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  &:hover {
+    background-color: var(--color-brand-accent);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 2px;
+  }
+}
+
+@utility btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  color: var(--color-brand-white);
+  border: 2px solid var(--color-brand-white);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  text-decoration: none;
+  &:hover {
+    background-color: var(--color-brand-white);
+    color: var(--color-brand-primary);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-secondary);
+    outline-offset: 2px;
+  }
+}
+
+@utility section-hero {
+  padding-block: 5rem;
+  @media (min-width: 640px) {
+    padding-block: 7rem;
+  }
+}
+
+@utility section-standard {
+  padding-block: 4.5rem;
+  @media (min-width: 640px) {
+    padding-block: 5.5rem;
+  }
+}
+
+@utility section-compact {
+  padding-block: 3rem;
+  @media (min-width: 640px) {
+    padding-block: 4rem;
+  }
+}
+
+/* Global focus indicator for any interactive element that doesn't have its own */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-brand-secondary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip-to-content link — visually hidden until focused */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -10rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-brand-primary);
+  color: var(--color-brand-white);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: top 0.15s ease-in-out;
+}
+.skip-link:focus {
+  top: 0.5rem;
+  outline: 2px solid var(--color-brand-secondary);
+  outline-offset: 2px;
+}
+
+/* Screen-reader-only — keeps heading outline valid without changing layout */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
   padding: 0;
-}
-
-/* Marquee animation */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-track {
-  animation: marquee 28s linear infinite;
-}
-
-.marquee-wrapper:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-/* Mobile menu */
-#mobile-menu {
-  display: none;
-}
-
-#mobile-menu.open {
-  display: flex;
-}
-
-/* Industries accordion mobile */
-.accordion-content {
-  display: none;
-}
-
-.accordion-content.open {
-  display: block;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
 }

@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+
+const lastUpdated = 'May 5, 2026';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Terms of Service — Forge',
+    description: 'Terms governing the use of forge-co.ca and Forge services.',
+    url: 'https://forge-co.ca/terms/',
+    dateModified: '2026-05-05',
+  },
+];
+---
+
+<Layout
+  title="Terms of Service — Forge"
+  description="Terms governing the use of forge-co.ca and the services provided by Forge."
+  schema={schema}
+>
+  <section class="bg-brand-primary section-hero">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <BreadcrumbNav items={[{ label: 'Home', href: '/' }, { label: 'Terms of Service' }]} />
+      <h1 class="font-display text-4xl sm:text-5xl font-800 text-brand-white leading-tight mt-6">
+        Terms of Service
+      </h1>
+      <p class="mt-4 text-brand-white/60">Last updated: {lastUpdated}</p>
+    </div>
+  </section>
+
+  <section class="section-standard">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 prose prose-invert">
+      <p>These terms govern your use of forge-co.ca and the services offered by 2313745 Ontario Inc. operating as <strong>Forge</strong> ("we", "us", "our"). By using the site or engaging our services, you agree to these terms. If you do not agree, do not use the site or our services.</p>
+
+      <h2>1. Services</h2>
+      <p>Forge provides marketing, content, and growth services for restaurants, including but not limited to: search and local SEO, content production, web design and development, and the Growth Audit. Specific deliverables, timelines, and fees are agreed in a separate engagement letter or order form for each client.</p>
+
+      <h2>2. Growth Audit</h2>
+      <p>The Growth Audit is a one-time engagement that includes a written report, a recorded walkthrough, and a 30-day window to ask follow-up questions. Final scope and commercial terms are confirmed in your engagement letter.</p>
+
+      <h2>3. Retainer Packages</h2>
+      <p>Retainer packages (Ignite, Accelerate, Dominate) are billed monthly in advance via Stripe. Minimum commitment is six months unless otherwise agreed in writing. After the minimum, retainers continue month-to-month and may be cancelled with 30 days' written notice. Cancellation does not entitle you to a refund of fees already paid.</p>
+
+      <h2>4. Payment</h2>
+      <p>All fees are in Canadian dollars and exclude HST, which is added where applicable. Payment is processed by Stripe; by paying you also accept Stripe's terms. Late payments accrue interest at 2% per month after 14 days. We reserve the right to pause delivery on accounts more than 14 days past due.</p>
+
+      <h2>5. Client Responsibilities</h2>
+      <p>To produce results, we require timely access to your accounts (Google Business Profile, social channels, website CMS, analytics), accurate information, and prompt feedback within agreed turnaround windows. Delays in client input will extend project timelines on a one-for-one basis.</p>
+
+      <h2>6. Intellectual Property</h2>
+      <p>Upon full payment, you own the final deliverables produced specifically for you (websites, written content, photography, videos, designs). We retain ownership of our underlying methods, frameworks, templates, and any pre-existing tools. We may use anonymized or named results in our portfolio and case studies; you may opt out of named use in writing.</p>
+
+      <h2>7. Confidentiality</h2>
+      <p>Each party agrees to keep confidential any non-public business or technical information shared by the other party in connection with the engagement.</p>
+
+      <h2>8. Warranties and Limitations</h2>
+      <p>We warrant that we will perform services in a professional manner consistent with industry standards. We do not guarantee specific rankings, traffic numbers, conversion rates, or revenue outcomes — search and social platforms are third parties whose algorithms and policies are outside our control.</p>
+      <p>To the fullest extent permitted by law, our total liability for any claim arising from the services is limited to the fees paid to us by you in the three months preceding the claim. We are not liable for indirect, consequential, special, or punitive damages.</p>
+
+      <h2>9. Termination</h2>
+      <p>Either party may terminate an engagement for material breach if the breach is not cured within 14 days of written notice. On termination, you owe fees for work performed up to the termination date, and we will deliver any work-in-progress upon receipt of final payment.</p>
+
+      <h2>10. Use of the Site</h2>
+      <p>You may not use this site to: violate any law; infringe any intellectual property right; transmit malware or attempt to disrupt the site; or scrape content for resale. We may suspend access to anyone violating these terms.</p>
+
+      <h2>11. Governing Law</h2>
+      <p>These terms are governed by the laws of the Province of Ontario and the federal laws of Canada applicable in Ontario. The courts of Ontario have exclusive jurisdiction over any dispute, except that we may seek injunctive relief in any jurisdiction to protect our intellectual property.</p>
+
+      <h2>12. Changes</h2>
+      <p>We may update these terms. The "last updated" date reflects the most recent change. Continued use of the site or services after a change constitutes acceptance.</p>
+
+      <h2>13. Contact</h2>
+      <p>
+        <strong>Forge</strong> (operated by 2313745 Ontario Inc.)<br />
+        <a href="mailto:hello@forge-co.ca">hello@forge-co.ca</a><br />
+        Toronto, Ontario, Canada
+      </p>
+    </div>
+  </section>
+</Layout>

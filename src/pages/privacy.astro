@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+
+const lastUpdated = 'May 5, 2026';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Privacy Policy — Forge',
+    description: 'How Forge collects, uses, and protects your personal information.',
+    url: 'https://forge-co.ca/privacy/',
+    dateModified: '2026-05-05',
+  },
+];
+---
+
+<Layout
+  title="Privacy Policy — Forge"
+  description="How Forge collects, uses, and protects your personal information. Compliant with PIPEDA and applicable Ontario privacy law."
+  schema={schema}
+>
+  <section class="bg-brand-primary section-hero">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <BreadcrumbNav items={[{ label: 'Home', href: '/' }, { label: 'Privacy Policy' }]} />
+      <h1 class="font-display text-4xl sm:text-5xl font-800 text-brand-white leading-tight mt-6">
+        Privacy Policy
+      </h1>
+      <p class="mt-4 text-brand-white/60">Last updated: {lastUpdated}</p>
+    </div>
+  </section>
+
+  <section class="section-standard">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 prose prose-invert">
+      <p>This policy explains how 2313745 Ontario Inc. operating as <strong>Forge</strong> ("we", "us", "our") collects, uses, and discloses personal information when you visit forge-co.ca, contact us, or engage our services. We comply with the Personal Information Protection and Electronic Documents Act (PIPEDA) and applicable Ontario privacy law.</p>
+
+      <h2>1. What We Collect</h2>
+      <p>We collect personal information you give us directly through:</p>
+      <ul>
+        <li><strong>Contact and Growth Audit forms:</strong> name, email, phone, business name, website, city, location count, revenue range, business type, primary challenge, and any notes you provide.</li>
+        <li><strong>Email correspondence:</strong> any information you include when emailing us.</li>
+        <li><strong>Payments:</strong> if you purchase a Growth Audit or retainer package, billing details are collected and processed by Stripe. We do not store your card number on our servers.</li>
+      </ul>
+
+      <p>We also collect limited usage information automatically:</p>
+      <ul>
+        <li><strong>Site analytics:</strong> page views, scroll depth, section visibility, click events, time on page, device type, approximate city and country (derived from IP — IP itself is not stored), and anonymous session identifiers.</li>
+        <li><strong>Server logs:</strong> standard Cloudflare access logs (timestamp, request path, response code, user agent).</li>
+      </ul>
+
+      <h2>2. How We Use It</h2>
+      <ul>
+        <li>To respond to your inquiry and deliver requested services.</li>
+        <li>To send transactional email (Growth Audit confirmation, scheduling, deliverables, invoices).</li>
+        <li>To improve site performance, content, and conversion.</li>
+        <li>To meet legal, accounting, or regulatory obligations.</li>
+      </ul>
+
+      <h2>3. Who We Share With</h2>
+      <p>We share personal information only with service providers we use to operate the business:</p>
+      <ul>
+        <li><strong>Stripe</strong> — payment processing.</li>
+        <li><strong>Resend</strong> — transactional email delivery.</li>
+        <li><strong>Cloudflare</strong> — site hosting, DNS, and edge security.</li>
+        <li><strong>Notion</strong> — internal client and project records.</li>
+      </ul>
+      <p>We do not sell, rent, or trade personal information. We do not share information with advertisers or data brokers.</p>
+
+      <h2>4. Cookies and Tracking</h2>
+      <p>The site uses first-party analytics to measure engagement. We do not use advertising cookies, retargeting pixels, or third-party trackers. You can disable cookies in your browser settings; the site will still function.</p>
+
+      <h2>5. Retention</h2>
+      <p>We keep contact-form and Growth Audit submissions for as long as we are actively communicating with you, and then for up to seven years for accounting and tax purposes. Analytics data is retained in aggregated form for up to 24 months.</p>
+
+      <h2>6. Your Rights</h2>
+      <p>Under PIPEDA you may request:</p>
+      <ul>
+        <li>Access to the personal information we hold about you.</li>
+        <li>Correction of inaccurate information.</li>
+        <li>Deletion of your information, subject to legal retention requirements.</li>
+        <li>Withdrawal of consent for future communications.</li>
+      </ul>
+      <p>To make a request, email <a href="mailto:hello@forge-co.ca">hello@forge-co.ca</a>. We respond within 30 days.</p>
+
+      <h2>7. Security</h2>
+      <p>We use industry-standard technical and organizational measures to protect personal information, including encrypted transport (HTTPS), restricted access, and reputable third-party processors. No system is perfectly secure; we cannot guarantee absolute security but we will notify affected individuals and the Office of the Privacy Commissioner of Canada in the event of a material breach as required by law.</p>
+
+      <h2>8. Children</h2>
+      <p>Our services are intended for business owners. We do not knowingly collect information from individuals under 18.</p>
+
+      <h2>9. Changes</h2>
+      <p>We may update this policy. The "last updated" date at the top reflects the most recent change. Material changes will be communicated by email to active clients.</p>
+
+      <h2>10. Contact</h2>
+      <p>Questions about this policy or your personal information:</p>
+      <p>
+        <strong>Forge</strong> (operated by 2313745 Ontario Inc.)<br />
+        <a href="mailto:hello@forge-co.ca">hello@forge-co.ca</a><br />
+        Toronto, Ontario, Canada
+      </p>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,161 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+import CTABanner from '../components/CTABanner.astro';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About Forge',
+    description: 'Meet the team behind Forge. We build connected marketing systems for GTA restaurants.',
+    url: 'https://forge-co.ca/about/',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'Forge',
+      url: 'https://forge-co.ca',
+      founder: [
+        { '@type': 'Person', name: 'Michael Sifontes', jobTitle: 'Strategy, Technology & Growth Systems' },
+        { '@type': 'Person', name: 'Jayden Aj', jobTitle: 'Content, Creative & Client Relationships' },
+      ],
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://forge-co.ca/' },
+      { '@type': 'ListItem', position: 2, name: 'About' },
+    ],
+  },
+];
+
+const values = [
+  {
+    title: 'Results Over Activity',
+    description: "We don't measure success in posts or impressions. We measure it in revenue, rankings, and customers through your door.",
+  },
+  {
+    title: 'Systems Over Tactics',
+    description: 'Anyone can run an ad. We build connected systems where every piece amplifies the others.',
+  },
+  {
+    title: 'Transparency Over Promises',
+    description: 'Clear scope. Real metrics. Monthly reporting. No black boxes.',
+  },
+];
+---
+
+<Layout
+  title="About Forge — GTA's Growth Systems Agency for Restaurants"
+  description="Meet the team behind Forge. We build connected marketing systems for GTA restaurants."
+  schema={schema}
+>
+  <!-- Hero -->
+  <section id="hero" class="bg-brand-primary section-hero">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-800 text-brand-white leading-tight text-shadow-forge">
+        Built by Operators, for Operators
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-brand-white/70 max-w-2xl mx-auto">
+        Forge was founded by people who understand what it takes to run a business in the GTA. We're not a social media agency. We're a growth systems company.
+      </p>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+    <BreadcrumbNav items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
+  </div>
+
+  <!-- The Story -->
+  <section id="story" class="section-standard">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading">
+            The Story
+          </h2>
+          <p class="mt-6 text-lg text-brand-text leading-relaxed">
+            Michael Sifontes and Jayden Aj founded Forge because they saw the same problem everywhere: restaurant owners drowning in disconnected marketing tactics that don't produce results.
+          </p>
+          <p class="mt-4 text-lg text-brand-text leading-relaxed">
+            We built The Forge Growth System to give operators what they actually need — a connected marketing engine that turns visibility into revenue.
+          </p>
+        </div>
+        <div>
+          <img
+            src="/assets/team/michael-and-jayden.jpg"
+            alt="Michael Sifontes and Jayden Aj, founders of Forge"
+            class="rounded-xl shadow-lg w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Team -->
+  <section id="team" class="section-standard bg-brand-bg-alt">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading text-center mb-12">
+        The Team
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Michael -->
+        <div class="bg-brand-card rounded-xl border border-brand-border p-8 text-center">
+          <img
+            src="/assets/team/michael-sifontes.jpg"
+            alt="Michael Sifontes"
+            class="w-32 h-32 rounded-full object-cover mx-auto mb-6"
+            loading="lazy"
+          />
+          <h3 class="font-display text-xl font-bold text-brand-heading">Michael Sifontes</h3>
+          <p class="text-brand-secondary font-semibold text-sm mt-1">Strategy, Technology & Growth Systems</p>
+          <p class="mt-4 text-brand-muted text-sm leading-relaxed">
+            Entrepreneur and technologist. Builds the systems, runs the data, ensures every dollar spent on marketing produces measurable results.
+          </p>
+        </div>
+
+        <!-- Jayden -->
+        <div class="bg-brand-card rounded-xl border border-brand-border p-8 text-center">
+          <img
+            src="/assets/team/jayden-aj.png"
+            alt="Jayden Aj"
+            class="w-32 h-32 rounded-full object-cover mx-auto mb-6"
+            loading="lazy"
+          />
+          <h3 class="font-display text-xl font-bold text-brand-heading">Jayden Aj</h3>
+          <p class="text-brand-secondary font-semibold text-sm mt-1">Content, Creative & Client Relationships</p>
+          <p class="mt-4 text-brand-muted text-sm leading-relaxed">
+            Content creator and relationship builder. 89K+ Instagram following. On the ground with clients, filming, creating, and driving engagement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section id="values" class="section-standard">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading text-center mb-12">
+        What We Stand For
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {values.map((v) => (
+          <div class="bg-brand-card rounded-xl border border-brand-border p-8 card-hover">
+            <h3 class="font-display text-lg font-bold text-brand-heading">{v.title}</h3>
+            <p class="mt-3 text-brand-muted text-sm leading-relaxed">{v.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <CTABanner
+    headline="Ready to grow?"
+    description="Get a complete diagnostic of your digital presence and a 90-day plan to fix it."
+    primaryCTA={{ text: 'Get Your Growth Audit', href: '/growth-audit/' }}
+  />
+</Layout>
