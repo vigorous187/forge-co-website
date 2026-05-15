@@ -57,6 +57,8 @@ const blog = defineCollection({
         }),
       )
       .optional(),
+    howCreated: z.string().optional(),
+    ymylReviewRequired: z.boolean().optional(),
   }),
 });
 

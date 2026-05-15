@@ -8,6 +8,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node ./scripts/check-seo-baseline.mjs && node ./scripts/check-blog-quality.mjs && node ./scripts/check-geo-readiness.mjs && node ./scripts/check-brand-alignment.mjs && node ./scripts/audit-headings.mjs",
+    "blog:inventory": "node ./scripts/blog-inventory.mjs",
+    "seo:guidelines:init": "node ./scripts/seo-init-guideline-baseline.mjs",
+    "seo:guidelines:check": "node ./scripts/seo-check-guideline-baseline.mjs",
     "audit-headings": "node ./scripts/audit-headings.mjs",
     "preview": "astro preview",
     "astro": "astro"

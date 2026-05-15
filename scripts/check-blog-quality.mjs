@@ -50,6 +50,26 @@ async function main() {
 
     if (data.draft === true) continue;
 
+    if (
+      String(data.howCreated || "")
+        .toLowerCase()
+        .includes("ai") &&
+      !/^##\s+how this was created/im.test(content)
+    ) {
+      failures.push(
+        `${file.name}: howCreated references AI but body is missing "## How this was created" section`,
+      );
+    }
+
+    if (data.ymylReviewRequired === true) {
+      const src = Array.isArray(data.sources) ? data.sources : [];
+      if (src.length < 3) {
+        failures.push(
+          `${file.name}: ymylReviewRequired needs at least 3 sources in frontmatter`,
+        );
+      }
+    }
+
     const wordCount = countWords(content);
     const h2Count = countH2(content);
     const links = collectMarkdownLinks(content);
