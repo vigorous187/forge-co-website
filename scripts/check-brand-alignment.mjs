@@ -1,9 +1,14 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 
+const GATES = JSON.parse(
+  await readFile(new URL("./site-gates.json", import.meta.url), "utf8"),
+);
+const BR = GATES.brand || {};
 const ROOT = path.resolve(process.cwd(), "src");
-const SCAN_DIRS = ["pages", "components", "layouts"];
-const FORBIDDEN = [/\bwe only work with restaurants\b/i, /\$\d[\d,]*/i];
+const SCAN_DIRS = BR.scanDirs || ["pages", "components", "layouts"];
+const SKIP_SUB = BR.skipPathSubstrings || [];
+const FORBIDDEN = (BR.forbiddenPatterns || []).map((s) => new RegExp(s, "i"));
 
 async function listFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -32,6 +37,7 @@ async function main() {
     const files = await listFiles(target);
     for (const file of files) {
       const rel = path.relative(process.cwd(), file);
+      if (SKIP_SUB.some((s) => rel.includes(s))) continue;
       const content = await readFile(file, "utf8");
       for (const pattern of FORBIDDEN) {
         if (pattern.test(content)) {

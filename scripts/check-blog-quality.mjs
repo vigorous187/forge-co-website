@@ -2,16 +2,17 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
 
-const BLOG_DIR = path.resolve(process.cwd(), "src/content/blog");
-const MIN_WORDS = 900;
-const MIN_H2 = 4;
-const PROHIBITED_PATTERNS = [
-  /\bguaranteed\s+rankings?\b/i,
-  /\bguaranteed\s+to\s+rank\b/i,
-  /\binstant\s+rankings?\b/i,
-  /\b#1\s+on\s+google\b/i,
-];
-const CONVERSION_LINK = "/growth-audit/";
+const GATES = JSON.parse(
+  await readFile(new URL("./site-gates.json", import.meta.url), "utf8"),
+);
+const BQ = GATES.blogQuality || {};
+const BLOG_DIR = path.resolve(process.cwd(), BQ.blogDir || "src/content/blog");
+const MIN_WORDS = BQ.minWords ?? 900;
+const MIN_H2 = BQ.minH2 ?? 4;
+const PROHIBITED_PATTERNS = (BQ.prohibitedPatterns || []).map(
+  (s) => new RegExp(s, "i"),
+);
+const CONVERSION_LINK = BQ.conversionLink || "/growth-audit/";
 
 function countWords(markdownBody) {
   return markdownBody

@@ -2,15 +2,22 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
 
-const BLOG_DIR = path.resolve(process.cwd(), "src/content/blog");
-const CASE_STUDY_DIR = path.resolve(process.cwd(), "src/content/case-studies");
+const GATES = JSON.parse(
+  await readFile(new URL("./site-gates.json", import.meta.url), "utf8"),
+);
+const GEO = GATES.geo || {};
+const BLOG_DIR = path.resolve(process.cwd(), GEO.blogDir || "src/content/blog");
+const CASE_STUDY_DIR = path.resolve(
+  process.cwd(),
+  GEO.caseStudyDir || "src/content/case-studies",
+);
 const BLOG_TEMPLATE = path.resolve(
   process.cwd(),
-  "src/pages/blog/[...slug].astro",
+  GEO.blogTemplate || "src/pages/blog/[...slug].astro",
 );
 const CASE_TEMPLATE = path.resolve(
   process.cwd(),
-  "src/pages/case-studies/[...slug].astro",
+  GEO.caseTemplate || "src/pages/case-studies/[...slug].astro",
 );
 
 const MIN_ANSWER_FIRST_WORDS = 5;
