@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) =>
+    new Date(b.data.datePublished ?? b.data.publishDate).getTime() -
+    new Date(a.data.datePublished ?? a.data.publishDate).getTime(),
+);
+---
+
+<BaseLayout title="Blog" description="REPLACE: blog index meta description.">
+  <section class="max-w-content mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold text-primary mb-4">Blog</h1>
+    <p class="text-secondary mb-10 max-w-2xl">REPLACE: intro paragraph.</p>
+    <ul class="space-y-6">
+      {posts.map((post) => (
+        <li class="border border-gray-200 rounded-lg p-6 bg-bg-light">
+          <a href={`/blog/${post.slug}/`} class="text-accent font-semibold text-lg hover:underline">
+            {post.data.title}
+          </a>
+          <p class="text-secondary text-sm mt-2">{post.data.datePublished ?? post.data.publishDate}</p>
+          <p class="text-primary/80 mt-2">{post.data.description}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
