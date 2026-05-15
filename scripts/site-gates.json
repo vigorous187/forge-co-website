@@ -1,0 +1,28 @@
+{
+  "blogQuality": {
+    "blogDir": "src/content/blog",
+    "minWords": 900,
+    "minH2": 4,
+    "conversionLink": "/growth-audit/",
+    "prohibitedPatterns": [
+      "\\bguaranteed\\s+rankings?\\b",
+      "\\bguaranteed\\s+to\\s+rank\\b",
+      "\\binstant\\s+rankings?\\b",
+      "\\b#1\\s+on\\s+google\\b"
+    ]
+  },
+  "brand": {
+    "scanDirs": ["pages", "components", "layouts"],
+    "skipPathSubstrings": ["/blog/"],
+    "forbiddenPatterns": [
+      "\\bwe only work with restaurants\\b",
+      "\\$\\d[\\d,]*"
+    ]
+  },
+  "geo": {
+    "blogDir": "src/content/blog",
+    "caseStudyDir": "src/content/case-studies",
+    "blogTemplate": "src/pages/blog/[...slug].astro",
+    "caseTemplate": "src/pages/case-studies/[...slug].astro"
+  }
+}

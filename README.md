@@ -20,6 +20,8 @@ npx wrangler pages deploy dist --project-name forge-co --commit-dirty=true
 
 Post-deploy smoke tests and favicon checks: see **`~/Developer/shared/knowledge-hub/seo/website-production-standard.md`**.
 
+**Gate scripts (build order, `site-gates.json`):** **`scripts/README.md`**.
+
 ## Standards (do not ship without)
 
 Multi-brand playbook (blog Typography, author assets, final-site checklist, Cloudflare mapping):  
