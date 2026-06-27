@@ -138,6 +138,10 @@ export async function generateBlogBody(topic) {
   const queueSource = site.queueSource || "automation/topic-queue.json";
   const system = systemPrompt(brand, domain, vertical);
 
+  const related =
+    topic.relatedBlog || "/blog/toronto-restaurants-google-maps-2026/";
+  const service = topic.serviceLink || "/services/search-forge/";
+
   const userPrompt = `Write a complete blog post for slug "${topic.slug}".
 
 Title: ${topic.title}
@@ -150,7 +154,7 @@ Hard requirements:
 - At least ${minWords} words
 - At least ${minH2} sections with ## H2 headings (not counting "How this was created")
 - Include a bullet or numbered list OR a markdown table
-- Include markdown links to ${conversion}, at least one /services/ path, and at least one /blog/ related path where natural
+- Include these exact markdown links somewhere in the body: [growth audit](${conversion}), [search services](${service}), and [related guide](${related})
 - End with ## How this was created — state the topic was queued in ${queueSource}, body was AI-drafted for human review before publish, and name ${brand}
 - Do not use phrases like "guaranteed rankings" or "#1 on Google"`;
 
