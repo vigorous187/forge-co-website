@@ -1,0 +1,47 @@
+name: Blog backfill (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic_slug:
+        description: Topic slug from automation/topic-queue.json
+        required: true
+        type: string
+      iso_week:
+        description: ISO week label for branch name (e.g. 2026-W25)
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  backfill-slot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Configure git author for automation commits
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Generate backfill post and open PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BLOG_AUTO_GENERATE: "1"
+          BLOG_FORCE_REGENERATE: "1"
+          BLOG_TOPIC_SLUG: ${{ github.event.inputs.topic_slug }}
+          BLOG_ISO_WEEK: ${{ github.event.inputs.iso_week }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/blog-open-slot.mjs
