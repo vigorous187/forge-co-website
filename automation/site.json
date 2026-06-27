@@ -1,0 +1,9 @@
+{
+  "brand": "Forge Co.",
+  "domain": "forge-co.ca",
+  "conversionPath": "/growth-audit/",
+  "audience": "GTA restaurant owners and local service business operators",
+  "vertical": "forge-agency",
+  "queueSource": "automation/topic-queue.json",
+  "frontmatterStyle": "forge"
+}

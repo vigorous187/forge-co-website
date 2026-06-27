@@ -1,11 +1,112 @@
 {
   "pending": [
     {
-      "slug": "gta-restaurant-content-calendar-q3",
-      "title": "GTA Restaurant Content Calendar Q3 (Draft Shell)",
-      "description": "Editorial shell for a seasonal content calendar article. Replace before publishing.",
+      "slug": "restaurant-review-response-playbook-gta",
+      "title": "Restaurant Review Response Playbook for GTA Owners",
+      "description": "How GTA restaurants should respond to Google reviews — templates, timing, and escalation rules without policy risk.",
+      "publishDate": "2026-06-22",
+      "category": "strategy",
+      "author": "Michael Sifontes",
+      "tags": [
+        "reviews",
+        "google business profile",
+        "reputation",
+        "gta",
+        "restaurants"
+      ],
+      "relatedBlog": "/blog/google-business-profile-gta-restaurants/"
+    }
+  ],
+  "backfill": [
+    {
+      "week": "2026-W21",
+      "slug": "toronto-restaurants-google-maps-2026",
+      "title": "How Toronto Restaurants Can Rank on Google Maps in 2026",
+      "description": "A practical guide for GTA restaurant owners to improve their Google Maps rankings.",
+      "publishDate": "2026-05-18",
+      "category": "seo",
+      "author": "Michael Sifontes",
+      "tags": ["google maps", "local seo", "toronto", "restaurant marketing"],
+      "relatedBlog": "/blog/google-business-profile-gta-restaurants/",
+      "useLocal": true
+    },
+    {
+      "week": "2026-W22",
+      "slug": "google-business-profile-gta-restaurants",
+      "title": "The Complete Google Business Profile Guide for GTA Restaurants",
+      "description": "Everything GTA restaurant owners need to know about Google Business Profile in 2026.",
+      "publishDate": "2026-05-25",
+      "category": "seo",
+      "author": "Michael Sifontes",
+      "tags": ["google business profile", "gbp", "local seo", "gta"],
+      "relatedBlog": "/blog/toronto-restaurants-google-maps-2026/",
+      "useLocal": true
+    },
+    {
+      "week": "2026-W23",
+      "slug": "tiktok-toronto-restaurants",
+      "title": "TikTok for Toronto Restaurants: The Complete Guide",
+      "description": "How GTA restaurants can use TikTok to fill seats with content ideas and posting strategy.",
       "publishDate": "2026-06-01",
-      "relatedBlog": "/blog/toronto-restaurants-google-maps-2026/"
+      "category": "social-media",
+      "author": "Jayden Aj",
+      "tags": [
+        "tiktok",
+        "social media",
+        "toronto",
+        "restaurant marketing",
+        "video"
+      ],
+      "relatedBlog": "/blog/google-business-profile-gta-restaurants/",
+      "useLocal": true
+    },
+    {
+      "week": "2026-W24",
+      "slug": "canadian-restaurant-closures-survival",
+      "title": "Why 7,000 Canadian Restaurants Closed Last Year (And How to Not Be Next)",
+      "description": "Canada lost thousands of restaurants in 2025. Marketing strategies keeping survivors ahead.",
+      "publishDate": "2026-06-08",
+      "category": "industry-trends",
+      "author": "Michael Sifontes",
+      "tags": [
+        "restaurant industry",
+        "canada",
+        "closures",
+        "survival",
+        "marketing strategy"
+      ],
+      "relatedBlog": "/blog/toronto-restaurants-google-maps-2026/",
+      "useLocal": true
+    },
+    {
+      "week": "2026-W25",
+      "slug": "gta-restaurant-content-calendar-q3",
+      "title": "GTA Restaurant Content Calendar for Q3",
+      "description": "A seasonal content calendar framework for GTA restaurants planning Q3 campaigns.",
+      "publishDate": "2026-06-15",
+      "category": "strategy",
+      "author": "Michael Sifontes",
+      "tags": ["content calendar", "restaurant marketing", "gta", "q3"],
+      "relatedBlog": "/blog/toronto-restaurants-google-maps-2026/",
+      "useLocal": false
+    },
+    {
+      "week": "2026-W26",
+      "slug": "restaurant-review-response-playbook-gta",
+      "title": "Restaurant Review Response Playbook for GTA Owners",
+      "description": "How GTA restaurants should respond to Google reviews — templates, timing, and escalation rules.",
+      "publishDate": "2026-06-22",
+      "category": "strategy",
+      "author": "Michael Sifontes",
+      "tags": [
+        "reviews",
+        "google business profile",
+        "reputation",
+        "gta",
+        "restaurants"
+      ],
+      "relatedBlog": "/blog/google-business-profile-gta-restaurants/",
+      "useLocal": false
     }
   ]
 }
