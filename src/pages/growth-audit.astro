@@ -5,16 +5,20 @@ import BreadcrumbNav from '../components/BreadcrumbNav.astro';
 const schema = [
   {
     '@context': 'https://schema.org',
-    '@type': 'Product',
+    '@type': 'Service',
     name: 'Growth Audit',
     description: 'A complete audit of your Google presence, social media, website, and reviews. Plus a custom 90-day action plan.',
     url: 'https://forge-co.ca/growth-audit/',
-    brand: { '@type': 'Organization', name: 'Forge' },
-    offers: {
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
-      url: 'https://forge-co.ca/growth-audit/',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'Forge',
+      url: 'https://forge-co.ca',
     },
+    areaServed: {
+      '@type': 'Place',
+      name: 'Greater Toronto Area, Ontario, Canada',
+    },
+    serviceType: 'Digital Marketing Audit',
   },
   {
     '@context': 'https://schema.org',
