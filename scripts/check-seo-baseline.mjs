@@ -60,6 +60,15 @@ async function main() {
     );
   }
 
+  const notFoundHtml = await readIfExists(path.join(ROOT, "dist", "404.html"));
+  assertTrue(notFoundHtml, "Missing dist/404.html; unknown URLs may become soft 404s");
+  assertTrue(
+    /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(
+      notFoundHtml,
+    ),
+    "404 page must include a noindex robots directive",
+  );
+
   console.log("SEO baseline check passed.");
 }
 
