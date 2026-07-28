@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Page Not Found — Forge"
+  description="The page you requested could not be found. Explore Forge services, case studies, and growth resources."
+  canonicalUrl="https://forge-co.ca/404/"
+  noindex={true}
+>
+  <section class="bg-brand-primary py-24 sm:py-32">
+    <div class="mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
+      <p class="text-sm font-semibold uppercase tracking-widest text-brand-secondary">
+        Error 404
+      </p>
+      <h1 class="mt-4 font-display text-4xl font-800 leading-tight text-brand-white text-shadow-forge sm:text-5xl lg:text-6xl">
+        This page has moved or no longer exists.
+      </h1>
+      <p class="mt-6 text-lg text-brand-white/70">
+        Head back to the Forge homepage or explore our growth services.
+      </p>
+      <div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+        <a href="/" class="btn-secondary">Back to home</a>
+        <a href="/services/" class="btn-outline">Explore services</a>
+      </div>
+    </div>
+  </section>
+  <h2 class="sr-only">Page recovery options</h2>
+</Layout>
