@@ -1,6 +1,6 @@
 # Forge — blog pipeline & SEO governance
 
-Canonical checklist: [~/Developer/shared/docs/BLOG_PIPELINE_GOOGLE_CHECKLIST.md](file:///Users/user/Developer/shared/docs/BLOG_PIPELINE_GOOGLE_CHECKLIST.md)
+Canonical checklist: [docs/BLOG_PIPELINE_GOOGLE_CHECKLIST.md](docs/BLOG_PIPELINE_GOOGLE_CHECKLIST.md)
 
 ## Automation
 
