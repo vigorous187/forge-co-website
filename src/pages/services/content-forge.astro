@@ -3,11 +3,6 @@ import Layout from '../../layouts/Layout.astro';
 import BreadcrumbNav from '../../components/BreadcrumbNav.astro';
 import FAQ from '../../components/FAQ.astro';
 import CTABanner from '../../components/CTABanner.astro';
-import CaseStudyCard from '../../components/CaseStudyCard.astro';
-import { getCollection } from 'astro:content';
-
-const caseStudies = await getCollection('caseStudies');
-const featuredCaseStudy = caseStudies.find((c) => c.id === 'michael-the-home-buyer');
 
 const schema = [
   {
@@ -235,35 +230,6 @@ const faqs = [
       <FAQ items={faqs} />
     </div>
   </section>
-
-  <!-- ============================================ -->
-  <!-- CASE STUDY                                   -->
-  <!-- ============================================ -->
-  {featuredCaseStudy && (
-    <section id="case-study" class="section-hero bg-white">
-      <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-10">
-          <p class="text-brand-secondary font-semibold text-sm uppercase tracking-wider mb-4">Proof It Works</p>
-          <h2 class="font-display text-3xl sm:text-4xl font-bold text-brand-heading leading-tight">
-            See ContentForge in Action
-          </h2>
-        </div>
-        <CaseStudyCard
-          title={featuredCaseStudy.data.title}
-          client={featuredCaseStudy.data.client}
-          industry={featuredCaseStudy.data.industry}
-          metrics={featuredCaseStudy.data.metrics}
-          image={featuredCaseStudy.data.featuredImage}
-          href={`/case-studies/${featuredCaseStudy.id}/`}
-        />
-        <p class="mt-8 text-center">
-          <a href="/case-studies/" class="text-brand-primary font-semibold hover:text-brand-secondary transition-colors">
-            See more client results &rarr;
-          </a>
-        </p>
-      </div>
-    </section>
-  )}
 
   <!-- ============================================ -->
   <!-- CTA BANNER                                   -->
