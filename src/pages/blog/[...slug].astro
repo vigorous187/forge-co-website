@@ -58,6 +58,10 @@ const breadcrumbs = [
   { label: post.data.title },
 ];
 
+const showAiDisclosure = String(post.data.howCreated || '')
+  .toLowerCase()
+  .includes('ai');
+
 // Table of contents from H2 headings
 const tocItems = headings.filter((h) => h.depth === 2);
 
@@ -164,6 +168,12 @@ if (post.data.faq && post.data.faq.length > 0) {
       <div class="flex gap-12 lg:gap-16">
         <!-- Main Content -->
         <div class="flex-1 max-w-3xl mx-auto lg:mx-0">
+          {showAiDisclosure && (
+            <p class="mb-8 rounded-lg border border-brand-border bg-brand-bg-alt px-4 py-3 text-sm leading-relaxed text-brand-text">
+              This article was drafted with AI and reviewed by Forge before publishing.
+            </p>
+          )}
+
           <!-- Table of Contents -->
           {tocItems.length > 2 && (
             <nav
