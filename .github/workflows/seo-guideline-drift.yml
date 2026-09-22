@@ -26,7 +26,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          TITLE="SEO: Google guideline page changed — review checklist"
+          existing="$(gh issue list --state open --limit 100 --json number,title | node -e '
+            const fs = require("fs");
+            const title = process.argv[1];
+            const issues = JSON.parse(fs.readFileSync(0, "utf8"));
+            const hit = issues.find((issue) => issue.title === title);
+            if (hit) process.stdout.write(String(hit.number));
+          ' "$TITLE")"
+          if [ -n "$existing" ]; then
+            echo "Open issue #$existing already has this title; skipping create."
+            exit 0
+          fi
           gh issue create \
-            --title "SEO: Google guideline page changed — review checklist" \
+            --title "$TITLE" \
             --body "Monthly guideline fingerprint check failed. Review logs in this workflow run. Update shared docs/BLOG_PIPELINE_GOOGLE_CHECKLIST.md and repo gate scripts; run npm run seo:guidelines:init and commit automation/guideline-baseline.json." \
             || true
