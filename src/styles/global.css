@@ -19,6 +19,8 @@
 
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-grotesk: "Oswald", "Arial Narrow", system-ui, sans-serif;
+  --font-editorial: "Playfair Display", Georgia, serif;
 }
 
 @utility text-shadow-forge {

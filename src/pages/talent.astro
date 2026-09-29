@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BreadcrumbNav from '../components/BreadcrumbNav.astro';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Forge Talent — Creator Management Division',
+    description:
+      'Forge Talent is the talent management division of Forge-co. Boutique creator representation and brand partnerships.',
+    url: 'https://forge-co.ca/talent/',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://forge-co.ca/' },
+      { '@type': 'ListItem', position: 2, name: 'Talent' },
+    ],
+  },
+];
+
+const roster = [
+  {
+    name: 'Jayden AJ',
+    href: '/talent/jayden-aj/',
+    img: '/assets/talent/jayden-alo-cyan.jpg',
+    alt: 'Jayden AJ, studio portrait',
+    cats: ['Food', 'Lifestyle'],
+    live: true,
+  },
+  {
+    name: 'Maya Chen',
+    href: null,
+    img: '/assets/talent/creator-maya.jpg',
+    alt: 'Maya Chen, studio portrait',
+    cats: ['Lifestyle'],
+    reach: '412K',
+  },
+  {
+    name: 'Dre Carter',
+    href: null,
+    img: '/assets/talent/creator-dre.jpg',
+    alt: 'Dre Carter, studio portrait',
+    cats: ['Fitness'],
+    reach: '288K',
+  },
+  {
+    name: 'Sofia Reyes',
+    href: null,
+    img: '/assets/talent/creator-sofia.jpg',
+    alt: 'Sofia Reyes, studio portrait',
+    cats: ['Beauty'],
+    reach: '531K',
+  },
+];
+---
+
+<Layout
+  title="Forge Talent — Creator Management Division | Forge-co"
+  description="Forge Talent is the talent management division of Forge-co. Boutique creator representation and brand partnerships."
+  schema={schema}
+>
+  <div class="bg-brand-bg text-brand-heading">
+    <!-- Breadcrumb -->
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6">
+      <BreadcrumbNav items={[{ label: 'Home', href: '/' }, { label: 'Talent' }]} />
+    </div>
+
+    <!-- Hero -->
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-16 text-center">
+      <h1
+        class="font-grotesk font-semibold uppercase leading-[0.9] tracking-tight text-[clamp(3.5rem,11vw,10rem)]"
+      >
+        Forge&nbsp;Talent
+      </h1>
+      <p class="mt-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-brand-muted">
+        Forge-co represents creators in food, lifestyle, fitness, beauty, and beyond.
+      </p>
+      <div class="mt-10 flex justify-center">
+        <img
+          src="/assets/talent/jayden-burberry-portrait.jpg"
+          alt="Jayden AJ, studio portrait"
+          class="w-64 sm:w-80 aspect-[3/4] object-cover rounded-2xl shadow-xl"
+          loading="eager"
+        />
+      </div>
+    </section>
+
+    <!-- Featured statement -->
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-secondary mb-6">
+        Featured creator
+      </p>
+      <p class="font-editorial italic text-3xl sm:text-4xl lg:text-5xl leading-tight max-w-4xl">
+        We elevate creators through strategy, growth, and partnerships.
+      </p>
+      <a
+        href="/talent/jayden-aj/"
+        class="group mt-10 block max-w-3xl"
+      >
+        <div class="relative overflow-hidden rounded-2xl">
+          <img
+            src="/assets/talent/jayden-burberry-fullbody.jpg"
+            alt="Jayden AJ, full-body studio portrait in a light-blue Burberry set"
+            class="w-full aspect-[16/10] object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+            loading="lazy"
+          />
+          <p
+            class="absolute bottom-5 left-6 font-grotesk font-semibold uppercase tracking-wide text-2xl sm:text-3xl text-white text-shadow-forge"
+          >
+            Jayden AJ
+          </p>
+          <p
+            class="absolute bottom-6 right-6 text-xs font-bold uppercase tracking-[0.2em] text-white/90 text-shadow-forge"
+          >
+            View profile &rarr;
+          </p>
+        </div>
+      </a>
+    </section>
+
+    <!-- Roster browser -->
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="sr-only">Roster</h2>
+      <div class="flex items-center justify-between border-b border-brand-border pb-4 mb-10">
+        <span></span>
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-muted">
+          4 talent
+        </p>
+        <span></span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {roster.map((person) => {
+          const inner = (
+            <>
+              <div class="flex items-baseline justify-between mb-3">
+                <h3 class="font-grotesk font-semibold uppercase tracking-wide text-xl">
+                  {person.name}
+                </h3>
+                <p class="text-xs font-semibold uppercase tracking-[0.15em] text-brand-muted">
+                  Social reach{' '}
+                  {person.live ? (
+                    <span id="reach-total" class="text-brand-heading">752K</span>
+                  ) : (
+                    <span class="text-brand-heading">{person.reach}</span>
+                  )}
+                </p>
+              </div>
+              <div class="relative overflow-hidden rounded-2xl">
+                <img
+                  src={person.img}
+                  alt={person.alt}
+                  class="w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  loading="lazy"
+                />
+                {person.live && (
+                  <div
+                    class="absolute inset-0 bg-brand-dark/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6"
+                  >
+                    <div class="text-white text-sm font-semibold uppercase tracking-[0.15em] space-y-2">
+                      <p class="flex justify-between"><span>TikTok</span><span id="stat-tiktok">716K</span></p>
+                      <p class="flex justify-between"><span>Instagram</span><span id="stat-instagram">35K</span></p>
+                      <p class="flex justify-between"><span>YouTube</span><span id="stat-youtube">2K</span></p>
+                    </div>
+                    <p class="text-white text-xs font-bold uppercase tracking-[0.2em]">
+                      {person.cats.join(' / ')}
+                    </p>
+                  </div>
+                )}
+              </div>
+              <div class="mt-3 flex flex-wrap gap-2">
+                {person.cats.map((c) => (
+                  <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-brand-muted border border-brand-border rounded-full px-3 py-1">
+                    {c}
+                  </span>
+                ))}
+              </div>
+              {person.live && (
+                <p class="mt-2 text-[11px] uppercase tracking-[0.15em] text-brand-muted" id="follower-note">
+                  Live counts refresh every 15 minutes.
+                </p>
+              )}
+            </>
+          );
+          return person.href ? (
+            <a href={person.href} class="group block">{inner}</a>
+          ) : (
+            <div class="group block">{inner}</div>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Agency CTA band -->
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 text-center">
+      <h2
+        class="font-grotesk font-semibold uppercase leading-[0.95] tracking-tight text-[clamp(2rem,6vw,4.5rem)]"
+      >
+        Fueled by creators,<br />backed by operators
+      </h2>
+      <p class="mt-6 text-lg text-brand-text/80 max-w-2xl mx-auto leading-relaxed">
+        Forge Talent is the talent-management division of Forge-co. A short
+        roster, on purpose — so every brand partnership gets real attention,
+        from brief to delivery.
+      </p>
+      <a
+        href="mailto:michael@forge-co.ca?subject=Rate card request — Forge Talent"
+        class="btn-primary mt-8 text-base px-8 py-4"
+      >
+        Request Rate Card
+      </a>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var elT = document.getElementById('stat-tiktok');
+      var elI = document.getElementById('stat-instagram');
+      var elY = document.getElementById('stat-youtube');
+      var elR = document.getElementById('reach-total');
+      var note = document.getElementById('follower-note');
+      if (!elT || !elI) return;
+      function compact(n) {
+        try {
+          return new Intl.NumberFormat('en', {
+            notation: 'compact',
+            maximumFractionDigits: 1,
+          }).format(n);
+        } catch (e) {
+          return String(n);
+        }
+      }
+      function setText(el, target) {
+        el.textContent = compact(target);
+      }
+      function ago(iso) {
+        var mins = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+        if (mins < 1) return 'updated just now';
+        if (mins === 1) return 'updated 1 min ago';
+        return 'updated ' + mins + ' min ago';
+      }
+      var bucket = Math.floor(Date.now() / 900000);
+      fetch(
+        'https://raw.githubusercontent.com/vigorous187/forge-followers/main/followers.json?v=' +
+          bucket,
+        { cache: 'no-store' }
+      )
+        .then(function (r) {
+          if (!r.ok) throw new Error('http ' + r.status);
+          return r.json();
+        })
+        .then(function (d) {
+          if (typeof d.tiktok === 'number') setText(elT, d.tiktok);
+          if (typeof d.instagram === 'number') setText(elI, d.instagram);
+          if (elY && typeof d.youtube === 'number') setText(elY, d.youtube);
+          if (elR && typeof d.tiktok === 'number' && typeof d.instagram === 'number')
+            setText(
+              elR,
+              d.tiktok + d.instagram + (typeof d.youtube === 'number' ? d.youtube : 0)
+            );
+          if (note && d.updated_at)
+            note.textContent =
+              'Live counts refresh every 15 minutes \u00B7 ' + ago(d.updated_at) + '.';
+        })
+        .catch(function () {
+          /* keep the baked-in fallback values */
+        });
+    })();
+  </script>
+</Layout>

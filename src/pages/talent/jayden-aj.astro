@@ -1,0 +1,272 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    name: 'Jayden AJ — Creator Profile | Forge Talent',
+    description:
+      'Jayden AJ is a Toronto food creator with 750K+ followers across TikTok, Instagram and YouTube, signed to Forge-co for management and brand partnerships.',
+    url: 'https://forge-co.ca/talent/jayden-aj/',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Jayden AJ',
+    jobTitle: 'Food Creator',
+    address: { '@type': 'PostalAddress', addressLocality: 'Toronto', addressCountry: 'CA' },
+    sameAs: ['https://www.tiktok.com/@jaydenaj', 'https://www.instagram.com/jaydenaj', 'https://www.youtube.com/@JaydenAj13'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://forge-co.ca/' },
+      { '@type': 'ListItem', position: 2, name: 'Talent', item: 'https://forge-co.ca/talent/' },
+      { '@type': 'ListItem', position: 3, name: 'Jayden AJ' },
+    ],
+  },
+];
+
+const brands = [
+  "McDonald's Canada",
+  'Pizza Pizza',
+  'Chevrolet Canada',
+  'Sprite',
+  'Vaseline',
+  'Skims',
+];
+
+const portfolio = [
+  { src: '/assets/talent/jayden-burberry-portrait.jpg', alt: 'Jayden AJ, studio portrait on brown backdrop' },
+  { src: '/assets/talent/jayden-alo-cyan.jpg', alt: 'Jayden AJ, studio portrait on cyan backdrop' },
+  { src: '/assets/talent/jayden-burberry-fullbody.jpg', alt: 'Jayden AJ, full-body studio portrait in a light-blue Burberry set' },
+];
+
+const socials = [
+  { platform: 'TikTok', handle: '@jaydenaj', href: 'https://www.tiktok.com/@jaydenaj', id: 'social-tiktok', fallback: '716K' },
+  { platform: 'Instagram', handle: '@jaydenaj', href: 'https://www.instagram.com/jaydenaj', id: 'social-instagram', fallback: '35K' },
+  { platform: 'YouTube', handle: '@JaydenAj13', href: 'https://www.youtube.com/@JaydenAj13', id: 'social-youtube', fallback: '2K' },
+];
+---
+
+<Layout
+  title="Jayden AJ — Creator Profile | Forge Talent"
+  description="Jayden AJ is a Toronto food creator with 750K+ followers across TikTok, Instagram and YouTube, signed to Forge-co for management and brand partnerships."
+  schema={schema}
+>
+  <!-- Profile sub-bar -->
+  <div class="bg-brand-bg text-brand-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <a
+        href="/talent/"
+        class="text-xs font-bold uppercase tracking-[0.2em] text-brand-muted hover:text-brand-heading transition-colors"
+      >
+        &larr; Back to roster
+      </a>
+      <span class="hidden sm:inline-block text-xs font-bold uppercase tracking-[0.2em] border border-brand-border rounded-full px-4 py-1.5">
+        Jayden AJ — Toronto
+      </span>
+      <a
+        href="mailto:michael@forge-co.ca?subject=Booking inquiry — Jayden AJ"
+        class="text-xs font-bold uppercase tracking-[0.2em] bg-brand-heading text-brand-white rounded-full px-5 py-2.5 hover:bg-brand-secondary hover:text-brand-primary transition-colors"
+      >
+        Book Jayden
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero: full-bleed editorial -->
+  <section class="relative min-h-[92vh] flex flex-col justify-end overflow-hidden bg-brand-dark">
+    <img
+      src="/assets/talent/jayden-burberry-portrait.jpg"
+      alt="Jayden AJ, studio portrait"
+      class="absolute inset-0 w-full h-full object-cover object-top"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/20"></div>
+    <div class="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-14 pt-40 text-center">
+      <p class="text-xs font-bold uppercase tracking-[0.3em] text-white/80 mb-4">Toronto</p>
+      <h1
+        class="font-grotesk font-semibold uppercase leading-[0.9] tracking-tight text-white text-[clamp(3.5rem,12vw,11rem)] text-shadow-forge"
+      >
+        Jayden AJ
+      </h1>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-white">
+        <p class="text-xs font-bold uppercase tracking-[0.2em]">
+          TikTok <span class="text-white/60 normal-case tracking-normal font-semibold">@jaydenaj</span>
+          <span id="hero-tiktok" class="ml-2 text-sm">716K</span>
+        </p>
+        <p class="text-xs font-bold uppercase tracking-[0.2em]">
+          Instagram <span class="text-white/60 normal-case tracking-normal font-semibold">@jaydenaj</span>
+          <span id="hero-instagram" class="ml-2 text-sm">35K</span>
+        </p>
+        <p class="text-xs font-bold uppercase tracking-[0.2em]">
+          YouTube <span class="text-white/60 normal-case tracking-normal font-semibold">@JaydenAj13</span>
+          <span id="hero-youtube" class="ml-2 text-sm">2K</span>
+        </p>
+      </div>
+      <p class="mt-4 text-[11px] uppercase tracking-[0.2em] text-white/50" id="hero-note">
+        Live counts refresh every 15 minutes.
+      </p>
+    </div>
+  </section>
+
+  <div class="bg-brand-bg text-brand-heading">
+    <!-- Portfolio -->
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-secondary mb-8">
+        Portfolio
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {portfolio.map((p) => (
+          <img
+            src={p.src}
+            alt={p.alt}
+            class="w-full aspect-[3/4] object-cover rounded-2xl shadow-lg"
+            loading="lazy"
+          />
+        ))}
+      </div>
+    </section>
+
+    <!-- Live socials -->
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20">
+      <div class="flex items-baseline justify-between mb-8">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-secondary">
+          Socials
+        </p>
+        <p class="text-[11px] uppercase tracking-[0.2em] text-brand-muted" id="socials-note">
+          Live counts refresh every 15 minutes.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {socials.map((s) => (
+          <a
+            href={s.href}
+            target="_blank"
+            rel="noopener"
+            class="group bg-white border border-brand-border rounded-2xl p-6 flex items-center justify-between hover:shadow-lg transition-shadow"
+          >
+            <div>
+              <p class="font-grotesk font-semibold uppercase tracking-wide text-2xl">
+                {s.platform}
+              </p>
+              <p class="mt-1 text-sm font-semibold text-brand-muted group-hover:text-brand-secondary transition-colors">
+                {s.handle}
+              </p>
+            </div>
+            <p class="font-grotesk font-semibold text-4xl" id={s.id}>
+              {s.fallback}
+            </p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-24">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-secondary mb-8">
+        About
+      </p>
+      <p class="text-2xl sm:text-3xl font-bold leading-snug max-w-4xl">
+        Jayden AJ is a Toronto food creator with an audience of 750K+ across
+        TikTok, Instagram and YouTube. He is signed to Forge-co for management and
+        brand partnerships.
+      </p>
+      <p class="mt-10 text-xs font-bold uppercase tracking-[0.2em] text-brand-muted mb-4">
+        Selected brand collaborations
+      </p>
+      <ul class="flex flex-wrap gap-2 max-w-3xl">
+        {brands.map((b) => (
+          <li class="text-sm font-medium text-brand-text bg-white border border-brand-border rounded-full px-4 py-1.5">
+            {b}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Spacer so the sticky bar never covers the footer -->
+    <div class="h-24"></div>
+  </div>
+
+  <!-- Sticky bottom bar -->
+  <div class="fixed bottom-0 inset-x-0 z-40 bg-brand-bg/95 backdrop-blur border-t border-brand-border">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-muted">Creator</span>
+      <span class="font-grotesk font-semibold uppercase tracking-wide text-lg">
+        Jayden AJ <span class="text-brand-muted font-sans text-xs font-bold tracking-[0.2em] ml-2">Toronto</span>
+      </span>
+      <a
+        href="mailto:michael@forge-co.ca?subject=Booking inquiry — Jayden AJ"
+        class="text-xs font-bold uppercase tracking-[0.2em] bg-brand-heading text-brand-white rounded-full px-5 py-2.5 hover:bg-brand-secondary hover:text-brand-primary transition-colors"
+      >
+        Book Jayden +
+      </a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var elT = document.getElementById('hero-tiktok');
+      var elI = document.getElementById('hero-instagram');
+      var elY = document.getElementById('hero-youtube');
+      var note = document.getElementById('hero-note');
+      var cardT = document.getElementById('social-tiktok');
+      var cardI = document.getElementById('social-instagram');
+      var cardY = document.getElementById('social-youtube');
+      var cardNote = document.getElementById('socials-note');
+      if (!elT || !elI) return;
+      function compact(n) {
+        try {
+          return new Intl.NumberFormat('en', {
+            notation: 'compact',
+            maximumFractionDigits: 1,
+          }).format(n);
+        } catch (e) {
+          return String(n);
+        }
+      }
+      function ago(iso) {
+        var mins = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+        if (mins < 1) return 'updated just now';
+        if (mins === 1) return 'updated 1 min ago';
+        return 'updated ' + mins + ' min ago';
+      }
+      var bucket = Math.floor(Date.now() / 900000);
+      fetch(
+        'https://raw.githubusercontent.com/vigorous187/forge-followers/main/followers.json?v=' +
+          bucket,
+        { cache: 'no-store' }
+      )
+        .then(function (r) {
+          if (!r.ok) throw new Error('http ' + r.status);
+          return r.json();
+        })
+        .then(function (d) {
+          if (typeof d.tiktok === 'number') {
+            elT.textContent = compact(d.tiktok);
+            if (cardT) cardT.textContent = compact(d.tiktok);
+          }
+          if (typeof d.instagram === 'number') {
+            elI.textContent = compact(d.instagram);
+            if (cardI) cardI.textContent = compact(d.instagram);
+          }
+          if (typeof d.youtube === 'number') {
+            if (elY) elY.textContent = compact(d.youtube);
+            if (cardY) cardY.textContent = compact(d.youtube);
+          }
+          if (note && d.updated_at) {
+            var label =
+              'Live counts refresh every 15 minutes \u00B7 ' + ago(d.updated_at) + '.';
+            note.textContent = label;
+            if (cardNote) cardNote.textContent = label;
+          }
+        })
+        .catch(function () {
+          /* keep the baked-in fallback values */
+        });
+    })();
+  </script>
+</Layout>
