@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>OpenSEO — Forge: privacy and Google data use</title>
-<meta name="description" content="How OpenSEO — Forge accesses, uses and retains Google Search Console data.">
+<meta name="description" content="How OpenSEO — Forge accesses, uses and retains Search Console and Google Analytics data.">
 <link rel="canonical" href="https://forge-co.ca/openseo/privacy/">
 <style>body{font:18px/1.6 system-ui,sans-serif;max-width:780px;margin:48px auto;padding:0 24px;color:#17222c;background:#faf9f6}h1{line-height:1.15}h2{font-size:1.2em;margin-top:36px}a{color:#125e69}p{overflow-wrap:break-word}</style>
 </head>
@@ -15,15 +15,16 @@
 <p>Operator and contact: Michael, Forge; 2313745ontarioinc@gmail.com.</p>
 <h2>Data accessed</h2>
 <p>With the account holder&#x27;s permission, OpenSEO — Forge accesses their Google account identifier, email address and profile information, plus read-only Google Search Console information for properties they can access. Search Console information includes site identifiers, search queries, page URLs, dates, clicks, impressions, click-through rates and average positions.</p>
+<p>If the account holder separately connects Google Analytics, the app requests read-only Analytics access. This can cover Analytics data accessible to that Google account. The operator selects existing GA4 properties for project reporting. Data can include account, property and stream identifiers; website URLs and measurement IDs; reporting time zones; measurement settings and custom dimension/metric definitions; and aggregated users, sessions, acquisition sources, pages, engagement, events, key events, site-search terms, device/country summaries and ecommerce transactions, items and revenue where collected.</p>
 <h2>Purpose</h2>
-<p>This information is used to connect the correct Google account, display SEO performance, investigate visibility and prepare operator-requested analysis and reports. The Google connection does not request website-editing or Search Console write permissions.</p>
+<p>This information is used to connect the correct Google account, display search and website performance, investigate visibility and visitor outcomes, and prepare operator-requested analysis and reports. The Google connections do not request website-editing, Search Console write or Analytics management permissions. Connecting Analytics does not install tracking, create a property or change collection settings.</p>
 <h2>Storage and access</h2>
 <p>The self-hosted workspace stores account-connection details, project/property mappings and any saved reports. Google access and refresh tokens are encrypted at rest. Cloudflare provides access control and request routing.</p>
-<p>Authorized AI clients can request Search Console results and saved reports through the workspace&#x27;s MCP connection. If the operator uses an AI provider, the information supplied to that provider is processed under that provider&#x27;s terms and the operator&#x27;s account settings. Such access should be limited to the data needed for the requested task.</p>
+<p>Authorized AI clients can request Search Console and connected Analytics results and saved reports through the workspace&#x27;s MCP connection. If the operator uses an AI provider, the information supplied to that provider is processed under that provider&#x27;s terms and the operator&#x27;s account settings. Such access should be limited to the data needed for the requested task.</p>
 <h2>Retention and removal</h2>
 <p>The operator retains connection information while it is needed for the integration and retains saved reports until they are removed. Disconnecting or revoking Google access stops future authorized retrieval but does not automatically erase previously saved reports, exported copies or existing backups. Contact the operator to request removal of retained data and review backup retention.</p>
 <h2>Your choices</h2>
-<p>You can revoke the app&#x27;s authorization in your Google Account&#x27;s third-party connections settings. You can ask the operator to remove the Google connection, affected project mappings and saved material. Removing access may prevent connected features from working.</p>
+<p>You can revoke the app&#x27;s authorization in your Google Account&#x27;s third-party connections settings. You can ask the operator to remove the Google connection, affected project mappings and saved material. Removing access may prevent connected features from working. Because the integrations share one Google app, revoking that app in Google may interrupt both Search Console and Analytics; disconnecting an Analytics project in OpenSEO is a separate action.</p>
 <h2>Use restrictions</h2>
 <p>Google user data will be used only to provide the described SEO features and requested analysis. It will not be sold or used for advertising targeting. Any transfer to an authorized tool must be necessary for that requested functionality and comply with the Google API Services User Data Policy.</p>
 <h2>Security and changes</h2>
