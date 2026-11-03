@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import BreadcrumbNav from '../../components/BreadcrumbNav.astro';
 import CaseStudyCard from '../../components/CaseStudyCard.astro';
 import CTABanner from '../../components/CTABanner.astro';
+import DragonPearlCampaign from '../../components/DragonPearlCampaign.astro';
 import { getCollection } from 'astro:content';
 
 const caseStudies = await getCollection('caseStudies');
@@ -30,8 +31,8 @@ const schema = [
 ---
 
 <Layout
-  title="Selected Client Work | Forge"
-  description="Real results for real operators. See how Forge builds growth systems for home services, real estate, and restaurant brands."
+  title="Creator Partnerships & Selected Work | Forge"
+  description="Explore Forge’s creator partnerships, including Jayden AJ’s June 2026 Dragon Pearl campaign, alongside selected website and digital-service work."
   schema={schema}
 >
   <!-- Hero -->
@@ -41,13 +42,17 @@ const schema = [
         <BreadcrumbNav items={breadcrumbs} />
       </div>
       <h1 class="font-display text-4xl sm:text-5xl font-bold text-brand-white text-shadow-forge">
-        Selected Client Work
+        Creator Partnerships &amp; Selected Work
       </h1>
       <p class="mt-4 text-lg text-brand-white/70 max-w-2xl">
-        Real results for real operators. Here's what happens when growth becomes a system.
+        Start with a creator partnership: explore Jayden AJ’s June 2026 Dragon Pearl campaign, then browse selected digital-service projects.
       </p>
     </div>
   </section>
+
+  <div class="forge-editorial">
+    <DragonPearlCampaign />
+  </div>
 
   <!-- Case Studies Grid -->
   <section class="section-standard">
@@ -55,7 +60,7 @@ const schema = [
       {sortedStudies.length > 0 ? (
         <>
           <h2 class="font-display text-2xl sm:text-3xl font-bold text-brand-heading mb-8">
-            Featured work
+            Digital-service projects
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {sortedStudies.map((study) => (
@@ -90,8 +95,8 @@ const schema = [
 
   <!-- CTA -->
   <CTABanner
-    headline="Want results like these?"
-    description="Every engagement starts with a Growth Audit. We'll show you exactly where the opportunities are."
-    primaryCTA={{ text: 'Get Your Growth Audit', href: '/growth-audit/' }}
+    headline="Have a partnership in mind?"
+    description="Share your brand, campaign idea and timing with Forge, or ask about website and SEO services."
+    primaryCTA={{ text: 'Discuss a brand partnership', href: '/contact/#brand-enquiry' }}
   />
 </Layout>
