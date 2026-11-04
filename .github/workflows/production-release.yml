@@ -1,0 +1,304 @@
+name: Production release (exact SHA)
+
+# Deploys the exact tip of main to the Cloudflare Pages project "forge-co" (direct upload),
+# verifies the live site, rolls back to the previous production deployment if anything fails,
+# and writes a receipt. Dispatch from main only.
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Full 40-character SHA currently at the tip of main
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forge-production-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Release exact main SHA
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      RELEASE_SHA: ${{ inputs.release_sha }}
+      PROJECT_NAME: forge-co
+      PRODUCTION_BRANCH: main
+      CLOUDFLARE_ACCOUNT_ID: 29adb2b788e4c6151ba90c43d19bbdb7
+      SITE_URL: https://forge-co.ca
+    steps:
+      - name: Check out requested release SHA
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.release_sha }}
+          fetch-depth: 0
+
+      - name: Require exact current main SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_REF" == "refs/heads/${PRODUCTION_BRANCH}" ]] || {
+            echo "This production workflow must be dispatched from ${PRODUCTION_BRANCH}" >&2
+            exit 1
+          }
+          [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]] || {
+            echo "release_sha must be a full lowercase 40-character commit SHA" >&2
+            exit 1
+          }
+          git fetch --force --no-tags origin \
+            "+refs/heads/${PRODUCTION_BRANCH}:refs/remotes/origin/${PRODUCTION_BRANCH}"
+          [[ "$(git rev-parse HEAD)" == "$RELEASE_SHA" ]] || {
+            echo "Checked-out commit does not match release_sha" >&2
+            exit 1
+          }
+          [[ "$(git rev-parse "origin/${PRODUCTION_BRANCH}")" == "$RELEASE_SHA" ]] || {
+            echo "release_sha must already be merged and be the exact current tip of ${PRODUCTION_BRANCH}" >&2
+            exit 1
+          }
+          [[ -z "$(git status --porcelain --untracked-files=all)" ]] || {
+            echo "Release checkout is not clean" >&2
+            exit 1
+          }
+
+      - name: Guard static-only deployment (no Pages Functions handlers)
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Production is verified static-only. A registered onRequest handler would activate
+          # Functions on every route, so refuse to release one without an explicit decision.
+          if [[ -d functions ]] && grep -rEh '^[[:space:]]*export' functions | grep -E 'onRequest'; then
+            echo "functions/ registers a Pages Functions handler; Forge production is static-only." >&2
+            exit 1
+          fi
+          echo "No registered Functions handlers."
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Validate release credentials
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          [[ -n "${CLOUDFLARE_API_TOKEN:-}" ]] || {
+            echo "Missing required repository secret: CLOUDFLARE_API_TOKEN" >&2
+            exit 1
+          }
+          echo "Required release configuration is present. Values were not printed."
+
+      - run: npm ci
+
+      - name: Build fresh release artifact (runs all SEO, blog, GEO and brand gates)
+        run: npm run build
+
+      - name: Check built artifact content
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ -f dist/index.html && -f dist/contact/index.html && -f dist/robots.txt && -f dist/sitemap-index.xml ]]
+          [[ ! -d dist/functions && ! -e dist/_worker.js ]]
+          ! grep -rqi 'michael@forge-co.ca' dist
+          grep -qF 'Send enquiry' dist/contact/index.html
+          grep -qF 'Your message' dist/contact/index.html
+          ! grep -qi 'local preview' dist/contact/index.html
+          echo "Built artifact matches the approved Forge release content."
+
+      - name: Capture last-known-good production deployment and pre-deploy baseline
+        id: lkg
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          response="$(mktemp)"
+          trap 'rm -f "$response"' EXIT
+          curl --fail-with-body --silent --show-error \
+            --output "$response" \
+            --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${PROJECT_NAME}"
+          jq -e '.success == true' "$response" >/dev/null
+          lkg_id="$(jq -er '.result.canonical_deployment.id' "$response")"
+          lkg_environment="$(jq -er '.result.canonical_deployment.environment' "$response")"
+          lkg_status="$(jq -er '.result.canonical_deployment.latest_stage.status' "$response")"
+          lkg_commit="$(jq -r '.result.canonical_deployment.deployment_trigger.metadata.commit_hash // empty' "$response")"
+          [[ "$lkg_environment" == production && "$lkg_status" == success ]] || {
+            echo "Current canonical Pages deployment is not a successful production baseline" >&2
+            exit 1
+          }
+          echo "deployment_id=${lkg_id}" >> "$GITHUB_OUTPUT"
+          echo "commit_sha=${lkg_commit}" >> "$GITHUB_OUTPUT"
+          echo "Captured the current successful production deployment as the rollback target."
+
+          # Pre-deploy baseline of files this release must not change.
+          mkdir -p "$RUNNER_TEMP/baseline"
+          for f in robots.txt sitemap-index.xml sitemap-0.xml llms.txt; do
+            curl --fail --silent --show-error --max-time 30 "${SITE_URL}/${f}" -o "$RUNNER_TEMP/baseline/${f}"
+          done
+
+      - name: Verify last-known-good live site is up (baseline)
+        env:
+          BASE_URL: ${{ env.SITE_URL }}
+        run: .github/scripts/forge-live-check.sh basic
+
+      - name: Upload exact SHA to production
+        id: upload
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          # Run from dist so wrangler cannot pick up the repo's functions/ directory.
+          cd dist
+          npx --yes wrangler@4.105.0 pages deploy . \
+            --project-name="$PROJECT_NAME" \
+            --branch="$PRODUCTION_BRANCH" \
+            --commit-hash="$RELEASE_SHA" \
+            --commit-message="GitHub exact-SHA release ${RELEASE_SHA}" \
+            --commit-dirty=false
+
+      - name: Resolve deployed production SHA
+        id: deployed
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          LKG_DEPLOYMENT_ID: ${{ steps.lkg.outputs.deployment_id }}
+        run: |
+          set -euo pipefail
+          response="$(mktemp)"
+          trap 'rm -f "$response"' EXIT
+          for attempt in {1..12}; do
+            curl --fail-with-body --silent --show-error \
+              --output "$response" \
+              --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${PROJECT_NAME}"
+            jq -e '.success == true' "$response" >/dev/null
+            deployed_id="$(jq -r '.result.canonical_deployment.id // empty' "$response")"
+            deployed_sha="$(jq -r '.result.canonical_deployment.deployment_trigger.metadata.commit_hash // empty' "$response")"
+            deployed_status="$(jq -r '.result.canonical_deployment.latest_stage.status // empty' "$response")"
+            deployed_env="$(jq -r '.result.canonical_deployment.environment // empty' "$response")"
+            if [[ "$deployed_sha" == "$RELEASE_SHA" && "$deployed_status" == success && "$deployed_env" == production ]]; then
+              [[ "$deployed_id" != "$LKG_DEPLOYMENT_ID" ]] || {
+                echo "Cloudflare did not create a new production deployment" >&2
+                exit 1
+              }
+              uses_functions="$(jq -r '.result.canonical_deployment.uses_functions // false' "$response")"
+              [[ "$uses_functions" == false ]] || {
+                echo "New deployment uses Pages Functions; Forge production must stay static-only" >&2
+                exit 1
+              }
+              echo "deployment_id=${deployed_id}" >> "$GITHUB_OUTPUT"
+              echo "Cloudflare canonical production metadata matches the requested SHA (static-only)."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Timed out waiting for Cloudflare canonical production metadata to match release_sha" >&2
+          exit 1
+
+      - name: Verify live release
+        id: production_verify
+        shell: bash
+        env:
+          BASE_URL: ${{ env.SITE_URL }}
+        run: |
+          set -u
+          export BASELINE_DIR="$RUNNER_TEMP/baseline"
+          for attempt in {1..12}; do
+            if .github/scripts/forge-live-check.sh full; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Production verification failed after deployment" >&2
+          exit 1
+
+      - name: Roll back production after a failed uploaded release
+        id: rollback
+        if: ${{ failure() && steps.upload.outcome == 'success' }}
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          LKG_DEPLOYMENT_ID: ${{ steps.lkg.outputs.deployment_id }}
+          BASE_URL: ${{ env.SITE_URL }}
+        run: |
+          set -euo pipefail
+          response="$(mktemp)"
+          trap 'rm -f "$response"' EXIT
+          curl --fail-with-body --silent --show-error \
+            --output "$response" \
+            --request POST \
+            --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${PROJECT_NAME}/deployments/${LKG_DEPLOYMENT_ID}/rollback"
+          jq -e '.success == true' "$response" >/dev/null
+
+          for attempt in {1..12}; do
+            curl --fail-with-body --silent --show-error \
+              --output "$response" \
+              --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${PROJECT_NAME}"
+            jq -e '.success == true' "$response" >/dev/null
+            canonical_id="$(jq -r '.result.canonical_deployment.id // empty' "$response")"
+            if [[ "$canonical_id" == "$LKG_DEPLOYMENT_ID" ]]; then
+              export BASELINE_DIR="$RUNNER_TEMP/baseline"
+              .github/scripts/forge-live-check.sh basic
+              echo "Rollback restored and verified the last-known-good production deployment."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Rollback API completed, but the production baseline could not be verified" >&2
+          exit 1
+
+      - name: Write release receipt
+        if: ${{ always() && steps.lkg.outcome == 'success' }}
+        shell: bash
+        env:
+          UPLOAD_OUTCOME: ${{ steps.upload.outcome }}
+          VERIFY_OUTCOME: ${{ steps.production_verify.outcome }}
+          ROLLBACK_OUTCOME: ${{ steps.rollback.outcome }}
+          LKG_DEPLOYMENT_ID: ${{ steps.lkg.outputs.deployment_id }}
+          LKG_COMMIT: ${{ steps.lkg.outputs.commit_sha }}
+          NEW_DEPLOYMENT_ID: ${{ steps.deployed.outputs.deployment_id }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          if [[ "$VERIFY_OUTCOME" == success ]]; then result=released_and_verified
+          elif [[ "$ROLLBACK_OUTCOME" == success ]]; then result=failed_and_rolled_back
+          elif [[ "$ROLLBACK_OUTCOME" == failure ]]; then result=failed_rollback_failed_manual_action_required
+          elif [[ "$UPLOAD_OUTCOME" == success ]]; then result=uploaded_unverified
+          else result=not_deployed
+          fi
+          jq -n \
+            --arg result "$result" \
+            --arg project "$PROJECT_NAME" \
+            --arg site "$SITE_URL" \
+            --arg release_sha "$RELEASE_SHA" \
+            --arg new_deployment "${NEW_DEPLOYMENT_ID:-}" \
+            --arg lkg_deployment "$LKG_DEPLOYMENT_ID" \
+            --arg lkg_commit "${LKG_COMMIT:-}" \
+            --arg run_url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+            --arg finished_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{result:$result, project:$project, site:$site, release_sha:$release_sha, new_deployment_id:$new_deployment, rollback_target_deployment_id:$lkg_deployment, rollback_target_commit:$lkg_commit, run_url:$run_url, finished_at_utc:$finished_at}' \
+            | tee artifacts/release-receipt.json
+          {
+            echo "## Forge production release: ${result}"
+            echo "- Release SHA: \`${RELEASE_SHA}\`"
+            echo "- New deployment: \`${NEW_DEPLOYMENT_ID:-none}\`"
+            echo "- Rollback target (previous production): \`${LKG_DEPLOYMENT_ID}\` (commit \`${LKG_COMMIT:-unknown}\`)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Retain release receipt
+        if: ${{ always() && steps.lkg.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-release-receipt-${{ inputs.release_sha }}
+          path: artifacts/release-receipt.json
+          if-no-files-found: warn
+          retention-days: 90

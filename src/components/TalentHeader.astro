@@ -1,0 +1,11 @@
+---
+const path = Astro.url.pathname;
+const links = [{href:'/talent/',label:'Talent'},{href:'/#for-creators',label:'For creators'},{href:'/#for-brands',label:'For brands'},{href:'/services/',label:'Digital services'}];
+---
+<header class="forge-nav">
+  <a class="forge-wordmark" href="/" aria-label="Forge home">FORGE<span>co.</span></a>
+  <nav aria-label="Primary navigation">
+    {links.map(link=><a href={link.href} aria-current={path===link.href?'page':undefined}>{link.label}</a>)}
+    <a class="enquiry-link" href="/contact/">Let’s talk <span aria-hidden="true">&nbsp;↗</span></a>
+  </nav>
+</header>

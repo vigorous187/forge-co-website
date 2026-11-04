@@ -1,7 +1,8 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from '../components/TalentHeader.astro';
+import Footer from '../components/TalentFooter.astro';
 import '../styles/global.css';
+import '../styles/talent-review.css';
 
 interface SchemaObject {
   '@context'?: string;
@@ -17,16 +18,18 @@ interface Props {
   canonicalUrl?: string;
   noindex?: boolean;
   schema?: SchemaObject[];
+  editorial?: boolean;
 }
 
 const {
   title,
-  description = 'Forge builds connected growth systems that turn visibility into revenue for local operators, with dedicated restaurant programs through Toronto Restaurant Growth.',
-  ogImage = '/og-default.jpg',
+  description = 'Creator management and brand partnerships in Toronto, with website development and SEO services from Forge.',
+  ogImage = '/assets/images/forge-logo-dark.png',
   ogType = 'website',
   canonicalUrl,
   noindex = false,
   schema = [],
+  editorial = false,
 } = Astro.props;
 
 const siteUrl = 'https://forge-co.ca';
@@ -38,7 +41,7 @@ const defaultOrgSchema: SchemaObject = {
   '@type': 'ProfessionalService',
   name: 'Forge',
   url: 'https://forge-co.ca',
-  description: 'Growth systems agency for GTA operators and restaurant brands',
+  description: 'Creator management and brand partnerships, with website development and SEO services.',
   areaServed: {
     '@type': 'Place',
     name: 'Greater Toronto Area, Ontario, Canada',
@@ -98,7 +101,7 @@ const allSchemas = [defaultOrgSchema, ...schema];
     <link rel="shortcut icon" href="https://forge-co.ca/assets/images/forge-logo-dark.png" />
     <link rel="apple-touch-icon" href="https://forge-co.ca/assets/images/forge-logo-dark.png" />
   </head>
-  <body class="bg-brand-bg text-brand-text font-sans antialiased">
+  <body class:list={['bg-brand-bg text-brand-text font-sans antialiased', { 'forge-editorial': editorial }]}>
     <a href="#main" class="skip-link">Skip to main content</a>
     <Header />
     <main id="main" tabindex="-1">

@@ -1,0 +1,61 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: 'Dragon Pearl Oyster Festival 2026 — Jayden AJ',
+  description: 'A creator campaign for Dragon Pearl Buffet, coordinated by Forge, with video creative by Jayden AJ.',
+  creator: {'@type': 'Person', name: 'Jayden AJ'},
+  dateCreated: '2026-06-01',
+  image: 'https://forge-co.ca/assets/campaigns/dragon-pearl-june-2026.jpg',
+}];
+---
+<Layout editorial title="Dragon Pearl × Jayden AJ — Oyster Festival Campaign | Forge" description="Explore Jayden AJ’s June 2026 Dragon Pearl Oyster Festival campaign, with brand coordination and campaign delivery by Forge." schema={schema} ogImage="/assets/campaigns/dragon-pearl-june-2026.jpg">
+  <section class="forge-wrap forge-section campaign-hero">
+    <div>
+      <a class="forge-link" href="/talent/jayden-aj/">← Jayden AJ’s profile</a>
+      <p class="forge-kicker campaign-date">Selected campaign / June 2026</p>
+      <h1>Dragon Pearl<br /><span class="editorial">× Jayden AJ.</span></h1>
+      <p class="campaign-intro">A restaurant partnership built around Jayden’s food content, created for Dragon Pearl Buffet’s Oyster Festival.</p>
+      <dl class="campaign-details">
+        <div><dt>Creator</dt><dd>Jayden AJ</dd></div>
+        <div><dt>Campaign scope</dt><dd>TikTok video + Instagram Reel</dd></div>
+        <div><dt>Posted</dt><dd>1 June 2026</dd></div>
+        <div><dt>Forge’s role</dt><dd>Brand coordination, campaign brief and delivery</dd></div>
+      </dl>
+    </div>
+    <figure>
+      <img src="/assets/campaigns/dragon-pearl-june-2026.jpg" alt="Jayden AJ presenting a seafood dish at Dragon Pearl Buffet" width="720" height="1280" fetchpriority="high" />
+      <figcaption>Frame from Jayden’s approved campaign video, June 2026.</figcaption>
+    </figure>
+  </section>
+  <section class="forge-wrap forge-section forge-rule forge-section-head">
+    <p class="forge-kicker">The partnership</p>
+    <div>
+      <h2>From the brief<br /><span class="editorial">to the table.</span></h2>
+      <p class="campaign-copy">The campaign brought Jayden to Dragon Pearl to create a short restaurant feature. Forge coordinated the partnership and client review, while Jayden led the video creative.</p>
+      <p class="campaign-copy">The agreed scope paired a TikTok video with an Instagram Reel using the same creative concept. The client approved the final video before posting and confirmed publication on 1 June 2026.</p>
+      <p class="campaign-note">This is a past campaign. The Oyster Festival promotion ran from 28 May to 18 June 2026 and has ended.</p>
+    </div>
+  </section>
+  <section class="forge-quiet"><div class="forge-wrap forge-section forge-section-head">
+    <p class="forge-kicker">Brand partnerships</p>
+    <div><h2>Have a campaign<br /><span class="editorial">in mind?</span></h2><p class="campaign-copy">Share your brand, campaign idea and timing. We’ll discuss the creator, scope and delivery that fit your brief.</p><a class="forge-button" href="/contact/?creator=jayden-aj#brand-enquiry">Enquire about Jayden ↗</a></div>
+  </div></section>
+</Layout>
+<style>
+  .campaign-hero{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(32px,6vw,88px);align-items:start}
+  .campaign-date{margin-top:48px}
+  .campaign-hero h1{font-size:clamp(42px,5.5vw,80px)}
+  .campaign-intro{max-width:540px;margin:28px 0}
+  .campaign-hero figure{margin:0;max-width:400px}
+  .campaign-hero img{display:block;width:100%;height:auto}
+  .campaign-hero figcaption{font-size:13px;line-height:1.6;margin-top:12px}
+  .campaign-details{margin:36px 0 0}
+  .campaign-details div{border-top:1px solid #d7d4cc;padding:16px 0;display:grid;grid-template-columns:130px minmax(0,1fr);gap:18px}
+  .campaign-details dt{font-size:13px}
+  .campaign-details dd{margin:0;font-size:15px}
+  .campaign-copy{margin:24px 0;max-width:600px}
+  .campaign-note{font-size:14px;max-width:600px;margin-top:28px}
+  @media(max-width:800px){.campaign-hero{grid-template-columns:1fr}.campaign-hero figure{max-width:340px}.campaign-details div{grid-template-columns:105px minmax(0,1fr);gap:12px}}
+</style>

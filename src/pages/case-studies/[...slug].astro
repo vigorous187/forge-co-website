@@ -55,7 +55,7 @@ const schema = [
 
 <Layout
   title={`${study.data.title} | Forge`}
-  description={`Case study: How Forge helped ${study.data.client} grow with ${study.data.services.join(' and ')}.`}
+  description={study.id === 'crab-boil' ? 'Contact Forge about Crab Boil project details, scope, dates and available work samples.' : `Case study: How Forge helped ${study.data.client} grow with ${study.data.services.join(' and ')}.`}
   schema={schema}
 >
   <!-- Hero -->
@@ -86,8 +86,8 @@ const schema = [
     </div>
   </section>
 
-  <!-- Key Metrics -->
-  <section class="section-compact bg-brand-bg-alt">
+  <!-- Only display supplied, reviewable metrics. -->
+  {study.data.metrics.length > 0 && <section class="section-compact bg-brand-bg-alt">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         {study.data.metrics.map((metric) => (
@@ -100,7 +100,7 @@ const schema = [
         ))}
       </div>
     </div>
-  </section>
+  </section>}
 
   <!-- Content -->
   <section class="py-16 sm:py-20">
@@ -135,7 +135,7 @@ const schema = [
   <!-- Services Used -->
   <section class="section-compact">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h2 class="font-display text-2xl font-bold text-brand-heading mb-6">Services Used</h2>
+      <h2 class="font-display text-2xl font-bold text-brand-heading mb-6">{study.id === 'crab-boil' ? 'Related services' : 'Services Used'}</h2>
       <div class="flex flex-wrap gap-3">
         {study.data.services.map((service) => (
           <span class="inline-block px-4 py-2 bg-brand-primary/10 text-brand-primary text-sm font-semibold rounded-full">
@@ -148,9 +148,9 @@ const schema = [
 
   <!-- CTA -->
   <CTABanner
-    headline="Ready to build your growth system?"
-    description="Every engagement starts with a Growth Audit. We'll map out exactly where the opportunities are for your business."
-    primaryCTA={{ text: 'Get Your Growth Audit', href: '/growth-audit/' }}
+    headline={study.id === 'crab-boil' ? 'Discuss your project' : 'Ready to build your growth system?'}
+    description={study.id === 'crab-boil' ? 'Tell us about your goals, timing and the work you have in mind.' : "Every engagement starts with a Growth Audit. We'll map out exactly where the opportunities are for your business."}
+    primaryCTA={study.id === 'crab-boil' ? { text: 'Contact Forge', href: '/contact/' } : { text: 'Get Your Growth Audit', href: '/growth-audit/' }}
     secondaryCTA={{ text: 'View All Case Studies', href: '/case-studies/' }}
   />
 </Layout>
