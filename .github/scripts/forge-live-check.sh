@@ -19,6 +19,25 @@ fetch() { # path -> body file, prints status code
   curl --silent --show-error --location --max-redirs 0 --max-time 30 \
     --output "$out" --dump-header "$out.hdr" --write-out '%{http_code}' \
     --header 'Cache-Control: no-cache' "${BASE}${path}${sep}cb=$(date +%s%N)" || echo 000
+  decode_cf_email "$out"
+}
+# Cloudflare Email Address Obfuscation (enabled on the forge-co.ca zone, not on *.pages.dev)
+# rewrites addresses into hex-encoded data-cfemail / /cdn-cgi/l/email-protection#hex links.
+# Decode them in place so the email assertions see the real addresses.
+decode_cf_email() {
+  [[ -s "$1" ]] || return 0
+  python3 - "$1" <<'PY'
+import re, sys
+p = sys.argv[1]
+s = open(p, encoding="utf-8", errors="replace").read()
+def dec(h):
+    k = int(h[:2], 16)
+    return "".join(chr(int(h[i:i+2], 16) ^ k) for i in range(2, len(h), 2))
+s = re.sub(r'/cdn-cgi/l/email-protection#([0-9a-fA-F]+)', lambda m: "mailto:" + dec(m.group(1)), s)
+s = re.sub(r'<(\w+)[^>]*class="__cf_email__"[^>]*data-cfemail="([0-9a-fA-F]+)"[^>]*>\[email&#160;protected\]</\1>', lambda m: dec(m.group(2)), s)
+s = re.sub(r'data-cfemail="([0-9a-fA-F]+)"', lambda m: 'data-cfemail-decoded="' + dec(m.group(1)) + '"', s)
+open(p, "w", encoding="utf-8").write(s)
+PY
 }
 body() { echo "$tmp/$(echo "$1" | tr '/?=&' '____').body"; }
 
